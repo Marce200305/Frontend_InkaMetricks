@@ -1,0 +1,35 @@
+Solo para Entidad Curso
+->en app:
+    ->components
+        ->coursecomponent
+            ->coursecomponent.css - html - ts
+            ->course-insert
+                ->course-insert.css - html - ts
+            ->course-list
+                ->course-list.css - html - ts
+        ->homecomponent
+            homecomponent.css - html - ts
+        ->menucomponent
+            menucomponent.css - html - ts
+    ->models
+        ->Course.ts        
+    ->services
+        ->courseservice.ts
+->environments/environment.development.ts
+
+------------------------------------------------------------------
+
+ng g c components/metricascomponent --skip-tests
+ng g c components/homecomponent --skip-tests
+ng g c components/menucomponent --skip-tests
+
+ng g c components/metricascomponent/metricas-insert --skip-tests
+ng g c components/metricascomponent/metricas-list --skip-tests
+ng g c components/metricascomponent/metricas-actualizar --skip-tests
+
+
+models (manual)
+
+ng g s services/metricasservices --skip-tests
+
+environments (manual)
