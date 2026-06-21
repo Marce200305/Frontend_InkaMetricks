@@ -32,6 +32,16 @@
   background-color: rgb(106, 235, 157);
 }
 
+/* Entidades independientes (sin dependencias): Marca, Plataforma, Región, Rol, Plan */
+.btn-menu.independiente {
+  background-color: #8B0000;
+  border-left: 3px solid #FFD700;
+}
+
+.btn-menu.independiente:hover {
+  background-color: rgb(106, 235, 157);
+}
+
 .btn-menu mat-icon,
 .btn-menu .material-symbols-outlined {
   font-size: 1.3rem;
