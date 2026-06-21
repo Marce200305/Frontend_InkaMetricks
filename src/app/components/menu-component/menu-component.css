@@ -3,6 +3,14 @@
   display: flex;
   align-items: center;
   padding: 0 8px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.desktop-menu {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
 }
 
 .btn-menu {
@@ -17,6 +25,7 @@
   gap: 6px;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  white-space: nowrap;
 }
 
 .btn-menu:hover {
@@ -35,6 +44,17 @@
   color: rgb(255, 255, 255);
 }
 
+/* Botón hamburguesa: solo visible en móvil */
+.btn-hamburger {
+  display: none;
+  background-color: #fb0800;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 10px;
+  cursor: pointer;
+  color: white;
+}
+
 .mat-mdc-menu-panel {
   background-color: rgba(250, 121, 16, 0.479) !important;
   backdrop-filter: blur(6px);
@@ -51,4 +71,16 @@
 
 .mat-mdc-menu-item:hover {
   background-color: rgba(46, 158, 46, 0.2) !important;
+}
+
+/* Responsive: en pantallas pequeñas mostrar hamburguesa y ocultar menú desktop */
+@media (max-width: 768px) {
+  .btn-hamburger {
+    display: flex;
+    align-items: center;
+  }
+
+  .desktop-menu {
+    display: none;
+  }
 }

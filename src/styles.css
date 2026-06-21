@@ -1,1 +1,40 @@
-/* You can add global styles to this file, and also import other style files */
+/* Estilos globales */
+
+/* Tablas responsivas: scroll horizontal en móvil */
+@media (max-width: 768px) {
+  table, mat-table {
+    width: 100% !important;
+  }
+
+  .mat-mdc-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Formularios: inputs a ancho completo */
+  mat-form-field {
+    width: 100% !important;
+  }
+
+  /* Contenedores de formulario */
+  .container form,
+  form mat-form-field {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Botones de acción con margen */
+  button[mat-raised-button],
+  button[mat-button] {
+    margin: 4px 0;
+  }
+}
+
+/* Contenedor general con padding lateral en móvil */
+@media (max-width: 600px) {
+  body {
+    padding: 0 8px;
+    box-sizing: border-box;
+  }
+}
