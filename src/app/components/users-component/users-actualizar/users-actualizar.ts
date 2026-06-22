@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -24,19 +24,33 @@ export class UsersActualizar implements OnInit {
   id: number = 0;
   listaEmpresas: Empresa[] = [];
 
-  constructor(private cS: UsersService, private empresaS: EmpresaService, private router: Router, private fb: FormBuilder, private route: ActivatedRoute) {}
+  constructor(private cS: UsersService, private empresaS: EmpresaService, private router: Router, private fb: FormBuilder, private route: ActivatedRoute, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.empresaS.list().subscribe(data => { this.listaEmpresas = data; });
-    this.route.params.subscribe((params: Params) => {
-      this.id = params['id'];
-    });
     this.form = this.fb.group({
       codigo: [''],
       username: ['', Validators.required],
       password: ['', Validators.required],
       enabled: [true, Validators.required],
       empresa: [null, Validators.required],
+    });
+    this.empresaS.list().subscribe(data => { this.listaEmpresas = data; this.cdr.detectChanges(); });
+    this.route.params.subscribe((params: Params) => {
+      this.id = params['id'];
+      this.init();
+    });
+  }
+
+  init() {
+    this.cS.listId(this.id).subscribe((data) => {
+      this.form.patchValue({
+        codigo: data.id,
+        username: data.username,
+        password: data.password,
+        enabled: data.enabled,
+        empresa: data.empresa,
+      });
+      this.cdr.detectChanges();
     });
   }
 

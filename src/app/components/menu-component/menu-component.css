@@ -1,96 +1,117 @@
 .custom-toolbar {
-  background-color: #fb0800;
+  background-color: #1E293B !important;
+  border-bottom: 1px solid #334155;
   display: flex;
   align-items: center;
-  padding: 0 8px;
+  padding: 0 12px;
   flex-wrap: nowrap;
   overflow-x: auto;
+  height: 60px;
 }
 
 .desktop-menu {
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
+  gap: 2px;
 }
 
+/* Reset completo de Material en estos botones */
 .btn-menu {
-  background-color: #fb0800;
-  border: none;
-  font-size: smaller;
-  border-radius: 4px;
-  margin: 4px;
-  padding: 6px 10px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  white-space: nowrap;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.82rem !important;
+  font-weight: 500 !important;
+  color: #CBD5E1 !important;
+  border-radius: 6px !important;
+  margin: 2px !important;
+  padding: 6px 10px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  cursor: pointer !important;
+  transition: background-color 0.15s ease, color 0.15s ease !important;
+  white-space: nowrap !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  min-width: unset !important;
 }
 
 .btn-menu:hover {
-  background-color: rgb(106, 235, 157);
+  background-color: #2563EB !important;
+  color: #FFFFFF !important;
 }
 
-/* Entidades independientes (sin dependencias): Marca, Plataforma, Región, Rol, Plan */
+.btn-menu mat-icon {
+  font-size: 1rem !important;
+  width: 1rem !important;
+  height: 1rem !important;
+  line-height: 1rem !important;
+  vertical-align: middle !important;
+  color: inherit !important;
+}
+
+/* Entidades independientes: badge verde sutil, sin borde lateral */
 .btn-menu.independiente {
-  background-color: #8B0000;
-  border-left: 3px solid #FFD700;
+  color: #4ADE80 !important;
+  background-color: rgba(34, 197, 94, 0.08) !important;
+}
+
+.btn-menu.independiente::after {
+  content: '●';
+  font-size: 0.4rem;
+  color: #22C55E;
+  margin-left: 3px;
+  vertical-align: middle;
 }
 
 .btn-menu.independiente:hover {
-  background-color: rgb(106, 235, 157);
+  background-color: #166534 !important;
+  color: #FFFFFF !important;
 }
 
-.btn-menu mat-icon,
-.btn-menu .material-symbols-outlined {
-  font-size: 1.3rem;
-  vertical-align: middle;
-  line-height: 1;
+.btn-menu.independiente:hover::after {
+  color: #FFFFFF;
 }
 
-.custom-toolbar button,
-.custom-toolbar mat-icon {
-  color: rgb(255, 255, 255);
-}
-
-/* Botón hamburguesa: solo visible en móvil */
+/* Botón hamburguesa */
 .btn-hamburger {
-  display: none;
-  background-color: #fb0800;
-  border: none;
-  border-radius: 4px;
-  padding: 6px 10px;
-  cursor: pointer;
-  color: white;
+  display: none !important;
+  background-color: transparent !important;
+  border: 1px solid #475569 !important;
+  border-radius: 6px !important;
+  padding: 6px 10px !important;
+  cursor: pointer !important;
+  color: #CBD5E1 !important;
+  transition: background-color 0.15s ease !important;
 }
 
-.mat-mdc-menu-panel {
-  background-color: rgba(250, 121, 16, 0.479) !important;
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(236, 143, 85, 0.3);
-  border-radius: 8px;
-  padding: 4px 0;
+.btn-hamburger:hover {
+  background-color: #2563EB !important;
+  border-color: #2563EB !important;
+  color: #FFFFFF !important;
 }
 
-.mat-mdc-menu-item {
-  color: #0c570c !important;
-  font-size: 0.85rem;
-  font-weight: 500;
+.btn-hamburger mat-icon {
+  color: inherit !important;
 }
 
-.mat-mdc-menu-item:hover {
-  background-color: rgba(46, 158, 46, 0.2) !important;
+/* Ripple de Material — hacerlo sutil */
+.btn-menu .mat-mdc-button-ripple,
+.btn-menu .mat-ripple {
+  opacity: 0.08;
 }
 
-/* Responsive: en pantallas pequeñas mostrar hamburguesa y ocultar menú desktop */
+/* Responsive */
 @media (max-width: 768px) {
   .btn-hamburger {
-    display: flex;
-    align-items: center;
+    display: flex !important;
+    align-items: center !important;
   }
 
   .desktop-menu {
-    display: none;
+    display: none !important;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -22,10 +22,10 @@ export class EmpresaInsertar implements OnInit {
   obj: Empresa = new Empresa();
   listaPlanes: Plan[] = [];
 
-  constructor(private cS: EmpresaService, private planS: PlanService, private router: Router, private fb: FormBuilder) {}
+  constructor(private cS: EmpresaService, private planS: PlanService, private router: Router, private fb: FormBuilder, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.planS.list().subscribe(data => { this.listaPlanes = data; });
+    this.planS.list().subscribe(data => { this.listaPlanes = data; this.cdr.detectChanges(); });
     this.form = this.fb.group({
       nombreComercial: ['', Validators.required],
       ruc: ['', Validators.required],

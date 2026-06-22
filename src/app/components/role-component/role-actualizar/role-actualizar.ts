@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -23,17 +23,29 @@ export class RoleActualizar implements OnInit {
   id: number = 0;
   listaUsuarios: Users[] = [];
 
-  constructor(private cS: RoleService, private usersS: UsersService, private router: Router, private fb: FormBuilder, private route: ActivatedRoute) {}
+  constructor(private cS: RoleService, private usersS: UsersService, private router: Router, private fb: FormBuilder, private route: ActivatedRoute, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.usersS.list().subscribe(data => { this.listaUsuarios = data; });
-    this.route.params.subscribe((params: Params) => {
-      this.id = params['id'];
-    });
     this.form = this.fb.group({
       codigo: [''],
       rol: ['', Validators.required],
       user: [null, Validators.required],
+    });
+    this.usersS.list().subscribe(data => { this.listaUsuarios = data; this.cdr.detectChanges(); });
+    this.route.params.subscribe((params: Params) => {
+      this.id = params['id'];
+      this.init();
+    });
+  }
+
+  init() {
+    this.cS.listId(this.id).subscribe((data) => {
+      this.form.patchValue({
+        codigo: data.id,
+        rol: data.rol,
+        user: data.user,
+      });
+      this.cdr.detectChanges();
     });
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -30,12 +30,13 @@ export class DeteccionpublicitariaInsertar implements OnInit {
     private transmisionS: TransmisionService,
     private marcaS: MarcaService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    this.transmisionS.list().subscribe(data => { this.listaTransmisiones = data; });
-    this.marcaS.list().subscribe(data => { this.listaMarcas = data; });
+    this.transmisionS.list().subscribe(data => { this.listaTransmisiones = data; this.cdr.detectChanges(); });
+    this.marcaS.list().subscribe(data => { this.listaMarcas = data; this.cdr.detectChanges(); });
     this.form = this.fb.group({
       tipo: ['', Validators.required],
       minutoAparicion: ['', Validators.required],

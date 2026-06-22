@@ -31,6 +31,8 @@ export class RegionListar implements OnInit {
   }
 
   eliminar(id: number) {
-    this.cS.delete(id).subscribe(() => { this.cargar(); });
+    if (confirm('¿Estás seguro de que deseas eliminar este registro?')) {
+      this.cS.delete(id).subscribe(() => { this.cargar(); });
+    }
   }
 }

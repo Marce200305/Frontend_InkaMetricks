@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -25,10 +25,10 @@ export class StreamerInsertar implements OnInit {
   obj: Streamer = new Streamer();
   listaRegiones: Region[] = [];
 
-  constructor(private cS: StreamerService, private regionS: RegionService, private router: Router, private fb: FormBuilder) {}
+  constructor(private cS: StreamerService, private regionS: RegionService, private router: Router, private fb: FormBuilder, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.regionS.list().subscribe(data => { this.listaRegiones = data; });
+    this.regionS.list().subscribe(data => { this.listaRegiones = data; this.cdr.detectChanges(); });
     this.form = this.fb.group({
       nickname: ['', Validators.required],
       genero: ['', Validators.required],

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -30,17 +30,18 @@ export class CanalInsertar implements OnInit {
     private plataformaS: PlataformaService,
     private streamerS: StreamerService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    this.plataformaS.list().subscribe(data => { this.listaPlataformas = data; });
-    this.streamerS.list().subscribe(data => { this.listaStreamers = data; });
+    this.plataformaS.list().subscribe(data => { this.listaPlataformas = data; this.cdr.detectChanges(); });
+    this.streamerS.list().subscribe(data => { this.listaStreamers = data; this.cdr.detectChanges(); });
     this.form = this.fb.group({
       urlCanal: ['', Validators.required],
-      seguidoresActuales: ['', Validators.required],
+      seguidoresActuales: [0],
       plataforma: [null, Validators.required],
-      streamer: [null, Validators.required],
+      streamer: [null],
     });
   }
 

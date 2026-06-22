@@ -19,7 +19,7 @@ export class MetricasnapshotService {
     return this.http.post(`${this.url}/nuevo`, c);
   }
   update(c: MetricaSnapshot) {
-    return this.http.put(`${this.url}/actualiza-metrica`, c, { responseType: 'text' });
+    return this.http.put(`${this.url}/actualiza`, c, { responseType: 'text' });
   }
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });

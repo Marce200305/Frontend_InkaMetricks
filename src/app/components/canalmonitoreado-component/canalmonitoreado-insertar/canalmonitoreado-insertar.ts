@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -12,6 +12,8 @@ import { Canal } from '../../../models/Canal';
 import { CanalService } from '../../../services/canal-service';
 import { Empresa } from '../../../models/Empresa';
 import { EmpresaService } from '../../../services/empresa-service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../environments/environment.development';
 
 @Component({
   selector: 'app-canalmonitoreado-insertar',
@@ -30,15 +32,17 @@ export class CanalmonitoreadoInsertar implements OnInit {
     private canalS: CanalService,
     private empresaS: EmpresaService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private cdr: ChangeDetectorRef,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
-    this.canalS.list().subscribe(data => { this.listaCanales = data; });
-    this.empresaS.list().subscribe(data => { this.listaEmpresas = data; });
+    this.canalS.list().subscribe(data => { this.listaCanales = data; this.cdr.detectChanges(); });
+    this.empresaS.list().subscribe(data => { this.listaEmpresas = data; this.cdr.detectChanges(); });
     this.form = this.fb.group({
       canal: [null, Validators.required],
-      empresa: [null, Validators.required],
+      empresa: [null],
     });
   }
 
@@ -46,7 +50,12 @@ export class CanalmonitoreadoInsertar implements OnInit {
     if (this.form.valid) {
       this.obj.canal = this.form.value.canal;
       this.obj.empresa = this.form.value.empresa;
-      this.cS.insert(this.obj).subscribe({ next: () => { this.router.navigate(['/canales-monitoreados/lista']); } });
+      this.cS.insert(this.obj).subscribe({
+        next: () => {
+          this.http.post(`${environment.base}/api/sync/ejecutar`, {}).subscribe();
+          this.router.navigate(['/canales-monitoreados/lista']);
+        }
+      });
     }
   }
 }

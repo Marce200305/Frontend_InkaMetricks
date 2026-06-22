@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -26,10 +26,10 @@ export class TransmisionInsertar implements OnInit {
   obj: Transmision = new Transmision();
   listaCanales: Canal[] = [];
 
-  constructor(private cS: TransmisionService, private canalS: CanalService, private router: Router, private fb: FormBuilder) {}
+  constructor(private cS: TransmisionService, private canalS: CanalService, private router: Router, private fb: FormBuilder, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.canalS.list().subscribe(data => { this.listaCanales = data; });
+    this.canalS.list().subscribe(data => { this.listaCanales = data; this.cdr.detectChanges(); });
     this.form = this.fb.group({
       tituloStream: ['', Validators.required],
       fechaInicio: ['', Validators.required],

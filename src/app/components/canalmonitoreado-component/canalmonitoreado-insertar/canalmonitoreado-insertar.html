@@ -12,13 +12,12 @@
         <mat-error>@if (form.get('canal')?.hasError('required')) { Seleccione un canal }</mat-error>
       </mat-form-field><br/>
       <mat-form-field>
-        <mat-label>Empresa</mat-label>
+        <mat-label>Empresa (opcional)</mat-label>
         <mat-select formControlName="empresa">
           @for (item of listaEmpresas; track item.idEmpresa) {
             <mat-option [value]="item">{{ item.nombreComercial }}</mat-option>
           }
         </mat-select>
-        <mat-error>@if (form.get('empresa')?.hasError('required')) { Seleccione una empresa }</mat-error>
       </mat-form-field><br/>
       <div><button matButton="elevated">Registrar</button></div>
     </form>

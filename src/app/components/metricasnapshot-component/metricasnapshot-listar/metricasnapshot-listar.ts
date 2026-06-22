@@ -38,10 +38,8 @@ export class MetricasnapshotListar {
     });
   }
     eliminar(id: number) {
-      this.cS.delete(id).subscribe(data => {
-        this.cS.list().subscribe(data => {
-          this.dataSource.data = data;
-        })
-      })
+      if (confirm('¿Estás seguro de que deseas eliminar este registro?')) {
+        this.cS.delete(id).subscribe(() => { this.cargarMetricas(); });
+      }
     }
 }

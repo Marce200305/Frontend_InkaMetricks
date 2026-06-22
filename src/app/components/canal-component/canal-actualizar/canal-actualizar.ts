@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -32,12 +32,13 @@ export class CanalActualizar implements OnInit {
     private streamerS: StreamerService,
     private router: Router,
     private fb: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    this.plataformaS.list().subscribe(data => { this.listaPlataformas = data; });
-    this.streamerS.list().subscribe(data => { this.listaStreamers = data; });
+    this.plataformaS.list().subscribe(data => { this.listaPlataformas = data; this.cdr.detectChanges(); });
+    this.streamerS.list().subscribe(data => { this.listaStreamers = data; this.cdr.detectChanges(); });
     this.route.params.subscribe((params: Params) => {
       this.id = params['id'];
       this.init();
@@ -45,9 +46,9 @@ export class CanalActualizar implements OnInit {
     this.form = this.fb.group({
       codigo: [''],
       urlCanal: ['', Validators.required],
-      seguidoresActuales: ['', Validators.required],
+      seguidoresActuales: [0],
       plataforma: [null, Validators.required],
-      streamer: [null, Validators.required],
+      streamer: [null],
     });
   }
 

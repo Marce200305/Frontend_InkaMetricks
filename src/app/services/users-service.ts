@@ -24,4 +24,7 @@ export class UsersService {
   update(c: Users) {
     return this.http.put(`${this.url}/actualiza`, c, { responseType: 'text' });
   }
+  listId(id: number) {
+    return this.http.get<Users>(`${this.url}/${id}`);
+  }
 }

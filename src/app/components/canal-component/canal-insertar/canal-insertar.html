@@ -10,7 +10,6 @@
       <mat-form-field>
         <mat-label>Seguidores Actuales</mat-label>
         <input matInput type="number" formControlName="seguidoresActuales" />
-        <mat-error>@if (form.get('seguidoresActuales')?.hasError('required')) { Ingrese el número de seguidores }</mat-error>
       </mat-form-field><br/>
       <mat-form-field>
         <mat-label>Plataforma</mat-label>
@@ -22,13 +21,12 @@
         <mat-error>@if (form.get('plataforma')?.hasError('required')) { Seleccione una plataforma }</mat-error>
       </mat-form-field><br/>
       <mat-form-field>
-        <mat-label>Streamer</mat-label>
+        <mat-label>Streamer (opcional)</mat-label>
         <mat-select formControlName="streamer">
           @for (item of listaStreamers; track item.idStreamer) {
             <mat-option [value]="item">{{ item.nickname }}</mat-option>
           }
         </mat-select>
-        <mat-error>@if (form.get('streamer')?.hasError('required')) { Seleccione un streamer }</mat-error>
       </mat-form-field><br/>
       <div><button matButton="elevated">Registrar</button></div>
     </form>

@@ -31,6 +31,9 @@ export class CanalListar implements OnInit {
   }
 
   eliminar(id: number) {
-    this.cS.delete(id).subscribe(() => { this.cargar(); });
+    const confirmado = confirm('¿Estás seguro de eliminar este canal?\nSe eliminarán también sus transmisiones, métricas y registros de monitoreo asociados.');
+    if (confirmado) {
+      this.cS.delete(id).subscribe(() => { this.cargar(); });
+    }
   }
 }

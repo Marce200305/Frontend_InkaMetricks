@@ -24,4 +24,7 @@ export class RoleService {
   update(c: Role) {
     return this.http.put(`${this.url}/actualiza`, c, { responseType: 'text' });
   }
+  listId(id: number) {
+    return this.http.get<Role>(`${this.url}/${id}`);
+  }
 }
