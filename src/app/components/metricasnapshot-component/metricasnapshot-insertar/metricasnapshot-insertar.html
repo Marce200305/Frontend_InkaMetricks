@@ -1,0 +1,42 @@
+<div class="container">
+  <div style="text-align: center; margin: 2%"><h2>Registrar Métrica Snapshot</h2></div>
+  <div style="text-align: center; margin: 3%">
+    <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+      <mat-form-field>
+        <mat-label>Transmisión</mat-label>
+        <mat-select formControlName="transmision" (selectionChange)="alSeleccionarTransmision()">
+          @for (item of listaTransmisiones; track item.idTransmision) {
+            <mat-option [value]="item">{{ item.tituloStream }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>@if (form.get('transmision')?.hasError('required')) { Seleccione una transmisión }</mat-error>
+      </mat-form-field><br/>
+      @if (buscando) {
+        <mat-spinner diameter="20" style="margin: 0 auto 8px"></mat-spinner>
+      }
+      @if (mensajePlataforma) {
+        <p [style.color]="mensajePlataforma.startsWith('✓') ? '#4caf50' : '#888'"
+           style="font-size:13px; margin-bottom:8px">{{ mensajePlataforma }}</p>
+      }
+      <mat-form-field>
+        <mat-label>Tipo de métrica</mat-label>
+        <mat-select formControlName="nombre" (selectionChange)="alSeleccionarMetrica()">
+          @for (m of METRICAS; track m.valor) {
+            <mat-option [value]="m.valor">{{ m.label }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>@if (form.get('nombre')?.hasError('required')) { Seleccione un tipo de métrica }</mat-error>
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>Cantidad</mat-label>
+        <input matInput type="number" formControlName="cantidad" />
+        <mat-hint>
+          @if (form.value.nombre === 'viewers' || form.value.nombre === 'seguidores') {
+            Se autocompleta desde la API si el canal está disponible
+          }
+        </mat-hint>
+      </mat-form-field><br/>
+      <div><button matButton="elevated">Registrar</button></div>
+    </form>
+  </div>
+</div>

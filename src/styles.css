@@ -1,0 +1,280 @@
+/* ===== VARIABLES DE DISEÑO ===== */
+:root {
+  --color-bg:         #0F172A;
+  --color-bg-sec:     #1E293B;
+  --color-bg-card:    #1E293B;
+  --color-action:     #2563EB;
+  --color-action-hov: #1D4ED8;
+  --color-text:       #FFFFFF;
+  --color-text-muted: #94A3B8;
+  --color-secondary:  #E5E7EB;
+  --color-success:    #22C55E;
+  --color-error:      #EF4444;
+  --color-border:     #334155;
+  --font-title:       'Poppins', sans-serif;
+  --font-body:        'Inter', sans-serif;
+  --font-size-base:   16px;
+  --radius:           8px;
+}
+
+/* ===== BASE ===== */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-title);
+  color: var(--color-text);
+  margin: 0 0 0.5em;
+}
+
+/* ===== CONTENEDORES ===== */
+.container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ===== TÍTULOS DE SECCIÓN ===== */
+div[style*="text-align: center"] h2,
+div[style*="text-align:center"] h2 {
+  font-family: var(--font-title);
+  font-size: 1.5rem;
+  color: var(--color-text);
+  letter-spacing: 0.3px;
+}
+
+/* ===== ANGULAR MATERIAL — TABLA ===== */
+.mat-mdc-table {
+  background-color: var(--color-bg-card) !important;
+  border-radius: var(--radius);
+  overflow: hidden;
+  width: 100%;
+}
+
+.mat-mdc-header-row {
+  background-color: var(--color-action) !important;
+}
+
+.mat-mdc-header-cell {
+  color: #FFFFFF !important;
+  font-family: var(--font-title) !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  border-bottom: none !important;
+}
+
+.mat-mdc-row {
+  background-color: var(--color-bg-card) !important;
+  border-bottom: 1px solid var(--color-border) !important;
+  transition: background-color 0.15s ease;
+}
+
+.mat-mdc-row:nth-child(even) {
+  background-color: #162032 !important;
+}
+
+.mat-mdc-row:hover {
+  background-color: #1D3A5F !important;
+}
+
+.mat-mdc-cell {
+  color: var(--color-text) !important;
+  font-family: var(--font-body) !important;
+  font-size: 0.9rem !important;
+  border-bottom: none !important;
+}
+
+/* ===== ANGULAR MATERIAL — BOTONES ===== */
+.mat-mdc-button,
+.mat-mdc-raised-button,
+.mat-mdc-unelevated-button,
+button[matbutton],
+button[mat-button],
+button[mat-raised-button] {
+  font-family: var(--font-body) !important;
+  font-weight: 500 !important;
+  border-radius: var(--radius) !important;
+  transition: background-color 0.2s ease, opacity 0.2s ease !important;
+}
+
+/* Botón de registrar/guardar (dentro de form) */
+form button[matButton],
+form button[matbutton],
+form .mat-mdc-button,
+form .mat-mdc-raised-button,
+form .mat-mdc-unelevated-button {
+  background-color: var(--color-action) !important;
+  color: #FFFFFF !important;
+  padding: 8px 28px !important;
+  font-size: 0.95rem !important;
+}
+
+form button[matButton]:hover,
+form button[matbutton]:hover {
+  background-color: var(--color-action-hov) !important;
+}
+
+/* Botones de acciones en tabla (editar / eliminar) */
+table button[matButton],
+table button[matbutton],
+.mat-mdc-table button {
+  color: var(--color-action) !important;
+  background: transparent !important;
+  min-width: unset !important;
+  padding: 4px !important;
+}
+
+.mat-mdc-table button mat-icon {
+  font-size: 1.2rem !important;
+}
+
+.mat-mdc-table button:last-child mat-icon {
+  color: var(--color-error) !important;
+}
+
+/* ===== ANGULAR MATERIAL — FORM FIELDS ===== */
+.mat-mdc-form-field {
+  width: 100%;
+  max-width: 400px;
+}
+
+.mat-mdc-text-field-wrapper {
+  background-color: var(--color-bg-sec) !important;
+  border-radius: var(--radius) !important;
+}
+
+.mat-mdc-form-field-focus-overlay {
+  background-color: transparent !important;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: var(--color-bg-sec) !important;
+}
+
+.mat-mdc-input-element,
+.mat-mdc-select-value-text {
+  color: var(--color-text) !important;
+  font-family: var(--font-body) !important;
+}
+
+.mat-mdc-form-field-label,
+.mdc-floating-label {
+  color: var(--color-text-muted) !important;
+  font-family: var(--font-body) !important;
+}
+
+.mdc-line-ripple::before {
+  border-bottom-color: var(--color-border) !important;
+}
+
+.mdc-line-ripple::after {
+  border-bottom-color: var(--color-action) !important;
+}
+
+.mat-mdc-form-field-error {
+  color: var(--color-error) !important;
+}
+
+/* ===== ANGULAR MATERIAL — SELECT / DROPDOWN ===== */
+.mat-mdc-select-panel,
+.mat-mdc-autocomplete-panel {
+  background-color: var(--color-bg-sec) !important;
+}
+
+.mat-mdc-option {
+  color: var(--color-text) !important;
+  font-family: var(--font-body) !important;
+}
+
+.mat-mdc-option:hover,
+.mat-mdc-option.mat-mdc-option-active {
+  background-color: var(--color-action) !important;
+}
+
+/* ===== ANGULAR MATERIAL — MENU PANEL ===== */
+.mat-mdc-menu-panel {
+  background-color: var(--color-bg-sec) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: var(--radius) !important;
+}
+
+.mat-mdc-menu-item {
+  color: var(--color-text) !important;
+  font-family: var(--font-body) !important;
+  font-size: 0.9rem !important;
+}
+
+.mat-mdc-menu-item:hover {
+  background-color: var(--color-action) !important;
+  color: #FFFFFF !important;
+}
+
+.mat-mdc-menu-item mat-icon {
+  color: var(--color-text-muted) !important;
+}
+
+.mat-mdc-menu-item:hover mat-icon {
+  color: #FFFFFF !important;
+}
+
+/* ===== ELEVATION / CARD ===== */
+.mat-elevation-z8,
+.mat-mdc-elevation-z8 {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-action); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .mat-mdc-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table, mat-table {
+    width: 100% !important;
+  }
+
+  mat-form-field,
+  .mat-mdc-form-field {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .container form,
+  form mat-form-field {
+    width: 100%;
+  }
+
+  button[mat-raised-button],
+  button[mat-button] {
+    margin: 4px 0;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 0 8px;
+  }
+
+  .container {
+    padding: 16px 8px;
+  }
+}

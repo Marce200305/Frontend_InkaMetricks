@@ -1,0 +1,66 @@
+<div class="container">
+  <div style="text-align: center; margin: 2%"><h2>Registrar Canal</h2></div>
+  <div style="text-align: center; margin: 3%">
+    <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+      <mat-form-field>
+        <mat-label>URL del Canal</mat-label>
+        <input matInput formControlName="urlCanal"
+               placeholder="ej: https://twitch.tv/ninja"
+               (blur)="buscarEnPlataforma()" />
+        <mat-error>@if (form.get('urlCanal')?.hasError('required')) { Ingrese la URL del canal }</mat-error>
+      </mat-form-field><br/>
+
+      @if (buscando) {
+        <mat-spinner diameter="24" style="margin: 0 auto 8px"></mat-spinner>
+      }
+
+      @if (datosPlataforma) {
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px; justify-content:center">
+          @if (datosPlataforma.profilePic) {
+            <img [src]="datosPlataforma.profilePic" width="40" height="40"
+                 style="border-radius:50%; object-fit:cover" />
+          }
+          <div style="text-align:left">
+            <div style="font-weight:600">{{ datosPlataforma.displayName }}</div>
+            <div style="font-size:12px; opacity:.7">
+              {{ datosPlataforma.followers | number }} seguidores
+              @if (datosPlataforma.isLive) {
+                · <span style="color:#f44336">● En vivo</span>
+                @if (datosPlataforma.stream?.viewers) {
+                  — {{ datosPlataforma.stream?.viewers | number }} viewers
+                }
+              }
+            </div>
+          </div>
+        </div>
+      }
+
+      @if (errorBusqueda) {
+        <p style="color:#f44336; font-size:12px; margin-bottom:8px">{{ errorBusqueda }}</p>
+      }
+
+      <mat-form-field>
+        <mat-label>Seguidores Actuales</mat-label>
+        <input matInput type="number" formControlName="seguidoresActuales" />
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>Plataforma</mat-label>
+        <mat-select formControlName="plataforma">
+          @for (item of listaPlataformas; track item.idPlataforma) {
+            <mat-option [value]="item">{{ item.nombre }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>@if (form.get('plataforma')?.hasError('required')) { Seleccione una plataforma }</mat-error>
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>Streamer</mat-label>
+        <mat-select formControlName="streamer">
+          @for (item of listaStreamers; track item.idStreamer) {
+            <mat-option [value]="item">{{ item.nickname }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field><br/>
+      <div><button matButton="elevated">Registrar</button></div>
+    </form>
+  </div>
+</div>

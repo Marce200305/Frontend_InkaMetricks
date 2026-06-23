@@ -1,0 +1,31 @@
+<div class="container">
+  <div style="text-align: center; margin: 2%"><h2>Actualizar Métrica Snapshot</h2></div>
+  <div style="text-align: center; margin: 3%">
+    <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+      <mat-form-field>
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="codigo" readonly />
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre" />
+        <mat-error>@if (form.get('nombre')?.hasError('required')) { Ingrese el nombre }</mat-error>
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>Cantidad</mat-label>
+        <input matInput type="number" formControlName="cantidad" />
+        <mat-error>@if (form.get('cantidad')?.hasError('required')) { Ingrese la cantidad }</mat-error>
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>Transmisión</mat-label>
+        <mat-select formControlName="transmision" [compareWith]="compareById">
+          @for (item of listaTransmisiones; track item.idTransmision) {
+            <mat-option [value]="item">{{ item.tituloStream }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>@if (form.get('transmision')?.hasError('required')) { Seleccione una transmisión }</mat-error>
+      </mat-form-field><br/>
+      <div><button matButton="elevated">Actualizar</button></div>
+    </form>
+  </div>
+</div>

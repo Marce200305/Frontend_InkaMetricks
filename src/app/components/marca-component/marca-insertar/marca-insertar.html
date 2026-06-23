@@ -1,0 +1,18 @@
+<div class="container">
+  <div style="text-align: center; margin: 2%"><h2>Registrar Marca</h2></div>
+  <div style="text-align: center; margin: 3%">
+    <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+      <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre" />
+        <mat-error>@if (form.get('nombre')?.hasError('required')) { Ingrese el nombre }</mat-error>
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>Sector</mat-label>
+        <input matInput formControlName="sector" />
+        <mat-error>@if (form.get('sector')?.hasError('required')) { Ingrese el sector }</mat-error>
+      </mat-form-field><br/>
+      <div><button matButton="elevated">Registrar</button></div>
+    </form>
+  </div>
+</div>

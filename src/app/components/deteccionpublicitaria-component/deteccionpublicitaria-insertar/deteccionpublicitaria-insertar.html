@@ -1,0 +1,41 @@
+<div class="container">
+  <div style="text-align: center; margin: 2%"><h2>Registrar Detección Publicitaria</h2></div>
+  <div style="text-align: center; margin: 3%">
+    <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+      <mat-form-field>
+        <mat-label>Tipo</mat-label>
+        <input matInput formControlName="tipo" />
+        <mat-error>@if (form.get('tipo')?.hasError('required')) { Ingrese el tipo }</mat-error>
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>Minuto Aparición (HH:mm:ss)</mat-label>
+        <input matInput formControlName="minutoAparicion" placeholder="00:05:30" />
+        <mat-error>@if (form.get('minutoAparicion')?.hasError('required')) { Ingrese el minuto de aparición }</mat-error>
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>Tiempo Aparición (seg)</mat-label>
+        <input matInput type="number" formControlName="tiempoAparicionSeg" />
+        <mat-error>@if (form.get('tiempoAparicionSeg')?.hasError('required')) { Ingrese el tiempo en segundos }</mat-error>
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>Transmisión</mat-label>
+        <mat-select formControlName="transmision">
+          @for (item of listaTransmisiones; track item.idTransmision) {
+            <mat-option [value]="item">{{ item.tituloStream }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>@if (form.get('transmision')?.hasError('required')) { Seleccione una transmisión }</mat-error>
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>Marca</mat-label>
+        <mat-select formControlName="marca">
+          @for (item of listaMarcas; track item.idMarca) {
+            <mat-option [value]="item">{{ item.nombre }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>@if (form.get('marca')?.hasError('required')) { Seleccione una marca }</mat-error>
+      </mat-form-field><br/>
+      <div><button matButton="elevated">Registrar</button></div>
+    </form>
+  </div>
+</div>
