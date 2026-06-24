@@ -65,10 +65,14 @@ import { UsersInsertar } from './components/users-component/users-insertar/users
 import { UsersListar } from './components/users-component/users-listar/users-listar';
 import { UsersActualizar } from './components/users-component/users-actualizar/users-actualizar';
 import { HomeComponent } from './components/home-component/home-component';
+import { Report01 } from './components/report01/report01';
+import { Report02 } from './components/report02/report02';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'homes', pathMatch: 'full' },
     { path: 'homes', component: HomeComponent },
+    { path: 'reporte01', component: Report01 },
+    { path: 'reporte02', component: Report02 },
 
     {
         path: 'canales', component: CanalComponent,
