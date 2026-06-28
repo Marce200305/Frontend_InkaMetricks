@@ -7,12 +7,12 @@
         <input matInput formControlName="codigo" readonly />
       </mat-form-field><br/>
       <mat-form-field>
-        <mat-label>Name</mat-label>
+        <mat-label>Nombre</mat-label>
         <input matInput formControlName="name" />
         <mat-error>
-          @if (form.get('name')?.hasError('required')) { Ingrese región }
-          @else if (form.get('name')?.hasError('minlength')) { Minimo 2 caracteres }
-          @else if (form.get('name')?.hasError('maxlength')) { Maximo 100 caracteres }
+          @if (form.get('name')?.hasError('required')) { Ingrese la región }
+          @else if (form.get('name')?.hasError('minlength')) { Mínimo 2 caracteres }
+          @else if (form.get('name')?.hasError('maxlength')) { Máximo 100 caracteres }
         </mat-error>
       </mat-form-field><br/>
       <div><button matButton="elevated">Actualizar</button></div>

@@ -3,12 +3,12 @@
   <div style="text-align: center; margin: 3%">
     <form [formGroup]="form" (submit)="aceptar()" class="example-form">
       <mat-form-field>
-        <mat-label>Name</mat-label>
+        <mat-label>Nombre</mat-label>
         <input matInput formControlName="name" />
         <mat-error>
-          @if (form.get('name')?.hasError('required')) { Enter the name }
-          @else if (form.get('name')?.hasError('minlength')) { Minimum 2 characters }
-          @else if (form.get('name')?.hasError('maxlength')) { Maximum 100 characters }
+          @if (form.get('name')?.hasError('required')) { Ingrese el nombre }
+          @else if (form.get('name')?.hasError('minlength')) { Mínimo 2 caracteres }
+          @else if (form.get('name')?.hasError('maxlength')) { Máximo 100 caracteres }
         </mat-error>
       </mat-form-field><br/>
       <div><button matButton="elevated">Registrar</button></div>

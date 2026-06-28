@@ -1,5 +1,5 @@
 <div class="container">
-  <div style="text-align: center; margin: 2%"><h2>Update Broadcast</h2></div>
+  <div style="text-align: center; margin: 2%"><h2>Actualizar Transmisión</h2></div>
   <div style="text-align: center; margin: 3%">
     <form [formGroup]="form" (submit)="submit()" class="example-form">
       <mat-form-field>
@@ -7,17 +7,17 @@
         <input matInput formControlName="codigo" readonly />
       </mat-form-field><br/>
       <mat-form-field>
-        <mat-label>Stream Title</mat-label>
+        <mat-label>Título del Stream</mat-label>
         <input matInput formControlName="streamTitle" />
         <mat-error>
-          @if (form.get('streamTitle')?.hasError('required')) { Enter the title }
-          @else if (form.get('streamTitle')?.hasError('minlength')) { Minimum 3 characters }
-          @else if (form.get('streamTitle')?.hasError('maxlength')) { Maximum 255 characters }
+          @if (form.get('streamTitle')?.hasError('required')) { Ingrese el título }
+          @else if (form.get('streamTitle')?.hasError('minlength')) { Mínimo 3 caracteres }
+          @else if (form.get('streamTitle')?.hasError('maxlength')) { Máximo 255 caracteres }
         </mat-error>
       </mat-form-field><br/>
       <div>
         <mat-form-field>
-          <mat-label>Start Date</mat-label>
+          <mat-label>Fecha Inicio</mat-label>
           <input matInput [matDatepicker]="pickerStart" formControlName="startDate" />
           <mat-hint>DD/MM/YYYY</mat-hint>
           <mat-datepicker-toggle matIconSuffix [for]="pickerStart"></mat-datepicker-toggle>
@@ -26,7 +26,7 @@
       </div><br/>
       <div>
         <mat-form-field>
-          <mat-label>End Date (optional)</mat-label>
+          <mat-label>Fecha Fin (opcional)</mat-label>
           <input matInput [matDatepicker]="pickerEnd" formControlName="endDate" />
           <mat-hint>DD/MM/YYYY</mat-hint>
           <mat-datepicker-toggle matIconSuffix [for]="pickerEnd"></mat-datepicker-toggle>
@@ -34,22 +34,22 @@
         </mat-form-field>
       </div><br/>
       <div style="margin: 10px 0">
-        <label>Is Live?</label><br/>
+        <label>¿En Vivo?</label><br/>
         <mat-radio-group formControlName="isLive">
-          <mat-radio-button [value]="true">Yes</mat-radio-button>&nbsp;
+          <mat-radio-button [value]="true">Sí</mat-radio-button>&nbsp;
           <mat-radio-button [value]="false">No</mat-radio-button>
         </mat-radio-group>
       </div><br/>
       <mat-form-field>
-        <mat-label>Channel</mat-label>
+        <mat-label>Canal</mat-label>
         <mat-select formControlName="canal">
           @for (item of listaChannels; track item.id) {
             <mat-option [value]="item.id">{{ item.channelUrl }}</mat-option>
           }
         </mat-select>
-        <mat-error>@if (form.get('canal')?.hasError('required')) { Select a channel }</mat-error>
+        <mat-error>@if (form.get('canal')?.hasError('required')) { Seleccione un canal }</mat-error>
       </mat-form-field><br/>
-      <div><button matButton="elevated">Update</button></div>
+      <div><button matButton="elevated">Actualizar</button></div>
     </form>
   </div>
 </div>

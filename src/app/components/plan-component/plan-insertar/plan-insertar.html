@@ -3,27 +3,27 @@
   <div style="text-align: center; margin: 3%">
     <form [formGroup]="form" (submit)="aceptar()" class="example-form">
       <mat-form-field>
-        <mat-label>Name</mat-label>
+        <mat-label>Nombre</mat-label>
         <input matInput formControlName="name" />
-        <mat-error>@if (form.get('name')?.hasError('required')) { Enter the name }</mat-error>
+        <mat-error>@if (form.get('name')?.hasError('required')) { Ingrese el nombre }</mat-error>
       </mat-form-field><br/>
       <mat-form-field>
-        <mat-label>Monthly Price</mat-label>
+        <mat-label>Precio Mensual</mat-label>
         <input matInput type="number" formControlName="monthlyPrice" />
         <mat-error>
-          @if (form.get('monthlyPrice')?.hasError('required')) { Enter the monthly price }
-          @else if (form.get('monthlyPrice')?.hasError('min')) { Price cannot be negative }
-          @else if (form.get('monthlyPrice')?.hasError('pattern')) { Enter a valid number (e.g. 29.90) }
+          @if (form.get('monthlyPrice')?.hasError('required')) { Ingrese el precio mensual }
+          @else if (form.get('monthlyPrice')?.hasError('min')) { El precio no puede ser negativo }
+          @else if (form.get('monthlyPrice')?.hasError('pattern')) { Ingrese un número válido (ej. 29.90) }
         </mat-error>
       </mat-form-field><br/>
       <mat-form-field>
-        <mat-label>API Limit</mat-label>
+        <mat-label>Límite de API</mat-label>
         <input matInput type="number" formControlName="apiLimit" />
         <mat-error>
-          @if (form.get('apiLimit')?.hasError('required')) { Enter the API limit }
-          @else if (form.get('apiLimit')?.hasError('min')) { Limit must be at least 1 }
-          @else if (form.get('apiLimit')?.hasError('max')) { Limit cannot exceed 1,000,000 }
-          @else if (form.get('apiLimit')?.hasError('pattern')) { Enter whole numbers only }
+          @if (form.get('apiLimit')?.hasError('required')) { Ingrese el límite de API }
+          @else if (form.get('apiLimit')?.hasError('min')) { El límite debe ser al menos 1 }
+          @else if (form.get('apiLimit')?.hasError('max')) { El límite no puede superar 1,000,000 }
+          @else if (form.get('apiLimit')?.hasError('pattern')) { Ingrese solo números enteros }
         </mat-error>
       </mat-form-field><br/>
       <div><button matButton="elevated">Registrar</button></div>

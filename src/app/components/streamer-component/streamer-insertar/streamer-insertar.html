@@ -48,18 +48,18 @@
       <br/>
 
       <mat-form-field>
-        <mat-label>Gender</mat-label>
+        <mat-label>Género</mat-label>
         <mat-select formControlName="gender">
-          <mat-option value="M">Male</mat-option>
-          <mat-option value="F">Female</mat-option>
-          <mat-option value="O">Other</mat-option>
+          <mat-option value="M">Masculino</mat-option>
+          <mat-option value="F">Femenino</mat-option>
+          <mat-option value="O">Otro</mat-option>
         </mat-select>
-        <mat-error>@if (form.get('gender')?.hasError('required')) { Select a gender }</mat-error>
+        <mat-error>@if (form.get('gender')?.hasError('required')) { Seleccione un género }</mat-error>
       </mat-form-field><br/>
 
       <div>
         <mat-form-field>
-          <mat-label>Registration Date</mat-label>
+          <mat-label>Fecha de Registro</mat-label>
           <input matInput [matDatepicker]="picker" formControlName="registrationDate" />
           <mat-hint>DD/MM/YYYY</mat-hint>
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
@@ -68,13 +68,13 @@
       </div><br/>
 
       <mat-form-field>
-        <mat-label>Region</mat-label>
+        <mat-label>Región</mat-label>
         <mat-select formControlName="region">
           @for (item of listaRegiones; track item.id) {
             <mat-option [value]="item.id">{{ item.name }}</mat-option>
           }
         </mat-select>
-        <mat-error>@if (form.get('region')?.hasError('required')) { Select a region }</mat-error>
+        <mat-error>@if (form.get('region')?.hasError('required')) { Seleccione una región }</mat-error>
       </mat-form-field><br/>
 
       <div><button matButton="elevated">Registrar</button></div>

@@ -1,5 +1,5 @@
 <div class="container">
-  <div style="text-align: center; margin: 2%"><h2>Update User</h2></div>
+  <div style="text-align: center; margin: 2%"><h2>Actualizar Usuario</h2></div>
   <div style="text-align: center; margin: 3%">
     <form [formGroup]="form" (submit)="submit()" class="example-form">
       <mat-form-field>
@@ -7,39 +7,39 @@
         <input matInput formControlName="codigo" readonly />
       </mat-form-field><br/>
       <mat-form-field>
-        <mat-label>Username</mat-label>
+        <mat-label>Usuario</mat-label>
         <input matInput formControlName="username" />
         <mat-error>
-          @if (form.get('username')?.hasError('required')) { Enter the username }
-          @else if (form.get('username')?.hasError('minlength')) { Minimum 3 characters }
-          @else if (form.get('username')?.hasError('maxlength')) { Maximum 50 characters }
+          @if (form.get('username')?.hasError('required')) { Ingrese el usuario }
+          @else if (form.get('username')?.hasError('minlength')) { Mínimo 3 caracteres }
+          @else if (form.get('username')?.hasError('maxlength')) { Máximo 50 caracteres }
         </mat-error>
       </mat-form-field><br/>
       <mat-form-field>
-        <mat-label>Password</mat-label>
+        <mat-label>Contraseña</mat-label>
         <input matInput type="password" formControlName="password" />
         <mat-error>
-          @if (form.get('password')?.hasError('required')) { Enter the password }
-          @else if (form.get('password')?.hasError('minlength')) { Minimum 6 characters }
+          @if (form.get('password')?.hasError('required')) { Ingrese la contraseña }
+          @else if (form.get('password')?.hasError('minlength')) { Mínimo 6 caracteres }
         </mat-error>
       </mat-form-field><br/>
       <div style="margin: 10px 0">
-        <label>Enabled?</label><br/>
+        <label>¿Habilitado?</label><br/>
         <mat-radio-group formControlName="enabled">
-          <mat-radio-button [value]="true">Yes</mat-radio-button>&nbsp;
+          <mat-radio-button [value]="true">Sí</mat-radio-button>&nbsp;
           <mat-radio-button [value]="false">No</mat-radio-button>
         </mat-radio-group>
       </div><br/>
       <mat-form-field>
-        <mat-label>Company</mat-label>
+        <mat-label>Empresa</mat-label>
         <mat-select formControlName="company">
           @for (item of listaCompanies; track item.id) {
             <mat-option [value]="item.id">{{ item.tradeName }}</mat-option>
           }
         </mat-select>
-        <mat-error>@if (form.get('company')?.hasError('required')) { Select a company }</mat-error>
+        <mat-error>@if (form.get('company')?.hasError('required')) { Seleccione una empresa }</mat-error>
       </mat-form-field><br/>
-      <div><button matButton="elevated">Update</button></div>
+      <div><button matButton="elevated">Actualizar</button></div>
     </form>
   </div>
 </div>

@@ -1,41 +1,41 @@
 <div class="container">
-  <div style="text-align: center; margin: 2%"><h2>Register Ad Detection</h2></div>
+  <div style="text-align: center; margin: 2%"><h2>Registrar Detección de Anuncio</h2></div>
   <div style="text-align: center; margin: 3%">
     <form [formGroup]="form" (submit)="submit()" class="example-form">
       <mat-form-field>
-        <mat-label>Type</mat-label>
+        <mat-label>Tipo</mat-label>
         <input matInput formControlName="type" />
-        <mat-error>@if (form.get('type')?.hasError('required')) { Enter the type }</mat-error>
+        <mat-error>@if (form.get('type')?.hasError('required')) { Ingrese el tipo }</mat-error>
       </mat-form-field><br/>
       <mat-form-field>
-        <mat-label>Appearance Time</mat-label>
+        <mat-label>Hora de Aparición</mat-label>
         <input matInput formControlName="appearanceTime" />
-        <mat-error>@if (form.get('appearanceTime')?.hasError('required')) { Enter the appearance time }</mat-error>
+        <mat-error>@if (form.get('appearanceTime')?.hasError('required')) { Ingrese la hora de aparición }</mat-error>
       </mat-form-field><br/>
       <mat-form-field>
-        <mat-label>Duration (sec)</mat-label>
+        <mat-label>Duración (seg)</mat-label>
         <input matInput type="number" formControlName="appearanceDurationSec" />
-        <mat-error>@if (form.get('appearanceDurationSec')?.hasError('required')) { Enter the duration }</mat-error>
+        <mat-error>@if (form.get('appearanceDurationSec')?.hasError('required')) { Ingrese la duración }</mat-error>
       </mat-form-field><br/>
       <mat-form-field>
-        <mat-label>Broadcast</mat-label>
+        <mat-label>Transmisión</mat-label>
         <mat-select formControlName="broadcast">
           @for (item of listaBroadcasts; track item.id) {
             <mat-option [value]="item.id">{{ item.streamTitle }}</mat-option>
           }
         </mat-select>
-        <mat-error>@if (form.get('broadcast')?.hasError('required')) { Select a broadcast }</mat-error>
+        <mat-error>@if (form.get('broadcast')?.hasError('required')) { Seleccione una transmisión }</mat-error>
       </mat-form-field><br/>
       <mat-form-field>
-        <mat-label>Brand</mat-label>
+        <mat-label>Marca</mat-label>
         <mat-select formControlName="brand">
           @for (item of listaBrands; track item.id) {
             <mat-option [value]="item.id">{{ item.name }}</mat-option>
           }
         </mat-select>
-        <mat-error>@if (form.get('brand')?.hasError('required')) { Select a brand }</mat-error>
+        <mat-error>@if (form.get('brand')?.hasError('required')) { Seleccione una marca }</mat-error>
       </mat-form-field><br/>
-      <div><button matButton="elevated">Register</button></div>
+      <div><button matButton="elevated">Registrar</button></div>
     </form>
   </div>
 </div>
