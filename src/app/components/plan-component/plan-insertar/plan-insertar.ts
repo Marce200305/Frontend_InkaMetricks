@@ -21,18 +21,18 @@ export class PlanInsertar implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      nombre: ['', Validators.required],
-      precioMensual: ['', [Validators.required, Validators.min(0), Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
-      limiteApi: ['', [Validators.required, Validators.min(1), Validators.max(1000000), Validators.pattern(/^\d+$/)]],
+      name: ['', Validators.required],
+      monthlyPrice: ['', [Validators.required, Validators.min(0), Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
+      apiLimit: ['', [Validators.required, Validators.min(1), Validators.max(1000000), Validators.pattern(/^\d+$/)]],
     });
   }
 
   aceptar(): void {
     if (this.form.valid) {
-      this.obj.nombre = this.form.value.nombre;
-      this.obj.precioMensual = this.form.value.precioMensual;
-      this.obj.limiteApi = this.form.value.limiteApi;
-      this.cS.insert(this.obj).subscribe({ next: () => { this.router.navigate(['/planes/lista']); } });
+      this.obj.name = this.form.value.name;
+      this.obj.monthlyPrice = this.form.value.monthlyPrice;
+      this.obj.apiLimit = this.form.value.apiLimit;
+      this.cS.insert(this.obj).subscribe({ next: () => { this.router.navigate(['/plans/list']); } });
     }
   }
 }

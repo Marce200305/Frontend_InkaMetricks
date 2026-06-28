@@ -58,8 +58,8 @@ export class StreamerInsertar implements OnInit {
 
     this.form = this.fb.group({
       nickname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.pattern(/^[a-zA-Z0-9._-]+$/)]],
-      genero: ['', Validators.required],
-      fechaRegistroApp: ['', Validators.required],
+      gender: ['', Validators.required],
+      registrationDate: ['', Validators.required],
       region: [null, Validators.required],
     });
   }
@@ -88,14 +88,14 @@ export class StreamerInsertar implements OnInit {
           if (data) {
             const regionMatch = data.country
               ? this.listaRegiones.find(r =>
-                  r.nombre?.toLowerCase().includes(data.country!.toLowerCase()) ||
-                  data.country!.toLowerCase().includes(r.nombre?.toLowerCase() ?? '')
+                  r.name?.toLowerCase().includes(data.country!.toLowerCase()) ||
+                  data.country!.toLowerCase().includes(r.name?.toLowerCase() ?? '')
                 ) ?? null
               : null;
             this.form.patchValue({
               nickname: data.displayName ?? this.form.value.nickname,
-              fechaRegistroApp: new Date(),
-              ...(regionMatch ? { region: regionMatch.idRegion } : {})
+              registrationDate: new Date(),
+              ...(regionMatch ? { region: regionMatch.id } : {})
             });
           }
           this.cdr.markForCheck();
@@ -121,7 +121,7 @@ export class StreamerInsertar implements OnInit {
         if (data) {
           this.form.patchValue({
             nickname: data.displayName ?? this.form.value.nickname,
-            fechaRegistroApp: new Date(),
+            registrationDate: new Date(),
           });
         }
         this.cdr.markForCheck();
@@ -137,10 +137,10 @@ export class StreamerInsertar implements OnInit {
   aceptar(): void {
     if (this.form.valid) {
       this.obj.nickname = this.form.value.nickname;
-      this.obj.genero = this.form.value.genero;
-      this.obj.fechaRegistroApp = this.form.value.fechaRegistroApp;
-      this.obj.idRegion = this.form.value.region;
-      this.cS.insert(this.obj).subscribe({ next: () => { this.router.navigate(['/streamers/lista']); } });
+      this.obj.gender = this.form.value.gender;
+      this.obj.registrationDate = this.form.value.registrationDate;
+      this.obj.regionId = this.form.value.region;
+      this.cS.insert(this.obj).subscribe({ next: () => { this.router.navigate(['/streamers/list']); } });
     }
   }
 }

@@ -13,16 +13,16 @@ export class StreamerService {
   constructor(private http: HttpClient) {}
 
   list() {
-    return this.http.get<Streamer[]>(`${this.url}/lista`);
+    return this.http.get<Streamer[]>(`${this.url}/list`);
   }
   insert(c: Streamer) {
-    return this.http.post(`${this.url}/nuevo`, c);
+    return this.http.post(`${this.url}/new`, c);
   }
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
   }
   update(c: Streamer) {
-    return this.http.put(`${this.url}/actualiza`, c, { responseType: 'text' });
+    return this.http.put(`${this.url}/update`, c, { responseType: 'text' });
   }
   listId(id: number) {
     return this.http.get<Streamer>(`${this.url}/${id}`);

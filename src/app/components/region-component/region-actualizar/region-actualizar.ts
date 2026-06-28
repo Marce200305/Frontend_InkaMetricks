@@ -27,24 +27,24 @@ export class RegionActualizar implements OnInit {
     });
     this.form = this.fb.group({
       codigo: [''],
-      nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
+      name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
     });
   }
 
   init() {
     this.cS.listId(this.id).subscribe((data) => {
       this.form.patchValue({
-        codigo: data.idRegion,
-        nombre: data.nombre,
+        codigo: data.id,
+        name: data.name,
       });
     });
   }
 
   aceptar(): void {
     if (this.form.valid) {
-      this.obj.idRegion = this.form.value.codigo;
-      this.obj.nombre = this.form.value.nombre;
-      this.cS.update(this.obj).subscribe({ next: () => { this.router.navigate(['/regiones/lista']); } });
+      this.obj.id = this.form.value.codigo;
+      this.obj.name = this.form.value.name;
+      this.cS.update(this.obj).subscribe({ next: () => { this.router.navigate(['/regions/list']); } });
     }
   }
 }

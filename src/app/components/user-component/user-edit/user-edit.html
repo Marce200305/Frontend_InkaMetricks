@@ -1,0 +1,45 @@
+<div class="container">
+  <div style="text-align: center; margin: 2%"><h2>Update User</h2></div>
+  <div style="text-align: center; margin: 3%">
+    <form [formGroup]="form" (submit)="submit()" class="example-form">
+      <mat-form-field>
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="codigo" readonly />
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username" />
+        <mat-error>
+          @if (form.get('username')?.hasError('required')) { Enter the username }
+          @else if (form.get('username')?.hasError('minlength')) { Minimum 3 characters }
+          @else if (form.get('username')?.hasError('maxlength')) { Maximum 50 characters }
+        </mat-error>
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" />
+        <mat-error>
+          @if (form.get('password')?.hasError('required')) { Enter the password }
+          @else if (form.get('password')?.hasError('minlength')) { Minimum 6 characters }
+        </mat-error>
+      </mat-form-field><br/>
+      <div style="margin: 10px 0">
+        <label>Enabled?</label><br/>
+        <mat-radio-group formControlName="enabled">
+          <mat-radio-button [value]="true">Yes</mat-radio-button>&nbsp;
+          <mat-radio-button [value]="false">No</mat-radio-button>
+        </mat-radio-group>
+      </div><br/>
+      <mat-form-field>
+        <mat-label>Company</mat-label>
+        <mat-select formControlName="company">
+          @for (item of listaCompanies; track item.id) {
+            <mat-option [value]="item.id">{{ item.tradeName }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>@if (form.get('company')?.hasError('required')) { Select a company }</mat-error>
+      </mat-form-field><br/>
+      <div><button matButton="elevated">Update</button></div>
+    </form>
+  </div>
+</div>

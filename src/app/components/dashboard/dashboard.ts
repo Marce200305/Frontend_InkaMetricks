@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { Report01 } from '../report01/report01';
-import { Report02 } from '../report02/report02';
+import { TopBroadcastsByMetric } from '../top-broadcasts-by-metric-component/top-broadcasts-by-metric-component';
+import { MetricsByRegion } from '../metrics-by-region-component/metrics-by-region-component';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [Report01, Report02],
+  imports: [TopBroadcastsByMetric, MetricsByRegion],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })

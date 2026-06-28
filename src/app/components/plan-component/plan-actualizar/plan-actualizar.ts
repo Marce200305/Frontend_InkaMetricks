@@ -27,30 +27,30 @@ export class PlanActualizar implements OnInit {
     });
     this.form = this.fb.group({
       codigo: [''],
-      nombre: ['', Validators.required],
-      precioMensual: ['', [Validators.required, Validators.min(0), Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
-      limiteApi: ['', [Validators.required, Validators.min(1), Validators.max(1000000), Validators.pattern(/^\d+$/)]],
+      name: ['', Validators.required],
+      monthlyPrice: ['', [Validators.required, Validators.min(0), Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
+      apiLimit: ['', [Validators.required, Validators.min(1), Validators.max(1000000), Validators.pattern(/^\d+$/)]],
     });
   }
 
   init() {
     this.cS.listId(this.id).subscribe((data) => {
       this.form.patchValue({
-        codigo: data.idPlan,
-        nombre: data.nombre,
-        precioMensual: data.precioMensual,
-        limiteApi: data.limiteApi,
+        codigo: data.id,
+        name: data.name,
+        monthlyPrice: data.monthlyPrice,
+        apiLimit: data.apiLimit,
       });
     });
   }
 
   aceptar(): void {
     if (this.form.valid) {
-      this.obj.idPlan = this.form.value.codigo;
-      this.obj.nombre = this.form.value.nombre;
-      this.obj.precioMensual = this.form.value.precioMensual;
-      this.obj.limiteApi = this.form.value.limiteApi;
-      this.cS.update(this.obj).subscribe({ next: () => { this.router.navigate(['/planes/lista']); } });
+      this.obj.id = this.form.value.codigo;
+      this.obj.name = this.form.value.name;
+      this.obj.monthlyPrice = this.form.value.monthlyPrice;
+      this.obj.apiLimit = this.form.value.apiLimit;
+      this.cS.update(this.obj).subscribe({ next: () => { this.router.navigate(['/plans/list']); } });
     }
   }
 }

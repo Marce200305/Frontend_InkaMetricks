@@ -1,0 +1,31 @@
+<div class="container">
+  <div style="text-align: center; margin: 2%"><h2>Register Metric Snapshot</h2></div>
+  <div style="text-align: center; margin: 3%">
+    <form [formGroup]="form" (submit)="submit()" class="example-form">
+      <mat-form-field>
+        <mat-label>Metric Name</mat-label>
+        <mat-select formControlName="name">
+          @for (item of metricNames; track item) {
+            <mat-option [value]="item">{{ item }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>@if (form.get('name')?.hasError('required')) { Select a metric }</mat-error>
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>Amount</mat-label>
+        <input matInput type="number" formControlName="amount" />
+        <mat-error>@if (form.get('amount')?.hasError('required')) { Enter the amount }</mat-error>
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>Broadcast</mat-label>
+        <mat-select formControlName="broadcast">
+          @for (item of listaBroadcasts; track item.id) {
+            <mat-option [value]="item.id">{{ item.streamTitle }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>@if (form.get('broadcast')?.hasError('required')) { Select a broadcast }</mat-error>
+      </mat-form-field><br/>
+      <div><button matButton="elevated">Register</button></div>
+    </form>
+  </div>
+</div>

@@ -1,183 +1,184 @@
 import { Routes } from '@angular/router';
 
-import { CanalComponent } from './components/canal-component/canal-component';
-import { CanalInsertar } from './components/canal-component/canal-insertar/canal-insertar';
-import { CanalListar } from './components/canal-component/canal-listar/canal-listar';
-import { CanalActualizar } from './components/canal-component/canal-actualizar/canal-actualizar';
+import { BrandComponent } from './components/brand-component/brand-component';
+import { BrandCreate } from './components/brand-component/brand-create/brand-create';
+import { BrandList } from './components/brand-component/brand-list/brand-list';
+import { BrandEdit } from './components/brand-component/brand-edit/brand-edit';
 
-import { CanalmonitoreadoComponent } from './components/canalmonitoreado-component/canalmonitoreado-component';
-import { CanalmonitoreadoInsertar } from './components/canalmonitoreado-component/canalmonitoreado-insertar/canalmonitoreado-insertar';
-import { CanalmonitoreadoListar } from './components/canalmonitoreado-component/canalmonitoreado-listar/canalmonitoreado-listar';
-import { CanalmonitoreadoActualizar } from './components/canalmonitoreado-component/canalmonitoreado-actualizar/canalmonitoreado-actualizar';
+import { PlatformComponent } from './components/platform-component/platform-component';
+import { PlatformCreate } from './components/platform-component/platform-create/platform-create';
+import { PlatformList } from './components/platform-component/platform-list/platform-list';
+import { PlatformEdit } from './components/platform-component/platform-edit/platform-edit';
 
-import { DeteccionpublicitariaComponent } from './components/deteccionpublicitaria-component/deteccionpublicitaria-component';
-import { DeteccionpublicitariaInsertar } from './components/deteccionpublicitaria-component/deteccionpublicitaria-insertar/deteccionpublicitaria-insertar';
-import { DeteccionpublicitariaListar } from './components/deteccionpublicitaria-component/deteccionpublicitaria-listar/deteccionpublicitaria-listar';
-import { DeteccionpublicitariaActualizar } from './components/deteccionpublicitaria-component/deteccionpublicitaria-actualizar/deteccionpublicitaria-actualizar';
+import { CompanyComponent } from './components/company-component/company-component';
+import { CompanyCreate } from './components/company-component/company-create/company-create';
+import { CompanyList } from './components/company-component/company-list/company-list';
+import { CompanyEdit } from './components/company-component/company-edit/company-edit';
 
-import { EmpresaComponent } from './components/empresa-component/empresa-component';
-import { EmpresaInsertar } from './components/empresa-component/empresa-insertar/empresa-insertar';
-import { EmpresaListar } from './components/empresa-component/empresa-listar/empresa-listar';
-import { EmpresaActualizar } from './components/empresa-component/empresa-actualizar/empresa-actualizar';
+import { ChannelComponent } from './components/channel-component/channel-component';
+import { ChannelCreate } from './components/channel-component/channel-create/channel-create';
+import { ChannelList } from './components/channel-component/channel-list/channel-list';
+import { ChannelEdit } from './components/channel-component/channel-edit/channel-edit';
 
-import { MarcaComponent } from './components/marca-component/marca-component';
-import { MarcaInsertar } from './components/marca-component/marca-insertar/marca-insertar';
-import { MarcaListar } from './components/marca-component/marca-listar/marca-listar';
-import { MarcaActualizar } from './components/marca-component/marca-actualizar/marca-actualizar';
+import { BroadcastComponent } from './components/broadcast-component/broadcast-component';
+import { BroadcastCreate } from './components/broadcast-component/broadcast-create/broadcast-create';
+import { BroadcastList } from './components/broadcast-component/broadcast-list/broadcast-list';
+import { BroadcastEdit } from './components/broadcast-component/broadcast-edit/broadcast-edit';
 
-import { MetricasnapshotComponent } from './components/metricasnapshot-component/metricasnapshot-component';
-import { MetricasnapshotInsertar } from './components/metricasnapshot-component/metricasnapshot-insertar/metricasnapshot-insertar';
-import { MetricasnapshotListar } from './components/metricasnapshot-component/metricasnapshot-listar/metricasnapshot-listar';
-import { MetricasnapshotActualizar } from './components/metricasnapshot-component/metricasnapshot-actualizar/metricasnapshot-actualizar';
+import { MonitoredChannelComponent } from './components/monitored-channel-component/monitored-channel-component';
+import { MonitoredChannelCreate } from './components/monitored-channel-component/monitored-channel-create/monitored-channel-create';
+import { MonitoredChannelList } from './components/monitored-channel-component/monitored-channel-list/monitored-channel-list';
+import { MonitoredChannelEdit } from './components/monitored-channel-component/monitored-channel-edit/monitored-channel-edit';
+
+import { MetricSnapshotComponent } from './components/metric-snapshot-component/metric-snapshot-component';
+import { MetricSnapshotCreate } from './components/metric-snapshot-component/metric-snapshot-create/metric-snapshot-create';
+import { MetricSnapshotList } from './components/metric-snapshot-component/metric-snapshot-list/metric-snapshot-list';
+import { MetricSnapshotEdit } from './components/metric-snapshot-component/metric-snapshot-edit/metric-snapshot-edit';
+
+import { AdDetectionComponent } from './components/ad-detection-component/ad-detection-component';
+import { AdDetectionCreate } from './components/ad-detection-component/ad-detection-create/ad-detection-create';
+import { AdDetectionList } from './components/ad-detection-component/ad-detection-list/ad-detection-list';
+import { AdDetectionEdit } from './components/ad-detection-component/ad-detection-edit/ad-detection-edit';
 
 import { PlanComponent } from './components/plan-component/plan-component';
 import { PlanInsertar } from './components/plan-component/plan-insertar/plan-insertar';
 import { PlanListar } from './components/plan-component/plan-listar/plan-listar';
 import { PlanActualizar } from './components/plan-component/plan-actualizar/plan-actualizar';
 
-import { PlataformaComponent } from './components/plataforma-component/plataforma-component';
-import { PlataformaInsertar } from './components/plataforma-component/plataforma-insertar/plataforma-insertar';
-import { PlataformaListar } from './components/plataforma-component/plataforma-listar/plataforma-listar';
-import { PlataformaActualizar } from './components/plataforma-component/plataforma-actualizar/plataforma-actualizar';
-
 import { RegionComponent } from './components/region-component/region-component';
 import { RegionInsertar } from './components/region-component/region-insertar/region-insertar';
 import { RegionListar } from './components/region-component/region-listar/region-listar';
 import { RegionActualizar } from './components/region-component/region-actualizar/region-actualizar';
-
-import { RoleComponent } from './components/role-component/role-component';
-import { RoleInsertar } from './components/role-component/role-insertar/role-insertar';
-import { RoleListar } from './components/role-component/role-listar/role-listar';
-import { RoleActualizar } from './components/role-component/role-actualizar/role-actualizar';
 
 import { StreamerComponent } from './components/streamer-component/streamer-component';
 import { StreamerInsertar } from './components/streamer-component/streamer-insertar/streamer-insertar';
 import { StreamerListar } from './components/streamer-component/streamer-listar/streamer-listar';
 import { StreamerActualizar } from './components/streamer-component/streamer-actualizar/streamer-actualizar';
 
-import { TransmisionComponent } from './components/transmision-component/transmision-component';
-import { TransmisionInsertar } from './components/transmision-component/transmision-insertar/transmision-insertar';
-import { TransmisionListar } from './components/transmision-component/transmision-listar/transmision-listar';
-import { TransmisionActualizar } from './components/transmision-component/transmision-actualizar/transmision-actualizar';
+import { RoleComponent } from './components/role-component/role-component';
+import { RoleInsertar } from './components/role-component/role-insertar/role-insertar';
+import { RoleListar } from './components/role-component/role-listar/role-listar';
+import { RoleActualizar } from './components/role-component/role-actualizar/role-actualizar';
 
-import { UsersComponent } from './components/users-component/users-component';
-import { UsersInsertar } from './components/users-component/users-insertar/users-insertar';
-import { UsersListar } from './components/users-component/users-listar/users-listar';
-import { UsersActualizar } from './components/users-component/users-actualizar/users-actualizar';
+import { UserComponent } from './components/user-component/user-component';
+import { UserCreate } from './components/user-component/user-create/user-create';
+import { UserList } from './components/user-component/user-list/user-list';
+import { UserEdit } from './components/user-component/user-edit/user-edit';
+
 import { HomeComponent } from './components/home-component/home-component';
-import { Report01 } from './components/report01/report01';
-import { Report02 } from './components/report02/report02';
+import { TopBroadcastsByMetric } from './components/top-broadcasts-by-metric-component/top-broadcasts-by-metric-component';
+import { MetricsByRegion } from './components/metrics-by-region-component/metrics-by-region-component';
 import { DashboardComponent } from './components/dashboard/dashboard';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'homes', pathMatch: 'full' },
     { path: 'homes', component: HomeComponent },
     { path: 'dashboard', component: DashboardComponent },
-    { path: 'reporte01', component: Report01 },
-    { path: 'reporte02', component: Report02 },
+    { path: 'top-broadcasts-by-metric', component: TopBroadcastsByMetric },
+    { path: 'metrics-by-region', component: MetricsByRegion },
 
     {
-        path: 'canales', component: CanalComponent,
+        path: 'brands', component: BrandComponent,
         children: [
-            { path: 'nuevo', component: CanalInsertar },
-            { path: 'lista', component: CanalListar },
-            { path: 'editar/:id', component: CanalActualizar },
+            { path: 'create', component: BrandCreate },
+            { path: 'list', component: BrandList },
+            { path: 'edit/:id', component: BrandEdit },
         ]
     },
     {
-        path: 'canales-monitoreados', component: CanalmonitoreadoComponent,
+        path: 'platforms', component: PlatformComponent,
         children: [
-            { path: 'nuevo', component: CanalmonitoreadoInsertar },
-            { path: 'lista', component: CanalmonitoreadoListar },
-            { path: 'editar/:id', component: CanalmonitoreadoActualizar },
+            { path: 'create', component: PlatformCreate },
+            { path: 'list', component: PlatformList },
+            { path: 'edit/:id', component: PlatformEdit },
         ]
     },
     {
-        path: 'detecciones-publicitarias', component: DeteccionpublicitariaComponent,
+        path: 'companies', component: CompanyComponent,
         children: [
-            { path: 'nuevo', component: DeteccionpublicitariaInsertar },
-            { path: 'lista', component: DeteccionpublicitariaListar },
-            { path: 'editar/:id', component: DeteccionpublicitariaActualizar },
+            { path: 'create', component: CompanyCreate },
+            { path: 'list', component: CompanyList },
+            { path: 'edit/:id', component: CompanyEdit },
         ]
     },
     {
-        path: 'empresas', component: EmpresaComponent,
+        path: 'channels', component: ChannelComponent,
         children: [
-            { path: 'nuevo', component: EmpresaInsertar },
-            { path: 'lista', component: EmpresaListar },
-            { path: 'editar/:id', component: EmpresaActualizar },
+            { path: 'create', component: ChannelCreate },
+            { path: 'list', component: ChannelList },
+            { path: 'edit/:id', component: ChannelEdit },
         ]
     },
     {
-        path: 'marcas', component: MarcaComponent,
+        path: 'broadcasts', component: BroadcastComponent,
         children: [
-            { path: 'nuevo', component: MarcaInsertar },
-            { path: 'lista', component: MarcaListar },
-            { path: 'editar/:id', component: MarcaActualizar },
+            { path: 'create', component: BroadcastCreate },
+            { path: 'list', component: BroadcastList },
+            { path: 'edit/:id', component: BroadcastEdit },
         ]
     },
     {
-        path: 'metricas', component: MetricasnapshotComponent,
+        path: 'monitored-channels', component: MonitoredChannelComponent,
         children: [
-            { path: 'nuevo', component: MetricasnapshotInsertar },
-            { path: 'lista', component: MetricasnapshotListar },
-            { path: 'editar/:id', component: MetricasnapshotActualizar },
+            { path: 'create', component: MonitoredChannelCreate },
+            { path: 'list', component: MonitoredChannelList },
+            { path: 'edit/:id', component: MonitoredChannelEdit },
         ]
     },
     {
-        path: 'planes', component: PlanComponent,
+        path: 'metrics', component: MetricSnapshotComponent,
         children: [
-            { path: 'nuevo', component: PlanInsertar },
-            { path: 'lista', component: PlanListar },
-            { path: 'editar/:id', component: PlanActualizar },
+            { path: 'create', component: MetricSnapshotCreate },
+            { path: 'list', component: MetricSnapshotList },
+            { path: 'edit/:id', component: MetricSnapshotEdit },
         ]
     },
     {
-        path: 'plataformas', component: PlataformaComponent,
+        path: 'ad-detections', component: AdDetectionComponent,
         children: [
-            { path: 'nuevo', component: PlataformaInsertar },
-            { path: 'lista', component: PlataformaListar },
-            { path: 'editar/:id', component: PlataformaActualizar },
+            { path: 'create', component: AdDetectionCreate },
+            { path: 'list', component: AdDetectionList },
+            { path: 'edit/:id', component: AdDetectionEdit },
         ]
     },
     {
-        path: 'regiones', component: RegionComponent,
+        path: 'plans', component: PlanComponent,
         children: [
-            { path: 'nuevo', component: RegionInsertar },
-            { path: 'lista', component: RegionListar },
-            { path: 'editar/:id', component: RegionActualizar },
+            { path: 'create', component: PlanInsertar },
+            { path: 'list', component: PlanListar },
+            { path: 'edit/:id', component: PlanActualizar },
         ]
     },
     {
-        path: 'roles', component: RoleComponent,
+        path: 'regions', component: RegionComponent,
         children: [
-            { path: 'nuevo', component: RoleInsertar },
-            { path: 'lista', component: RoleListar },
-            { path: 'editar/:id', component: RoleActualizar },
+            { path: 'create', component: RegionInsertar },
+            { path: 'list', component: RegionListar },
+            { path: 'edit/:id', component: RegionActualizar },
         ]
     },
     {
         path: 'streamers', component: StreamerComponent,
         children: [
-            { path: 'nuevo', component: StreamerInsertar },
-            { path: 'lista', component: StreamerListar },
-            { path: 'editar/:id', component: StreamerActualizar },
+            { path: 'create', component: StreamerInsertar },
+            { path: 'list', component: StreamerListar },
+            { path: 'edit/:id', component: StreamerActualizar },
         ]
     },
     {
-        path: 'transmisiones', component: TransmisionComponent,
+        path: 'roles', component: RoleComponent,
         children: [
-            { path: 'nuevo', component: TransmisionInsertar },
-            { path: 'lista', component: TransmisionListar },
-            { path: 'editar/:id', component: TransmisionActualizar },
+            { path: 'create', component: RoleInsertar },
+            { path: 'list', component: RoleListar },
+            { path: 'edit/:id', component: RoleActualizar },
         ]
     },
     {
-        path: 'usuarios', component: UsersComponent,
+        path: 'users', component: UserComponent,
         children: [
-            { path: 'nuevo', component: UsersInsertar },
-            { path: 'lista', component: UsersListar },
-            { path: 'editar/:id', component: UsersActualizar },
+            { path: 'create', component: UserCreate },
+            { path: 'list', component: UserList },
+            { path: 'edit/:id', component: UserEdit },
         ]
     },
 ];

@@ -1,0 +1,58 @@
+<div class="container">
+  <div style="text-align: center; margin: 2%"><h2>Registrar Transmisión</h2></div>
+  <div style="text-align: center; margin: 3%">
+    <form [formGroup]="form" (submit)="submit()" class="example-form">
+      <mat-form-field>
+        <mat-label>Canal</mat-label>
+        <mat-select formControlName="canal" (selectionChange)="alSeleccionarCanal()">
+          @for (item of listaChannels; track item.id) {
+            <mat-option [value]="item.id">{{ item.channelUrl }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>@if (form.get('canal')?.hasError('required')) { Seleccione un canal }</mat-error>
+      </mat-form-field><br/>
+      @if (buscando) {
+        <mat-spinner diameter="20" style="margin: 0 auto 8px"></mat-spinner>
+      }
+      @if (mensajePlataforma) {
+        <p [style.color]="mensajePlataforma.startsWith('✓') ? '#4caf50' : '#f44336'"
+           style="font-size:13px; margin-bottom:8px">{{ mensajePlataforma }}</p>
+      }
+      <mat-form-field>
+        <mat-label>Título del Stream</mat-label>
+        <input matInput formControlName="streamTitle" />
+        <mat-error>
+          @if (form.get('streamTitle')?.hasError('required')) { Ingrese el título }
+          @else if (form.get('streamTitle')?.hasError('minlength')) { Mínimo 3 caracteres }
+          @else if (form.get('streamTitle')?.hasError('maxlength')) { Máximo 255 caracteres }
+        </mat-error>
+      </mat-form-field><br/>
+      <div>
+        <mat-form-field>
+          <mat-label>Fecha Inicio</mat-label>
+          <input matInput [matDatepicker]="pickerInicio" formControlName="startDate" />
+          <mat-hint>DD/MM/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+          <mat-datepicker #pickerInicio></mat-datepicker>
+        </mat-form-field>
+      </div><br/>
+      <div>
+        <mat-form-field>
+          <mat-label>Fecha Fin (opcional)</mat-label>
+          <input matInput [matDatepicker]="pickerFin" formControlName="endDate" />
+          <mat-hint>DD/MM/YYYY — dejar vacío si aún está en vivo</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="pickerFin"></mat-datepicker-toggle>
+          <mat-datepicker #pickerFin></mat-datepicker>
+        </mat-form-field>
+      </div><br/>
+      <div style="margin: 10px 0">
+        <label>¿En Vivo?</label><br/>
+        <mat-radio-group formControlName="isLive">
+          <mat-radio-button [value]="true">Sí</mat-radio-button>&nbsp;
+          <mat-radio-button [value]="false">No</mat-radio-button>
+        </mat-radio-group>
+      </div><br/>
+      <div><button matButton="elevated">Registrar</button></div>
+    </form>
+  </div>
+</div>

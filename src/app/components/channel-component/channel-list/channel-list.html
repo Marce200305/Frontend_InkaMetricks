@@ -1,0 +1,58 @@
+<div class="container">
+  <div style="text-align: center; margin: 5%"><h2>Canales</h2></div>
+  <div>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="c1">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+      <ng-container matColumnDef="c2">
+        <th mat-header-cell *matHeaderCellDef>URL Canal</th>
+        <td mat-cell *matCellDef="let element">{{ element.channelUrl }}</td>
+      </ng-container>
+      <ng-container matColumnDef="c3">
+        <th mat-header-cell *matHeaderCellDef>Seguidores</th>
+        <td mat-cell *matCellDef="let element">
+          {{ (platformDataMap.get(element.id)?.followers ?? element.currentFollowers) | number }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="c4">
+        <th mat-header-cell *matHeaderCellDef>Plataforma</th>
+        <td mat-cell *matCellDef="let element">{{ getPlatform(element.platformId) }}</td>
+      </ng-container>
+      <ng-container matColumnDef="c5">
+        <th mat-header-cell *matHeaderCellDef>Streamer</th>
+        <td mat-cell *matCellDef="let element">{{ getStreamer(element.streamerId) }}</td>
+      </ng-container>
+      <ng-container matColumnDef="c6">
+        <th mat-header-cell *matHeaderCellDef>Estado</th>
+        <td mat-cell *matCellDef="let element">
+          @if (platformDataMap.get(element.id)?.isLive) {
+            <span style="color:#f44336; font-weight:600; font-size:12px">● En vivo
+              @if (platformDataMap.get(element.id)?.stream?.viewers) {
+                — {{ platformDataMap.get(element.id)?.stream?.viewers | number }}
+              }
+            </span>
+          } @else if (platformDataMap.has(element.id)) {
+            <span style="color:#888; font-size:12px">● Offline</span>
+          } @else {
+            <span style="color:#bbb; font-size:12px">—</span>
+          }
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="c7">
+        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let element">
+          <button matButton [routerLink]="['/channels/edit', element.id]" title="Editar">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button matButton (click)="delete(element.id)" title="Eliminar">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</div>

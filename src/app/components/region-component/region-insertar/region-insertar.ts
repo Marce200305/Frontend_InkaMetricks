@@ -21,14 +21,14 @@ export class RegionInsertar implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
+      name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
     });
   }
 
   aceptar(): void {
     if (this.form.valid) {
-      this.obj.nombre = this.form.value.nombre;
-      this.cS.insert(this.obj).subscribe({ next: () => { this.router.navigate(['/regiones/lista']); } });
+      this.obj.name = this.form.value.name;
+      this.cS.insert(this.obj).subscribe({ next: () => { this.router.navigate(['/regions/list']); } });
     }
   }
 }

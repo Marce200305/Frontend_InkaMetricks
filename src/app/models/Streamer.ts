@@ -1,7 +1,7 @@
 export class Streamer {
-    idStreamer: number = 0;
+    id: number = 0;
     nickname: string = '';
-    genero: string = '';
-    fechaRegistroApp: string = '';
-    idRegion: number = 0;
+    gender: string = '';
+    registrationDate: string = '';
+    regionId: number = 0;
 }

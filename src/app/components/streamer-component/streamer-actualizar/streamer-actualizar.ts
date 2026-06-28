@@ -37,8 +37,8 @@ export class StreamerActualizar implements OnInit {
     this.form = this.fb.group({
       codigo: [''],
       nickname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.pattern(/^[a-zA-Z0-9._-]+$/)]],
-      genero: ['', Validators.required],
-      fechaRegistroApp: ['', Validators.required],
+      gender: ['', Validators.required],
+      registrationDate: ['', Validators.required],
       region: [null, Validators.required],
     });
   }
@@ -46,23 +46,23 @@ export class StreamerActualizar implements OnInit {
   init() {
     this.cS.listId(this.id).subscribe((data) => {
       this.form.patchValue({
-        codigo: data.idStreamer,
+        codigo: data.id,
         nickname: data.nickname,
-        genero: data.genero,
-        fechaRegistroApp: data.fechaRegistroApp,
-        region: data.idRegion,
+        gender: data.gender,
+        registrationDate: data.registrationDate,
+        region: data.regionId,
       });
     });
   }
 
   aceptar(): void {
     if (this.form.valid) {
-      this.obj.idStreamer = this.form.value.codigo;
+      this.obj.id = this.form.value.codigo;
       this.obj.nickname = this.form.value.nickname;
-      this.obj.genero = this.form.value.genero;
-      this.obj.fechaRegistroApp = this.form.value.fechaRegistroApp;
-      this.obj.idRegion = this.form.value.region;
-      this.cS.update(this.obj).subscribe({ next: () => { this.router.navigate(['/streamers/lista']); } });
+      this.obj.gender = this.form.value.gender;
+      this.obj.registrationDate = this.form.value.registrationDate;
+      this.obj.regionId = this.form.value.region;
+      this.cS.update(this.obj).subscribe({ next: () => { this.router.navigate(['/streamers/list']); } });
     }
   }
 }

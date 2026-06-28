@@ -47,7 +47,7 @@ export class StreamerListar implements OnInit, OnDestroy {
   }
 
   getRegion(id: number): string {
-    return this.listaRegiones.find(r => r.idRegion === id)?.nombre || '—';
+    return this.listaRegiones.find(r => r.id === id)?.name || '—';
   }
 
   eliminar(id: number) {

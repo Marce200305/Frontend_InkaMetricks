@@ -13,16 +13,16 @@ export class RoleService {
   constructor(private http: HttpClient) {}
 
   list() {
-    return this.http.get<Role[]>(`${this.url}/lista`);
+    return this.http.get<Role[]>(`${this.url}/list`);
   }
   insert(c: Role) {
-    return this.http.post(`${this.url}/nuevo`, c);
+    return this.http.post(`${this.url}/new`, c);
   }
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
   }
   update(c: Role) {
-    return this.http.put(`${this.url}/actualiza`, c, { responseType: 'text' });
+    return this.http.put(`${this.url}/update`, c, { responseType: 'text' });
   }
   listId(id: number) {
     return this.http.get<Role>(`${this.url}/${id}`);

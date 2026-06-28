@@ -8,8 +8,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { Role } from '../../../models/Role';
 import { RoleService } from '../../../services/role-service';
-import { Users } from '../../../models/Users';
-import { UsersService } from '../../../services/users-service';
+import { User } from '../../../models/User';
+import { UserService } from '../../../services/user-service';
 
 @Component({
   selector: 'app-role-actualizar',
@@ -21,14 +21,14 @@ export class RoleActualizar implements OnInit {
   form: FormGroup = new FormGroup({});
   obj: Role = new Role();
   id: number = 0;
-  listaUsuarios: Users[] = [];
+  listaUsuarios: User[] = [];
 
-  constructor(private cS: RoleService, private usersS: UsersService, private router: Router, private fb: FormBuilder, private route: ActivatedRoute, private cdr: ChangeDetectorRef) {}
+  constructor(private cS: RoleService, private usersS: UserService, private router: Router, private fb: FormBuilder, private route: ActivatedRoute, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
       codigo: [''],
-      rol: ['', Validators.required],
+      role: ['', Validators.required],
       user: [null, Validators.required],
     });
     this.usersS.list().subscribe(data => { this.listaUsuarios = data; this.cdr.detectChanges(); });
@@ -42,7 +42,7 @@ export class RoleActualizar implements OnInit {
     this.cS.listId(this.id).subscribe((data) => {
       this.form.patchValue({
         codigo: data.id,
-        rol: data.rol,
+        role: data.role,
         user: data.user,
       });
       this.cdr.detectChanges();
@@ -58,9 +58,9 @@ export class RoleActualizar implements OnInit {
   aceptar(): void {
     if (this.form.valid) {
       this.obj.id = this.form.value.codigo;
-      this.obj.rol = this.form.value.rol;
+      this.obj.role = this.form.value.role;
       this.obj.user = this.form.value.user;
-      this.cS.update(this.obj).subscribe({ next: () => { this.router.navigate(['/roles/lista']); } });
+      this.cS.update(this.obj).subscribe({ next: () => { this.router.navigate(['/roles/list']); } });
     }
   }
 }
