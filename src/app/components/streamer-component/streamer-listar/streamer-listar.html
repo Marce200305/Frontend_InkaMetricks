@@ -20,7 +20,7 @@
       </ng-container>
       <ng-container matColumnDef="c5">
         <th mat-header-cell *matHeaderCellDef>Región</th>
-        <td mat-cell *matCellDef="let element">{{ element.region?.nombre }}</td>
+        <td mat-cell *matCellDef="let element">{{ getRegion(element.idRegion) }}</td>
       </ng-container>
       <ng-container matColumnDef="c6">
         <th mat-header-cell *matHeaderCellDef>Acciones</th>

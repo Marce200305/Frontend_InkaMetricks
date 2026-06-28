@@ -34,7 +34,7 @@ export class MetricasnapshotActualizar implements OnInit {
     this.form = this.fb.group({
       codigo: [''],
       nombre: ['', Validators.required],
-      cantidad: ['', Validators.required],
+      cantidad: ['', [Validators.required, Validators.min(0), Validators.pattern(/^\d+$/)]],
       transmision: [null, Validators.required],
     });
   }
@@ -45,15 +45,9 @@ export class MetricasnapshotActualizar implements OnInit {
         codigo: data.idMetricaSnapshot,
         nombre: data.nombre,
         cantidad: data.cantidad,
-        transmision: data.transmision,
+        transmision: data.idTransmision,
       });
     });
-  }
-
-  compareById(a: any, b: any): boolean {
-    if (!a || !b) return a === b;
-    const key = Object.keys(a).find(k => k.toLowerCase().startsWith('id'));
-    return key ? a[key] === b[key] : a === b;
   }
 
   aceptar(): void {
@@ -61,7 +55,7 @@ export class MetricasnapshotActualizar implements OnInit {
       this.obj.idMetricaSnapshot = this.form.value.codigo;
       this.obj.nombre = this.form.value.nombre;
       this.obj.cantidad = this.form.value.cantidad;
-      this.obj.transmision = this.form.value.transmision;
+      this.obj.idTransmision = this.form.value.transmision;
       this.cS.update(this.obj).subscribe({ next: () => { this.router.navigate(['/metricas/lista']); } });
     }
   }

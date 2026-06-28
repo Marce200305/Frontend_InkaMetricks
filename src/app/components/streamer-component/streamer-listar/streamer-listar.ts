@@ -7,6 +7,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Streamer } from '../../../models/Streamer';
 import { StreamerService } from '../../../services/streamer-service';
+import { Region } from '../../../models/Region';
+import { RegionService } from '../../../services/region-service';
 
 @Component({
   selector: 'app-streamer-listar',
@@ -23,14 +25,13 @@ import { StreamerService } from '../../../services/streamer-service';
 export class StreamerListar implements OnInit, OnDestroy {
   dataSource: MatTableDataSource<Streamer> = new MatTableDataSource();
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'];
+  listaRegiones: Region[] = [];
   private routerSub?: Subscription;
 
-  constructor(
-    private cS: StreamerService,
-    private router: Router
-  ) {}
+  constructor(private cS: StreamerService, private regionS: RegionService, private router: Router) {}
 
   ngOnInit(): void {
+    this.regionS.list().subscribe(data => { this.listaRegiones = data; });
     this.cargar();
     this.routerSub = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) { this.cargar(); }
@@ -43,6 +44,10 @@ export class StreamerListar implements OnInit, OnDestroy {
     this.cS.list().subscribe({
       next: (data) => { this.dataSource.data = data; }
     });
+  }
+
+  getRegion(id: number): string {
+    return this.listaRegiones.find(r => r.idRegion === id)?.nombre || '—';
   }
 
   eliminar(id: number) {

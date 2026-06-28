@@ -5,7 +5,11 @@
       <mat-form-field>
         <mat-label>Nombre</mat-label>
         <input matInput formControlName="nombre" />
-        <mat-error>@if (form.get('nombre')?.hasError('required')) { Ingrese el nombre }</mat-error>
+        <mat-error>
+          @if (form.get('nombre')?.hasError('required')) { Ingrese el nombre }
+          @else if (form.get('nombre')?.hasError('minlength')) { Mínimo 2 caracteres }
+          @else if (form.get('nombre')?.hasError('maxlength')) { Máximo 100 caracteres }
+        </mat-error>
       </mat-form-field><br/>
       <div><button matButton="elevated">Registrar</button></div>
     </form>

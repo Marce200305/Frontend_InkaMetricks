@@ -29,8 +29,8 @@ export class UsersActualizar implements OnInit {
   ngOnInit(): void {
     this.form = this.fb.group({
       codigo: [''],
-      username: ['', Validators.required],
-      password: ['', Validators.required],
+      username: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30), Validators.pattern(/^[a-zA-Z0-9._-]+$/)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
       enabled: [true, Validators.required],
       empresa: [null, Validators.required],
     });
@@ -48,16 +48,10 @@ export class UsersActualizar implements OnInit {
         username: data.username,
         password: data.password,
         enabled: data.enabled,
-        empresa: data.empresa,
+        empresa: data.idEmpresa,
       });
       this.cdr.detectChanges();
     });
-  }
-
-  compareById(a: any, b: any): boolean {
-    if (!a || !b) return a === b;
-    const key = Object.keys(a).find(k => k.toLowerCase().startsWith('id'));
-    return key ? a[key] === b[key] : a === b;
   }
 
   aceptar(): void {
@@ -66,7 +60,7 @@ export class UsersActualizar implements OnInit {
       this.obj.username = this.form.value.username;
       this.obj.password = this.form.value.password;
       this.obj.enabled = this.form.value.enabled;
-      this.obj.empresa = this.form.value.empresa;
+      this.obj.idEmpresa = this.form.value.empresa;
       this.cS.update(this.obj).subscribe({ next: () => { this.router.navigate(['/usuarios/lista']); } });
     }
   }

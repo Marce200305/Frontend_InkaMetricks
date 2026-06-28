@@ -41,7 +41,7 @@ export class TransmisionInsertar implements OnInit {
   ngOnInit(): void {
     this.canalS.list().subscribe(data => { this.listaCanales = data; });
     this.form = this.fb.group({
-      tituloStream: ['', Validators.required],
+      tituloStream: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
       fechaInicio: ['', Validators.required],
       fechaFin: [null],
       enVivo: [false],
@@ -50,7 +50,8 @@ export class TransmisionInsertar implements OnInit {
   }
 
   alSeleccionarCanal(): void {
-    const canal: Canal = this.form.value.canal;
+    const idCanal: number = this.form.value.canal;
+    const canal = this.listaCanales.find(c => c.idCanal === idCanal);
     if (!canal?.urlCanal) return;
 
     this.buscando = true;
@@ -84,7 +85,7 @@ export class TransmisionInsertar implements OnInit {
       this.obj.fechaInicio = this.form.value.fechaInicio;
       this.obj.fechaFin = this.form.value.fechaFin;
       this.obj.enVivo = this.form.value.enVivo;
-      this.obj.canal = this.form.value.canal;
+      this.obj.idCanal = this.form.value.canal;
       this.cS.insert(this.obj).subscribe({ next: () => { this.router.navigate(['/transmisiones/lista']); } });
     }
   }

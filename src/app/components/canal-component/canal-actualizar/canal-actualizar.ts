@@ -44,8 +44,8 @@ export class CanalActualizar implements OnInit {
     });
     this.form = this.fb.group({
       codigo: [''],
-      urlCanal: ['', Validators.required],
-      seguidoresActuales: [0],
+      urlCanal: ['', [Validators.required, Validators.pattern(/^https?:\/\/.+/), Validators.maxLength(2048)]],
+      seguidoresActuales: [0, [Validators.min(0)]],
       plataforma: [null, Validators.required],
       streamer: [null],
     });
@@ -57,16 +57,10 @@ export class CanalActualizar implements OnInit {
         codigo: data.idCanal,
         urlCanal: data.urlCanal,
         seguidoresActuales: data.seguidoresActuales,
-        plataforma: data.plataforma,
-        streamer: data.streamer,
+        plataforma: data.idPlataforma,
+        streamer: data.idStreamer,
       });
     });
-  }
-
-  compareById(a: any, b: any): boolean {
-    if (!a || !b) return a === b;
-    const key = Object.keys(a).find(k => k.toLowerCase().startsWith('id'));
-    return key ? a[key] === b[key] : a === b;
   }
 
   aceptar(): void {
@@ -74,8 +68,8 @@ export class CanalActualizar implements OnInit {
       this.obj.idCanal = this.form.value.codigo;
       this.obj.urlCanal = this.form.value.urlCanal;
       this.obj.seguidoresActuales = this.form.value.seguidoresActuales;
-      this.obj.plataforma = this.form.value.plataforma;
-      this.obj.streamer = this.form.value.streamer;
+      this.obj.idPlataforma = this.form.value.plataforma;
+      this.obj.idStreamer = this.form.value.streamer;
       this.cS.update(this.obj).subscribe({ next: () => { this.router.navigate(['/canales/lista']); } });
     }
   }

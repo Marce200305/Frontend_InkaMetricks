@@ -23,7 +23,7 @@
       <button mat-menu-item [matMenuTriggerFor]="menuTransmisionM"><mat-icon>live_tv</mat-icon> Transmisión</button>
       <button mat-menu-item [matMenuTriggerFor]="menuMetricaM"><mat-icon>bar_chart</mat-icon> Métrica</button>
       <button mat-menu-item [matMenuTriggerFor]="menuDeteccionM"><mat-icon>campaign</mat-icon> Detección Pub.</button>
-      <button mat-menu-item [matMenuTriggerFor]="menuReportesM"><mat-icon>bar_chart</mat-icon> Reportes</button>
+      <button mat-menu-item routerLink="/dashboard"><mat-icon>dashboard</mat-icon> Dashboard</button>
     </mat-menu>
 
     <!-- Submenús móvil -->
@@ -78,10 +78,6 @@
     <mat-menu #menuDeteccionM="matMenu">
       <button mat-menu-item routerLink="/detecciones-publicitarias/nuevo"><mat-icon>add</mat-icon>Registrar</button>
       <button mat-menu-item routerLink="/detecciones-publicitarias/lista"><mat-icon>list</mat-icon>Lista</button>
-    </mat-menu>
-    <mat-menu #menuReportesM="matMenu">
-      <button mat-menu-item routerLink="/reporte01"><mat-icon>donut_large</mat-icon>Top transmisiones</button>
-      <button mat-menu-item routerLink="/reporte02"><mat-icon>radar</mat-icon>Métricas por región</button>
     </mat-menu>
 
     <!-- Botones desktop -->
@@ -200,13 +196,9 @@
         <button mat-menu-item routerLink="/detecciones-publicitarias/lista"><mat-icon>list</mat-icon>Lista</button>
       </mat-menu>
 
-      <button matButton class="btn-menu" [matMenuTriggerFor]="menuReportes">
-        <mat-icon>assessment</mat-icon> Reportes
+      <button matButton class="btn-menu" routerLink="/dashboard">
+        <mat-icon>dashboard</mat-icon> Dashboard
       </button>
-      <mat-menu #menuReportes="matMenu">
-        <button mat-menu-item routerLink="/reporte01"><mat-icon>donut_large</mat-icon>Top transmisiones</button>
-        <button mat-menu-item routerLink="/reporte02"><mat-icon>radar</mat-icon>Métricas por región</button>
-      </mat-menu>
     </div>
 
   </mat-toolbar>

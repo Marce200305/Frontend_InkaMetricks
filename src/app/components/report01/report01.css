@@ -31,11 +31,14 @@
   color: #444;
 }
 
-.filter-row input {
+.filter-row select {
   padding: 0.4rem 0.75rem;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 1rem;
+  cursor: pointer;
+  background: white;
+  min-width: 160px;
 }
 
 .filter-row button {

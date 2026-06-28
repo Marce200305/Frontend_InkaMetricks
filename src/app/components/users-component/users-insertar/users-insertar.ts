@@ -28,8 +28,8 @@ export class UsersInsertar implements OnInit {
   ngOnInit(): void {
     this.empresaS.list().subscribe(data => { this.listaEmpresas = data; this.cdr.detectChanges(); });
     this.form = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
+      username: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30), Validators.pattern(/^[a-zA-Z0-9._-]+$/)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
       enabled: [true, Validators.required],
       empresa: [null, Validators.required],
     });
@@ -40,7 +40,7 @@ export class UsersInsertar implements OnInit {
       this.obj.username = this.form.value.username;
       this.obj.password = this.form.value.password;
       this.obj.enabled = this.form.value.enabled;
-      this.obj.empresa = this.form.value.empresa;
+      this.obj.idEmpresa = this.form.value.empresa;
       this.cS.insert(this.obj).subscribe({ next: () => { this.router.navigate(['/usuarios/lista']); } });
     }
   }

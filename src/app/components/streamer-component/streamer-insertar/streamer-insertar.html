@@ -18,7 +18,12 @@
       <mat-form-field>
         <mat-label>Nickname</mat-label>
         <input matInput formControlName="nickname" (blur)="buscarPerfil()" />
-        <mat-error>@if (form.get('nickname')?.hasError('required')) { Ingrese el nickname }</mat-error>
+        <mat-error>
+          @if (form.get('nickname')?.hasError('required')) { Ingrese el nickname }
+          @else if (form.get('nickname')?.hasError('minlength')) { Mínimo 3 caracteres }
+          @else if (form.get('nickname')?.hasError('maxlength')) { Máximo 50 caracteres }
+          @else if (form.get('nickname')?.hasError('pattern')) { Solo letras, números, puntos, guiones y guiones bajos }
+        </mat-error>
       </mat-form-field>
 
       @if (buscando) {
@@ -66,7 +71,7 @@
         <mat-label>Región</mat-label>
         <mat-select formControlName="region">
           @for (item of listaRegiones; track item.idRegion) {
-            <mat-option [value]="item">{{ item.nombre }}</mat-option>
+            <mat-option [value]="item.idRegion">{{ item.nombre }}</mat-option>
           }
         </mat-select>
         <mat-error>@if (form.get('region')?.hasError('required')) { Seleccione una región }</mat-error>

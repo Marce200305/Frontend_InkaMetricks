@@ -8,6 +8,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { Canal } from '../../../models/Canal';
 import { CanalService } from '../../../services/canal-service';
 import { StreamingPlatformData } from '../../../models/StreamingPlatformData';
+import { Plataforma } from '../../../models/Plataforma';
+import { PlataformaService } from '../../../services/plataforma-service';
+import { Streamer } from '../../../models/Streamer';
+import { StreamerService } from '../../../services/streamer-service';
 
 @Component({
   selector: 'app-canal-listar',
@@ -21,13 +25,14 @@ export class CanalListar implements OnInit, OnDestroy {
   private routerSub?: Subscription;
 
   platformDataMap: Map<number, StreamingPlatformData> = new Map();
+  listaPlataformas: Plataforma[] = [];
+  listaStreamers: Streamer[] = [];
 
-  constructor(
-    private cS: CanalService,
-    private router: Router
-  ) {}
+  constructor(private cS: CanalService, private plataformaS: PlataformaService, private streamerS: StreamerService, private router: Router) {}
 
   ngOnInit(): void {
+    this.plataformaS.list().subscribe(data => { this.listaPlataformas = data; });
+    this.streamerS.list().subscribe(data => { this.listaStreamers = data; });
     this.cargar();
     this.routerSub = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) { this.cargar(); }
@@ -40,6 +45,14 @@ export class CanalListar implements OnInit, OnDestroy {
     this.cS.list().subscribe({
       next: (data) => { this.dataSource.data = data; }
     });
+  }
+
+  getPlataforma(id: number): string {
+    return this.listaPlataformas.find(p => p.idPlataforma === id)?.nombre || '—';
+  }
+
+  getStreamer(id: number): string {
+    return this.listaStreamers.find(s => s.idStreamer === id)?.nickname || '—';
   }
 
   eliminar(id: number) {

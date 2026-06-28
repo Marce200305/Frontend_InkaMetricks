@@ -45,8 +45,8 @@ export class CanalmonitoreadoInsertar implements OnInit {
 
   aceptar(): void {
     if (this.form.valid) {
-      this.obj.canal = this.form.value.canal;
-      this.obj.empresa = this.form.value.empresa;
+      this.obj.idCanal = this.form.value.canal;
+      this.obj.idEmpresa = this.form.value.empresa;
       this.cS.insert(this.obj).subscribe({
         next: () => {
           this.router.navigate(['/canales-monitoreados/lista']);

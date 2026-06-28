@@ -6,7 +6,7 @@
         <mat-label>Canal</mat-label>
         <mat-select formControlName="canal">
           @for (item of listaCanales; track item.idCanal) {
-            <mat-option [value]="item">{{ item.urlCanal }}</mat-option>
+            <mat-option [value]="item.idCanal">{{ item.urlCanal }}</mat-option>
           }
         </mat-select>
         <mat-error>@if (form.get('canal')?.hasError('required')) { Seleccione un canal }</mat-error>
@@ -15,7 +15,7 @@
         <mat-label>Empresa (opcional)</mat-label>
         <mat-select formControlName="empresa">
           @for (item of listaEmpresas; track item.idEmpresa) {
-            <mat-option [value]="item">{{ item.nombreComercial }}</mat-option>
+            <mat-option [value]="item.idEmpresa">{{ item.nombreComercial }}</mat-option>
           }
         </mat-select>
       </mat-form-field><br/>

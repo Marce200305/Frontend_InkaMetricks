@@ -10,12 +10,21 @@
       <mat-form-field>
         <mat-label>Precio Mensual</mat-label>
         <input matInput type="number" formControlName="precioMensual" />
-        <mat-error>@if (form.get('precioMensual')?.hasError('required')) { Ingrese el precio mensual }</mat-error>
+        <mat-error>
+          @if (form.get('precioMensual')?.hasError('required')) { Ingrese el precio mensual }
+          @else if (form.get('precioMensual')?.hasError('min')) { El precio no puede ser negativo }
+          @else if (form.get('precioMensual')?.hasError('pattern')) { Ingrese un número válido (ej: 29.90) }
+        </mat-error>
       </mat-form-field><br/>
       <mat-form-field>
         <mat-label>Límite API</mat-label>
         <input matInput type="number" formControlName="limiteApi" />
-        <mat-error>@if (form.get('limiteApi')?.hasError('required')) { Ingrese el límite de API }</mat-error>
+        <mat-error>
+          @if (form.get('limiteApi')?.hasError('required')) { Ingrese el límite de API }
+          @else if (form.get('limiteApi')?.hasError('min')) { El límite debe ser al menos 1 }
+          @else if (form.get('limiteApi')?.hasError('max')) { El límite no puede superar 1,000,000 }
+          @else if (form.get('limiteApi')?.hasError('pattern')) { Ingrese solo números enteros }
+        </mat-error>
       </mat-form-field><br/>
       <div><button matButton="elevated">Registrar</button></div>
     </form>

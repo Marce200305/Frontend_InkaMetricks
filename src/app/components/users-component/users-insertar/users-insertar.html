@@ -5,12 +5,20 @@
       <mat-form-field>
         <mat-label>Username</mat-label>
         <input matInput formControlName="username" />
-        <mat-error>@if (form.get('username')?.hasError('required')) { Ingrese el username }</mat-error>
+        <mat-error>
+          @if (form.get('username')?.hasError('required')) { Ingrese el username }
+          @else if (form.get('username')?.hasError('minlength')) { Mínimo 4 caracteres }
+          @else if (form.get('username')?.hasError('maxlength')) { Máximo 30 caracteres }
+          @else if (form.get('username')?.hasError('pattern')) { Solo letras, números, puntos, guiones y guiones bajos }
+        </mat-error>
       </mat-form-field><br/>
       <mat-form-field>
         <mat-label>Password</mat-label>
         <input matInput type="password" formControlName="password" />
-        <mat-error>@if (form.get('password')?.hasError('required')) { Ingrese la contraseña }</mat-error>
+        <mat-error>
+          @if (form.get('password')?.hasError('required')) { Ingrese la contraseña }
+          @else if (form.get('password')?.hasError('minlength')) { Mínimo 8 caracteres }
+        </mat-error>
       </mat-form-field><br/>
       <div style="margin: 10px 0">
         <label>¿Activo?</label><br/>
@@ -23,7 +31,7 @@
         <mat-label>Empresa</mat-label>
         <mat-select formControlName="empresa">
           @for (item of listaEmpresas; track item.idEmpresa) {
-            <mat-option [value]="item">{{ item.nombreComercial }}</mat-option>
+            <mat-option [value]="item.idEmpresa">{{ item.nombreComercial }}</mat-option>
           }
         </mat-select>
         <mat-error>@if (form.get('empresa')?.hasError('required')) { Seleccione una empresa }</mat-error>

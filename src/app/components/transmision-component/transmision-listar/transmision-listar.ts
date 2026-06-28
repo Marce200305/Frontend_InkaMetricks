@@ -7,6 +7,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Transmision } from '../../../models/Transmision';
 import { TransmisionService } from '../../../services/transmision-service';
+import { Canal } from '../../../models/Canal';
+import { CanalService } from '../../../services/canal-service';
 
 @Component({
   selector: 'app-transmision-listar',
@@ -17,14 +19,13 @@ import { TransmisionService } from '../../../services/transmision-service';
 export class TransmisionListar implements OnInit, OnDestroy {
   dataSource: MatTableDataSource<Transmision> = new MatTableDataSource();
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8'];
+  listaCanales: Canal[] = [];
   private routerSub?: Subscription;
 
-  constructor(
-    private cS: TransmisionService,
-    private router: Router
-  ) {}
+  constructor(private cS: TransmisionService, private canalS: CanalService, private router: Router) {}
 
   ngOnInit(): void {
+    this.canalS.list().subscribe(data => { this.listaCanales = data; });
     this.cargar();
     this.routerSub = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) { this.cargar(); }
@@ -37,6 +38,10 @@ export class TransmisionListar implements OnInit, OnDestroy {
     this.cS.list().subscribe({
       next: (data) => { this.dataSource.data = data; }
     });
+  }
+
+  getCanal(id: number): string {
+    return this.listaCanales.find(c => c.idCanal === id)?.urlCanal || '—';
   }
 
   eliminar(id: number) {

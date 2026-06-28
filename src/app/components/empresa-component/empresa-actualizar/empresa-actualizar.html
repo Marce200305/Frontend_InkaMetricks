@@ -14,13 +14,16 @@
       <mat-form-field>
         <mat-label>RUC</mat-label>
         <input matInput formControlName="ruc" />
-        <mat-error>@if (form.get('ruc')?.hasError('required')) { Ingrese el RUC }</mat-error>
+        <mat-error>
+          @if (form.get('ruc')?.hasError('required')) { Ingrese el RUC }
+          @else if (form.get('ruc')?.hasError('minlength') || form.get('ruc')?.hasError('maxlength')) { El RUC debe tener exactamente 11 caracteres }
+        </mat-error>
       </mat-form-field><br/>
       <mat-form-field>
         <mat-label>Plan</mat-label>
-        <mat-select formControlName="plan" [compareWith]="compareById">
+        <mat-select formControlName="plan">
           @for (item of listaPlanes; track item.idPlan) {
-            <mat-option [value]="item">{{ item.nombre }}</mat-option>
+            <mat-option [value]="item.idPlan">{{ item.nombre }}</mat-option>
           }
         </mat-select>
         <mat-error>@if (form.get('plan')?.hasError('required')) { Seleccione un plan }</mat-error>

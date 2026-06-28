@@ -53,23 +53,17 @@ export class CanalmonitoreadoActualizar implements OnInit {
     this.cS.listId(this.id).subscribe((data) => {
       this.form.patchValue({
         codigo: data.idCanalMonitoreado,
-        canal: data.canal,
-        empresa: data.empresa,
+        canal: data.idCanal,
+        empresa: data.idEmpresa,
       });
     });
-  }
-
-  compareById(a: any, b: any): boolean {
-    if (!a || !b) return a === b;
-    const key = Object.keys(a).find(k => k.toLowerCase().startsWith('id'));
-    return key ? a[key] === b[key] : a === b;
   }
 
   aceptar(): void {
     if (this.form.valid) {
       this.obj.idCanalMonitoreado = this.form.value.codigo;
-      this.obj.canal = this.form.value.canal;
-      this.obj.empresa = this.form.value.empresa;
+      this.obj.idCanal = this.form.value.canal;
+      this.obj.idEmpresa = this.form.value.empresa;
       this.cS.update(this.obj).subscribe({ next: () => { this.router.navigate(['/canales-monitoreados/lista']); } });
     }
   }

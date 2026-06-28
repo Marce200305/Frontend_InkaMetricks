@@ -27,7 +27,7 @@ export class RegionActualizar implements OnInit {
     });
     this.form = this.fb.group({
       codigo: [''],
-      nombre: ['', Validators.required],
+      nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
     });
   }
 

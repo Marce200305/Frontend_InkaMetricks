@@ -28,8 +28,8 @@ export class PlanActualizar implements OnInit {
     this.form = this.fb.group({
       codigo: [''],
       nombre: ['', Validators.required],
-      precioMensual: ['', Validators.required],
-      limiteApi: ['', Validators.required],
+      precioMensual: ['', [Validators.required, Validators.min(0), Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
+      limiteApi: ['', [Validators.required, Validators.min(1), Validators.max(1000000), Validators.pattern(/^\d+$/)]],
     });
   }
 

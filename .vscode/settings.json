@@ -1,0 +1,4 @@
+{
+    "simpleBrowser.focusLockIndicator.enabled": false,
+    "workbench.browser.openLocalhostLinks": false
+}

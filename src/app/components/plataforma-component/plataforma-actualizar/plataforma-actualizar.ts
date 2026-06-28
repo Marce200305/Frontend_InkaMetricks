@@ -27,8 +27,8 @@ export class PlataformaActualizar implements OnInit {
     });
     this.form = this.fb.group({
       codigo: [''],
-      nombre: ['', Validators.required],
-      urlBase: ['', Validators.required],
+      nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+      urlBase: ['', [Validators.required, Validators.pattern(/^https?:\/\/.+/), Validators.maxLength(200)]],
     });
   }
 

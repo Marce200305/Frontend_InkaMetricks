@@ -34,7 +34,7 @@ export class EmpresaActualizar implements OnInit {
     this.form = this.fb.group({
       codigo: [''],
       nombreComercial: ['', Validators.required],
-      ruc: ['', Validators.required],
+      ruc: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
       plan: [null, Validators.required],
     });
   }
@@ -45,15 +45,9 @@ export class EmpresaActualizar implements OnInit {
         codigo: data.idEmpresa,
         nombreComercial: data.nombreComercial,
         ruc: data.ruc,
-        plan: data.plan,
+        plan: data.idPlan,
       });
     });
-  }
-
-  compareById(a: any, b: any): boolean {
-    if (!a || !b) return a === b;
-    const key = Object.keys(a).find(k => k.toLowerCase().startsWith('id'));
-    return key ? a[key] === b[key] : a === b;
   }
 
   aceptar(): void {
@@ -61,7 +55,7 @@ export class EmpresaActualizar implements OnInit {
       this.obj.idEmpresa = this.form.value.codigo;
       this.obj.nombreComercial = this.form.value.nombreComercial;
       this.obj.ruc = this.form.value.ruc;
-      this.obj.plan = this.form.value.plan;
+      this.obj.idPlan = this.form.value.plan;
       this.cS.update(this.obj).subscribe({ next: () => { this.router.navigate(['/empresas/lista']); } });
     }
   }

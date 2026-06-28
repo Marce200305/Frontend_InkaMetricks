@@ -2,25 +2,26 @@
   <h2 class="chart-title">Top transmisiones por métrica</h2>
 
   <div class="filter-row">
-    <label>Nombre de métrica:</label>
-    <input [(ngModel)]="nombreMetrica" placeholder="Ej: views, likes..." />
-    <button (click)="cargarDatos()">Buscar</button>
+    <label>Métrica:</label>
+    <select [(ngModel)]="nombreMetrica" (change)="cargarDatos()">
+      @for (nombre of nombresDisponibles; track nombre) {
+        <option [value]="nombre">{{ nombre }}</option>
+      }
+    </select>
   </div>
 
   <div class="chart-wrapper">
     @if (hasData) {
       <div class="chart-wrapper chart-pie">
-        <canvas
-          baseChart
+        <canvas baseChart
           [datasets]="chartData"
           [labels]="chartLabels"
           [options]="chartOptions"
           [legend]="chartLegend"
-          [type]="chartType"
-        ></canvas>
+          [type]="chartType">
+        </canvas>
       </div>
     }
-
     @if (!hasData) {
       <div class="no-data">
         <mat-icon class="no-data-icon">info_outline</mat-icon>

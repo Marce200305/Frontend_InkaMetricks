@@ -16,7 +16,7 @@
       </ng-container>
       <ng-container matColumnDef="c4">
         <th mat-header-cell *matHeaderCellDef>Empresa</th>
-        <td mat-cell *matCellDef="let element">{{ element.empresa?.nombreComercial }}</td>
+        <td mat-cell *matCellDef="let element">{{ getEmpresa(element.idEmpresa) }}</td>
       </ng-container>
       <ng-container matColumnDef="c5">
         <th mat-header-cell *matHeaderCellDef>Actualizar</th>

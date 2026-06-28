@@ -18,11 +18,11 @@
       </ng-container>
       <ng-container matColumnDef="c4">
         <th mat-header-cell *matHeaderCellDef>Plataforma</th>
-        <td mat-cell *matCellDef="let element">{{ element.plataforma?.nombre }}</td>
+        <td mat-cell *matCellDef="let element">{{ getPlataforma(element.idPlataforma) }}</td>
       </ng-container>
       <ng-container matColumnDef="c5">
         <th mat-header-cell *matHeaderCellDef>Streamer</th>
-        <td mat-cell *matCellDef="let element">{{ element.streamer?.nickname }}</td>
+        <td mat-cell *matCellDef="let element">{{ getStreamer(element.idStreamer) }}</td>
       </ng-container>
       <ng-container matColumnDef="c6">
         <th mat-header-cell *matHeaderCellDef>Estado</th>

@@ -28,7 +28,7 @@
 .chart-line canvas {
   width: 100% !important;
   max-width: 1000px !important;
-  height: 500px !important;
+  height: 450px !important;
 }
 
 .no-data {

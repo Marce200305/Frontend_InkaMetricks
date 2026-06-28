@@ -44,9 +44,9 @@ export class DeteccionpublicitariaActualizar implements OnInit {
     });
     this.form = this.fb.group({
       codigo: [''],
-      tipo: ['', Validators.required],
-      minutoAparicion: ['', Validators.required],
-      tiempoAparicionSeg: ['', Validators.required],
+      tipo: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
+      minutoAparicion: ['', [Validators.required, Validators.pattern(/^\d{2}:\d{2}:\d{2}$/)]],
+      tiempoAparicionSeg: ['', [Validators.required, Validators.min(1), Validators.max(3600), Validators.pattern(/^\d+$/)]],
       transmision: [null, Validators.required],
       marca: [null, Validators.required],
     });
@@ -59,16 +59,10 @@ export class DeteccionpublicitariaActualizar implements OnInit {
         tipo: data.tipo,
         minutoAparicion: data.minutoAparicion,
         tiempoAparicionSeg: data.tiempoAparicionSeg,
-        transmision: data.transmision,
-        marca: data.marca,
+        transmision: data.idTransmision,
+        marca: data.idMarca,
       });
     });
-  }
-
-  compareById(a: any, b: any): boolean {
-    if (!a || !b) return a === b;
-    const key = Object.keys(a).find(k => k.toLowerCase().startsWith('id'));
-    return key ? a[key] === b[key] : a === b;
   }
 
   aceptar(): void {
@@ -77,8 +71,8 @@ export class DeteccionpublicitariaActualizar implements OnInit {
       this.obj.tipo = this.form.value.tipo;
       this.obj.minutoAparicion = this.form.value.minutoAparicion;
       this.obj.tiempoAparicionSeg = this.form.value.tiempoAparicionSeg;
-      this.obj.transmision = this.form.value.transmision;
-      this.obj.marca = this.form.value.marca;
+      this.obj.idTransmision = this.form.value.transmision;
+      this.obj.idMarca = this.form.value.marca;
       this.cS.update(this.obj).subscribe({ next: () => { this.router.navigate(['/detecciones-publicitarias/lista']); } });
     }
   }

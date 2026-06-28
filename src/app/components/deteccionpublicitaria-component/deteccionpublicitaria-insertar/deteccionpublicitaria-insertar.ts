@@ -38,9 +38,9 @@ export class DeteccionpublicitariaInsertar implements OnInit {
     this.transmisionS.list().subscribe(data => { this.listaTransmisiones = data; this.cdr.detectChanges(); });
     this.marcaS.list().subscribe(data => { this.listaMarcas = data; this.cdr.detectChanges(); });
     this.form = this.fb.group({
-      tipo: ['', Validators.required],
-      minutoAparicion: ['', Validators.required],
-      tiempoAparicionSeg: ['', Validators.required],
+      tipo: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
+      minutoAparicion: ['', [Validators.required, Validators.pattern(/^\d{2}:\d{2}:\d{2}$/)]],
+      tiempoAparicionSeg: ['', [Validators.required, Validators.min(1), Validators.max(3600), Validators.pattern(/^\d+$/)]],
       transmision: [null, Validators.required],
       marca: [null, Validators.required],
     });
@@ -51,8 +51,8 @@ export class DeteccionpublicitariaInsertar implements OnInit {
       this.obj.tipo = this.form.value.tipo;
       this.obj.minutoAparicion = this.form.value.minutoAparicion;
       this.obj.tiempoAparicionSeg = this.form.value.tiempoAparicionSeg;
-      this.obj.transmision = this.form.value.transmision;
-      this.obj.marca = this.form.value.marca;
+      this.obj.idTransmision = this.form.value.transmision;
+      this.obj.idMarca = this.form.value.marca;
       this.cS.insert(this.obj).subscribe({ next: () => { this.router.navigate(['/detecciones-publicitarias/lista']); } });
     }
   }

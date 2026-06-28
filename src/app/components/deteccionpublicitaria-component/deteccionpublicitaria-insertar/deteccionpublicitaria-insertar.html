@@ -5,23 +5,35 @@
       <mat-form-field>
         <mat-label>Tipo</mat-label>
         <input matInput formControlName="tipo" />
-        <mat-error>@if (form.get('tipo')?.hasError('required')) { Ingrese el tipo }</mat-error>
+        <mat-error>
+          @if (form.get('tipo')?.hasError('required')) { Ingrese el tipo }
+          @else if (form.get('tipo')?.hasError('minlength')) { Mínimo 2 caracteres }
+          @else if (form.get('tipo')?.hasError('maxlength')) { Máximo 100 caracteres }
+        </mat-error>
       </mat-form-field><br/>
       <mat-form-field>
         <mat-label>Minuto Aparición (HH:mm:ss)</mat-label>
         <input matInput formControlName="minutoAparicion" placeholder="00:05:30" />
-        <mat-error>@if (form.get('minutoAparicion')?.hasError('required')) { Ingrese el minuto de aparición }</mat-error>
+        <mat-error>
+          @if (form.get('minutoAparicion')?.hasError('required')) { Ingrese el minuto de aparición }
+          @else if (form.get('minutoAparicion')?.hasError('pattern')) { Formato inválido, use HH:mm:ss (ej: 00:05:30) }
+        </mat-error>
       </mat-form-field><br/>
       <mat-form-field>
         <mat-label>Tiempo Aparición (seg)</mat-label>
         <input matInput type="number" formControlName="tiempoAparicionSeg" />
-        <mat-error>@if (form.get('tiempoAparicionSeg')?.hasError('required')) { Ingrese el tiempo en segundos }</mat-error>
+        <mat-error>
+          @if (form.get('tiempoAparicionSeg')?.hasError('required')) { Ingrese el tiempo en segundos }
+          @else if (form.get('tiempoAparicionSeg')?.hasError('min')) { Debe ser al menos 1 segundo }
+          @else if (form.get('tiempoAparicionSeg')?.hasError('max')) { No puede superar 3600 segundos (1 hora) }
+          @else if (form.get('tiempoAparicionSeg')?.hasError('pattern')) { Ingrese solo números enteros }
+        </mat-error>
       </mat-form-field><br/>
       <mat-form-field>
         <mat-label>Transmisión</mat-label>
         <mat-select formControlName="transmision">
           @for (item of listaTransmisiones; track item.idTransmision) {
-            <mat-option [value]="item">{{ item.tituloStream }}</mat-option>
+            <mat-option [value]="item.idTransmision">{{ item.tituloStream }}</mat-option>
           }
         </mat-select>
         <mat-error>@if (form.get('transmision')?.hasError('required')) { Seleccione una transmisión }</mat-error>
@@ -30,7 +42,7 @@
         <mat-label>Marca</mat-label>
         <mat-select formControlName="marca">
           @for (item of listaMarcas; track item.idMarca) {
-            <mat-option [value]="item">{{ item.nombre }}</mat-option>
+            <mat-option [value]="item.idMarca">{{ item.nombre }}</mat-option>
           }
         </mat-select>
         <mat-error>@if (form.get('marca')?.hasError('required')) { Seleccione una marca }</mat-error>

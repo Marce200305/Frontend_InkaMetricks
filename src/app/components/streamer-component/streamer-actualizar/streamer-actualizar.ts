@@ -36,7 +36,7 @@ export class StreamerActualizar implements OnInit {
     });
     this.form = this.fb.group({
       codigo: [''],
-      nickname: ['', Validators.required],
+      nickname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.pattern(/^[a-zA-Z0-9._-]+$/)]],
       genero: ['', Validators.required],
       fechaRegistroApp: ['', Validators.required],
       region: [null, Validators.required],
@@ -50,15 +50,9 @@ export class StreamerActualizar implements OnInit {
         nickname: data.nickname,
         genero: data.genero,
         fechaRegistroApp: data.fechaRegistroApp,
-        region: data.region,
+        region: data.idRegion,
       });
     });
-  }
-
-  compareById(a: any, b: any): boolean {
-    if (!a || !b) return a === b;
-    const key = Object.keys(a).find(k => k.toLowerCase().startsWith('id'));
-    return key ? a[key] === b[key] : a === b;
   }
 
   aceptar(): void {
@@ -67,7 +61,7 @@ export class StreamerActualizar implements OnInit {
       this.obj.nickname = this.form.value.nickname;
       this.obj.genero = this.form.value.genero;
       this.obj.fechaRegistroApp = this.form.value.fechaRegistroApp;
-      this.obj.region = this.form.value.region;
+      this.obj.idRegion = this.form.value.region;
       this.cS.update(this.obj).subscribe({ next: () => { this.router.navigate(['/streamers/lista']); } });
     }
   }

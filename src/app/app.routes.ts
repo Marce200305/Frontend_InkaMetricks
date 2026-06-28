@@ -67,10 +67,12 @@ import { UsersActualizar } from './components/users-component/users-actualizar/u
 import { HomeComponent } from './components/home-component/home-component';
 import { Report01 } from './components/report01/report01';
 import { Report02 } from './components/report02/report02';
+import { DashboardComponent } from './components/dashboard/dashboard';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'homes', pathMatch: 'full' },
     { path: 'homes', component: HomeComponent },
+    { path: 'dashboard', component: DashboardComponent },
     { path: 'reporte01', component: Report01 },
     { path: 'reporte02', component: Report02 },
 

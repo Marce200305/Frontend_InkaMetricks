@@ -27,8 +27,8 @@ export class MarcaActualizar implements OnInit {
     });
     this.form = this.fb.group({
       codigo: [''],
-      nombre: ['', Validators.required],
-      sector: ['', Validators.required],
+      nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
+      sector: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
     });
   }
 

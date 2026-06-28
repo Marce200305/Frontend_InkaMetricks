@@ -7,6 +7,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CanalMonitoreado } from '../../../models/CanalMonitoreado';
 import { CanalmonitoreadoService } from '../../../services/canalmonitoreado-service';
+import { Canal } from '../../../models/Canal';
+import { CanalService } from '../../../services/canal-service';
+import { Empresa } from '../../../models/Empresa';
+import { EmpresaService } from '../../../services/empresa-service';
 
 @Component({
   selector: 'app-canalmonitoreado-listar',
@@ -17,11 +21,15 @@ import { CanalmonitoreadoService } from '../../../services/canalmonitoreado-serv
 export class CanalmonitoreadoListar implements OnInit, OnDestroy {
   dataSource: MatTableDataSource<CanalMonitoreado> = new MatTableDataSource();
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5'];
+  listaCanales: Canal[] = [];
+  listaEmpresas: Empresa[] = [];
   private routerSub?: Subscription;
 
-  constructor(private cS: CanalmonitoreadoService, private router: Router) {}
+  constructor(private cS: CanalmonitoreadoService, private canalS: CanalService, private empresaS: EmpresaService, private router: Router) {}
 
   ngOnInit(): void {
+    this.canalS.list().subscribe(data => { this.listaCanales = data; });
+    this.empresaS.list().subscribe(data => { this.listaEmpresas = data; });
     this.cargar();
     this.routerSub = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) { this.cargar(); }
@@ -32,6 +40,14 @@ export class CanalmonitoreadoListar implements OnInit, OnDestroy {
 
   cargar() {
     this.cS.list().subscribe({ next: (data) => { this.dataSource.data = data; } });
+  }
+
+  getCanal(id: number): string {
+    return this.listaCanales.find(c => c.idCanal === id)?.urlCanal || '—';
+  }
+
+  getEmpresa(id: number): string {
+    return this.listaEmpresas.find(e => e.idEmpresa === id)?.nombreComercial || '—';
   }
 
   eliminar(id: number) {

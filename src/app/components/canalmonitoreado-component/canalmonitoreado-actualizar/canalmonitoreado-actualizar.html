@@ -8,18 +8,18 @@
       </mat-form-field><br/>
       <mat-form-field>
         <mat-label>Canal</mat-label>
-        <mat-select formControlName="canal" [compareWith]="compareById">
+        <mat-select formControlName="canal">
           @for (item of listaCanales; track item.idCanal) {
-            <mat-option [value]="item">{{ item.urlCanal }}</mat-option>
+            <mat-option [value]="item.idCanal">{{ item.urlCanal }}</mat-option>
           }
         </mat-select>
         <mat-error>@if (form.get('canal')?.hasError('required')) { Seleccione un canal }</mat-error>
       </mat-form-field><br/>
       <mat-form-field>
         <mat-label>Empresa</mat-label>
-        <mat-select formControlName="empresa" [compareWith]="compareById">
+        <mat-select formControlName="empresa">
           @for (item of listaEmpresas; track item.idEmpresa) {
-            <mat-option [value]="item">{{ item.nombreComercial }}</mat-option>
+            <mat-option [value]="item.idEmpresa">{{ item.nombreComercial }}</mat-option>
           }
         </mat-select>
         <mat-error>@if (form.get('empresa')?.hasError('required')) { Seleccione una empresa }</mat-error>

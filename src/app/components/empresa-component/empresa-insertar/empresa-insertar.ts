@@ -28,7 +28,7 @@ export class EmpresaInsertar implements OnInit {
     this.planS.list().subscribe(data => { this.listaPlanes = data; this.cdr.detectChanges(); });
     this.form = this.fb.group({
       nombreComercial: ['', Validators.required],
-      ruc: ['', Validators.required],
+      ruc: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
       plan: [null, Validators.required],
     });
   }
@@ -37,7 +37,7 @@ export class EmpresaInsertar implements OnInit {
     if (this.form.valid) {
       this.obj.nombreComercial = this.form.value.nombreComercial;
       this.obj.ruc = this.form.value.ruc;
-      this.obj.plan = this.form.value.plan;
+      this.obj.idPlan = this.form.value.plan;
       this.cS.insert(this.obj).subscribe({ next: () => { this.router.navigate(['/empresas/lista']); } });
     }
   }

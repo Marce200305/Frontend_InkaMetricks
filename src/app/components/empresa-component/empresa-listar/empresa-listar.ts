@@ -7,6 +7,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Empresa } from '../../../models/Empresa';
 import { EmpresaService } from '../../../services/empresa-service';
+import { Plan } from '../../../models/Plan';
+import { PlanService } from '../../../services/plan-service';
 
 @Component({
   selector: 'app-empresa-listar',
@@ -17,11 +19,13 @@ import { EmpresaService } from '../../../services/empresa-service';
 export class EmpresaListar implements OnInit, OnDestroy {
   dataSource: MatTableDataSource<Empresa> = new MatTableDataSource();
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'];
+  listaPlanes: Plan[] = [];
   private routerSub?: Subscription;
 
-  constructor(private cS: EmpresaService, private router: Router) {}
+  constructor(private cS: EmpresaService, private planS: PlanService, private router: Router) {}
 
   ngOnInit(): void {
+    this.planS.list().subscribe(data => { this.listaPlanes = data; });
     this.cargar();
     this.routerSub = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) { this.cargar(); }
@@ -32,6 +36,10 @@ export class EmpresaListar implements OnInit, OnDestroy {
 
   cargar() {
     this.cS.list().subscribe({ next: (data) => { this.dataSource.data = data; } });
+  }
+
+  getPlan(id: number): string {
+    return this.listaPlanes.find(p => p.idPlan === id)?.nombre || '—';
   }
 
   eliminar(id: number) {

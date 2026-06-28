@@ -9,7 +9,11 @@
       <mat-form-field>
         <mat-label>Título del Stream</mat-label>
         <input matInput formControlName="tituloStream" />
-        <mat-error>@if (form.get('tituloStream')?.hasError('required')) { Ingrese el título }</mat-error>
+        <mat-error>
+          @if (form.get('tituloStream')?.hasError('required')) { Ingrese el título }
+          @else if (form.get('tituloStream')?.hasError('minlength')) { Mínimo 3 caracteres }
+          @else if (form.get('tituloStream')?.hasError('maxlength')) { Máximo 255 caracteres }
+        </mat-error>
       </mat-form-field><br/>
       <div>
         <mat-form-field>
@@ -40,9 +44,9 @@
       </div><br/>
       <mat-form-field>
         <mat-label>Canal</mat-label>
-        <mat-select formControlName="canal" [compareWith]="compareById">
+        <mat-select formControlName="canal">
           @for (item of listaCanales; track item.idCanal) {
-            <mat-option [value]="item">{{ item.urlCanal }}</mat-option>
+            <mat-option [value]="item.idCanal">{{ item.urlCanal }}</mat-option>
           }
         </mat-select>
         <mat-error>@if (form.get('canal')?.hasError('required')) { Seleccione un canal }</mat-error>

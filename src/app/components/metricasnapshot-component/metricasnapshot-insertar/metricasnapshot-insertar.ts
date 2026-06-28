@@ -49,14 +49,15 @@ export class MetricasnapshotInsertar implements OnInit {
     this.transmisionS.list().subscribe(data => { this.listaTransmisiones = data; });
     this.form = this.fb.group({
       nombre: ['', Validators.required],
-      cantidad: ['', Validators.required],
+      cantidad: ['', [Validators.required, Validators.min(0), Validators.pattern(/^\d+$/)]],
       transmision: [null, Validators.required],
     });
   }
 
   alSeleccionarTransmision(): void {
-    const transmision: Transmision = this.form.value.transmision;
-    const urlCanal = (transmision as any)?.canal?.urlCanal;
+    const idTransmision: number = this.form.value.transmision;
+    const transmision = this.listaTransmisiones.find(t => t.idTransmision === idTransmision);
+    const urlCanal = (transmision as any)?.urlCanal;
     if (!urlCanal) return;
 
     this.buscando = true;
@@ -103,7 +104,7 @@ export class MetricasnapshotInsertar implements OnInit {
     if (this.form.valid) {
       this.obj.nombre = this.form.value.nombre;
       this.obj.cantidad = this.form.value.cantidad;
-      this.obj.transmision = this.form.value.transmision;
+      this.obj.idTransmision = this.form.value.transmision;
       this.cS.insert(this.obj).subscribe({ next: () => { this.router.navigate(['/metricas/lista']); } });
     }
   }

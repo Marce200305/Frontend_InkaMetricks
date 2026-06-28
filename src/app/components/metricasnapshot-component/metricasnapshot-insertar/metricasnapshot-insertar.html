@@ -6,7 +6,7 @@
         <mat-label>Transmisión</mat-label>
         <mat-select formControlName="transmision" (selectionChange)="alSeleccionarTransmision()">
           @for (item of listaTransmisiones; track item.idTransmision) {
-            <mat-option [value]="item">{{ item.tituloStream }}</mat-option>
+            <mat-option [value]="item.idTransmision">{{ item.tituloStream }}</mat-option>
           }
         </mat-select>
         <mat-error>@if (form.get('transmision')?.hasError('required')) { Seleccione una transmisión }</mat-error>
@@ -35,6 +35,11 @@
             Se autocompleta desde la API si el canal está disponible
           }
         </mat-hint>
+        <mat-error>
+          @if (form.get('cantidad')?.hasError('required')) { Ingrese la cantidad }
+          @else if (form.get('cantidad')?.hasError('min')) { La cantidad no puede ser negativa }
+          @else if (form.get('cantidad')?.hasError('pattern')) { Ingrese un número entero }
+        </mat-error>
       </mat-form-field><br/>
       <div><button matButton="elevated">Registrar</button></div>
     </form>

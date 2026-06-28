@@ -7,6 +7,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { DeteccionPublicitaria } from '../../../models/DeteccionPublicitaria';
 import { DeteccionpublicitariaService } from '../../../services/deteccionpublicitaria-service';
+import { Transmision } from '../../../models/Transmision';
+import { TransmisionService } from '../../../services/transmision-service';
+import { Marca } from '../../../models/Marca';
+import { MarcaService } from '../../../services/marca-service';
 
 @Component({
   selector: 'app-deteccionpublicitaria-listar',
@@ -17,11 +21,15 @@ import { DeteccionpublicitariaService } from '../../../services/deteccionpublici
 export class DeteccionpublicitariaListar implements OnInit, OnDestroy {
   dataSource: MatTableDataSource<DeteccionPublicitaria> = new MatTableDataSource();
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8'];
+  listaTransmisiones: Transmision[] = [];
+  listaMarcas: Marca[] = [];
   private routerSub?: Subscription;
 
-  constructor(private cS: DeteccionpublicitariaService, private router: Router) {}
+  constructor(private cS: DeteccionpublicitariaService, private transmisionS: TransmisionService, private marcaS: MarcaService, private router: Router) {}
 
   ngOnInit(): void {
+    this.transmisionS.list().subscribe(data => { this.listaTransmisiones = data; });
+    this.marcaS.list().subscribe(data => { this.listaMarcas = data; });
     this.cargar();
     this.routerSub = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) { this.cargar(); }
@@ -32,6 +40,14 @@ export class DeteccionpublicitariaListar implements OnInit, OnDestroy {
 
   cargar() {
     this.cS.list().subscribe({ next: (data) => { this.dataSource.data = data; } });
+  }
+
+  getTransmision(id: number): string {
+    return this.listaTransmisiones.find(t => t.idTransmision === id)?.tituloStream || '—';
+  }
+
+  getMarca(id: number): string {
+    return this.listaMarcas.find(m => m.idMarca === id)?.nombre || '—';
   }
 
   eliminar(id: number) {

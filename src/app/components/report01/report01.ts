@@ -13,18 +13,42 @@ import { ReporteService } from '../../services/reporte-service';
 })
 export class Report01 implements OnInit {
   hasData = false;
-  nombreMetrica = 'views';
+  nombreMetrica = '';
+  nombresDisponibles: string[] = [];
 
-  chartOptions: ChartOptions = { responsive: true };
+  chartOptions: ChartOptions = {
+    responsive: true,
+    plugins: {
+      legend: { position: 'bottom', labels: { padding: 20, font: { size: 13 } } },
+      tooltip: {
+        callbacks: {
+          label: (ctx) => ` ${ctx.label}: ${ctx.parsed.toLocaleString()}`,
+        },
+      },
+    },
+  };
   chartLegend = true;
   chartLabels: string[] = [];
   chartData: ChartDataset[] = [];
   chartType: ChartType = 'doughnut';
 
+  private readonly COLORS = [
+    '#3498db', '#e74c3c', '#2ecc71', '#f39c12',
+    '#9b59b6', '#1abc9c', '#e67e22', '#e91e63',
+  ];
+
   constructor(private rS: ReporteService) {}
 
   ngOnInit(): void {
-    this.cargarDatos();
+    this.rS.getNombresMetrica().subscribe({
+      next: (nombres) => {
+        this.nombresDisponibles = nombres;
+        if (nombres.length > 0) {
+          this.nombreMetrica = nombres[0];
+          this.cargarDatos();
+        }
+      },
+    });
   }
 
   cargarDatos(): void {
@@ -37,25 +61,15 @@ export class Report01 implements OnInit {
             {
               data: data.map((item) => item.totalCantidad),
               label: `Total de "${this.nombreMetrica}" por transmisión`,
-              backgroundColor: [
-                '#d72b04',
-                '#f40b03',
-                'rgb(194, 41, 31)',
-                'rgba(230, 77, 77, 0.7)',
-                'rgb(148, 14, 4)',
-                '#ff6b6b',
-                '#c0392b',
-                '#e74c3c',
-              ],
+              backgroundColor: this.COLORS.slice(0, data.length),
+              hoverOffset: 10,
             },
           ];
         } else {
           this.hasData = false;
         }
       },
-      error: () => {
-        this.hasData = false;
-      },
+      error: () => { this.hasData = false; },
     });
   }
 }

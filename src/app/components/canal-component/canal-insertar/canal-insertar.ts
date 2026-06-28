@@ -45,8 +45,8 @@ export class CanalInsertar implements OnInit {
     this.plataformaS.list().subscribe(data => { this.listaPlataformas = data; this.cdr.detectChanges(); });
     this.streamerS.list().subscribe(data => { this.listaStreamers = data; this.cdr.detectChanges(); });
     this.form = this.fb.group({
-      urlCanal: ['', Validators.required],
-      seguidoresActuales: [0],
+      urlCanal: ['', [Validators.required, Validators.pattern(/^https?:\/\/.+/), Validators.maxLength(2048)]],
+      seguidoresActuales: [0, [Validators.min(0)]],
       plataforma: [null, Validators.required],
       streamer: [null],
     });
@@ -77,8 +77,8 @@ export class CanalInsertar implements OnInit {
 
           this.form.patchValue({
             seguidoresActuales: data.followers,
-            plataforma: plataformaMatch,
-            streamer: streamerMatch,
+            plataforma: plataformaMatch?.idPlataforma ?? null,
+            streamer: streamerMatch?.idStreamer ?? null,
           });
         } else {
           this.errorBusqueda = 'No se encontró el canal en la plataforma';
@@ -97,8 +97,8 @@ export class CanalInsertar implements OnInit {
     if (this.form.valid) {
       this.obj.urlCanal = this.form.value.urlCanal;
       this.obj.seguidoresActuales = this.form.value.seguidoresActuales;
-      this.obj.plataforma = this.form.value.plataforma;
-      this.obj.streamer = this.form.value.streamer;
+      this.obj.idPlataforma = this.form.value.plataforma;
+      this.obj.idStreamer = this.form.value.streamer;
       this.cS.insert(this.obj).subscribe({ next: () => { this.router.navigate(['/canales/lista']); } });
     }
   }

@@ -37,7 +37,7 @@ export class TransmisionActualizar implements OnInit {
     });
     this.form = this.fb.group({
       codigo: [''],
-      tituloStream: ['', Validators.required],
+      tituloStream: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
       fechaInicio: ['', Validators.required],
       fechaFin: ['', Validators.required],
       enVivo: [false, Validators.required],
@@ -53,15 +53,9 @@ export class TransmisionActualizar implements OnInit {
         fechaInicio: data.fechaInicio,
         fechaFin: data.fechaFin,
         enVivo: data.enVivo,
-        canal: data.canal,
+        canal: data.idCanal,
       });
     });
-  }
-
-  compareById(a: any, b: any): boolean {
-    if (!a || !b) return a === b;
-    const key = Object.keys(a).find(k => k.toLowerCase().startsWith('id'));
-    return key ? a[key] === b[key] : a === b;
   }
 
   aceptar(): void {
@@ -71,7 +65,7 @@ export class TransmisionActualizar implements OnInit {
       this.obj.fechaInicio = this.form.value.fechaInicio;
       this.obj.fechaFin = this.form.value.fechaFin;
       this.obj.enVivo = this.form.value.enVivo;
-      this.obj.canal = this.form.value.canal;
+      this.obj.idCanal = this.form.value.canal;
       this.cS.update(this.obj).subscribe({ next: () => { this.router.navigate(['/transmisiones/lista']); } });
     }
   }

@@ -21,7 +21,7 @@ export class RegionInsertar implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      nombre: ['', Validators.required],
+      nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
     });
   }
 

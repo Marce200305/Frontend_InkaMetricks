@@ -7,6 +7,8 @@ import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MetricasnapshotService } from '../../../services/metricasnapshot-service';
 import { MetricaSnapshot } from '../../../models/MetricaSnapshot';
+import { Transmision } from '../../../models/Transmision';
+import { TransmisionService } from '../../../services/transmision-service';
 
 @Component({
   selector: 'app-metricasnapshot-listar',
@@ -17,14 +19,13 @@ import { MetricaSnapshot } from '../../../models/MetricaSnapshot';
 export class MetricasnapshotListar implements OnInit, OnDestroy {
   dataSource: MatTableDataSource<MetricaSnapshot> = new MatTableDataSource();
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'];
+  listaTransmisiones: Transmision[] = [];
   private routerSub?: Subscription;
 
-  constructor(
-    private cS: MetricasnapshotService,
-    private router: Router
-  ) {}
+  constructor(private cS: MetricasnapshotService, private transmisionS: TransmisionService, private router: Router) {}
 
   ngOnInit(): void {
+    this.transmisionS.list().subscribe(data => { this.listaTransmisiones = data; });
     this.cargarMetricas();
     this.routerSub = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) { this.cargarMetricas(); }
@@ -37,6 +38,10 @@ export class MetricasnapshotListar implements OnInit, OnDestroy {
     this.cS.list().subscribe({
       next: (data) => { this.dataSource.data = data; }
     });
+  }
+
+  getTransmision(id: number): string {
+    return this.listaTransmisiones.find(t => t.idTransmision === id)?.tituloStream || '—';
   }
 
   eliminar(id: number) {

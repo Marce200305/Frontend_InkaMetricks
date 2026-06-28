@@ -57,7 +57,7 @@ export class StreamerInsertar implements OnInit {
     });
 
     this.form = this.fb.group({
-      nickname: ['', Validators.required],
+      nickname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.pattern(/^[a-zA-Z0-9._-]+$/)]],
       genero: ['', Validators.required],
       fechaRegistroApp: ['', Validators.required],
       region: [null, Validators.required],
@@ -95,7 +95,7 @@ export class StreamerInsertar implements OnInit {
             this.form.patchValue({
               nickname: data.displayName ?? this.form.value.nickname,
               fechaRegistroApp: new Date(),
-              ...(regionMatch ? { region: regionMatch } : {})
+              ...(regionMatch ? { region: regionMatch.idRegion } : {})
             });
           }
           this.cdr.markForCheck();
@@ -139,7 +139,7 @@ export class StreamerInsertar implements OnInit {
       this.obj.nickname = this.form.value.nickname;
       this.obj.genero = this.form.value.genero;
       this.obj.fechaRegistroApp = this.form.value.fechaRegistroApp;
-      this.obj.region = this.form.value.region;
+      this.obj.idRegion = this.form.value.region;
       this.cS.insert(this.obj).subscribe({ next: () => { this.router.navigate(['/streamers/lista']); } });
     }
   }
