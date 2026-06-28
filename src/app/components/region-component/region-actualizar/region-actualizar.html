@@ -10,9 +10,9 @@
         <mat-label>Name</mat-label>
         <input matInput formControlName="name" />
         <mat-error>
-          @if (form.get('name')?.hasError('required')) { Enter the name }
-          @else if (form.get('name')?.hasError('minlength')) { Minimum 2 characters }
-          @else if (form.get('name')?.hasError('maxlength')) { Maximum 100 characters }
+          @if (form.get('name')?.hasError('required')) { Ingrese región }
+          @else if (form.get('name')?.hasError('minlength')) { Minimo 2 caracteres }
+          @else if (form.get('name')?.hasError('maxlength')) { Maximo 100 caracteres }
         </mat-error>
       </mat-form-field><br/>
       <div><button matButton="elevated">Actualizar</button></div>
