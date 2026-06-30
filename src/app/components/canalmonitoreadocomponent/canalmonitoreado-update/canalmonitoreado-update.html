@@ -1,0 +1,30 @@
+<div class="container">
+  <div style="text-align: center; margin: 2%"><h2>Actualizar Canal Monitoreado</h2></div>
+  <div style="text-align: center; margin: 3%">
+    <form [formGroup]="form" (submit)="acept()" class="example-form">
+      <mat-form-field>
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="codigo" readonly />
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>Canal</mat-label>
+        <mat-select formControlName="canal" [compareWith]="compareById">
+          @for (item of listaCanales; track item.idCanal) {
+            <mat-option [value]="item">{{ item.urlCanal }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>@if (form.get('canal')?.hasError('required')) { Seleccione un canal }</mat-error>
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>Empresa</mat-label>
+        <mat-select formControlName="empresa" [compareWith]="compareById">
+          @for (item of listaEmpresas; track item.idEmpresa) {
+            <mat-option [value]="item">{{ item.nombreComercial }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>@if (form.get('empresa')?.hasError('required')) { Seleccione una empresa }</mat-error>
+      </mat-form-field><br/>
+      <div><button matButton="elevated">Actualizar</button></div>
+    </form>
+  </div>
+</div>

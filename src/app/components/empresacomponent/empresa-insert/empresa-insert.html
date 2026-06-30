@@ -1,0 +1,27 @@
+<div class="container">
+  <div style="text-align: center; margin: 2%"><h2>Registrar Empresa</h2></div>
+  <div style="text-align: center; margin: 3%">
+    <form [formGroup]="form" (submit)="acept()" class="example-form">
+      <mat-form-field>
+        <mat-label>Nombre Comercial</mat-label>
+        <input matInput formControlName="nombreComercial" />
+        <mat-error>@if (form.get('nombreComercial')?.hasError('required')) { Ingrese el nombre comercial }</mat-error>
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>RUC</mat-label>
+        <input matInput formControlName="ruc" />
+        <mat-error>@if (form.get('ruc')?.hasError('required')) { Ingrese el RUC }</mat-error>
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>Plan</mat-label>
+        <mat-select formControlName="plan">
+          @for (item of listaPlanes; track item.idPlan) {
+            <mat-option [value]="item">{{ item.nombre }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>@if (form.get('plan')?.hasError('required')) { Seleccione un plan }</mat-error>
+      </mat-form-field><br/>
+      <div><button matButton="elevated">Registrar</button></div>
+    </form>
+  </div>
+</div>

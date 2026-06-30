@@ -1,0 +1,38 @@
+<div class="container">
+  <div style="text-align: center; margin: 2%"><h2>Channel update</h2></div>
+  <div style="text-align: center; margin: 3%">
+    <form [formGroup]="form" (submit)="acept()" class="example-form">
+      <mat-form-field>
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="codigo" readonly />
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>URL del Canal</mat-label>
+        <input matInput formControlName="UrlCanal" />
+        <mat-error>@if (form.get('UrlCanal')?.hasError('required')) { Ingrese la URL del canal }</mat-error>
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>Seguidores Actuales</mat-label>
+        <input matInput type="number" formControlName="SeguidoresActuales" />
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>Plataforma</mat-label>
+        <mat-select formControlName="plataforma" [compareWith]="compareById">
+          @for (item of listaPlataformas; track item.idPlataforma) {
+            <mat-option [value]="item">{{ item.nombre }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>@if (form.get('plataforma')?.hasError('required')) { Seleccione una plataforma }</mat-error>
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>Streamer</mat-label>
+        <mat-select formControlName="streamer" [compareWith]="compareById">
+          @for (item of listaStreamers; track item.idStreamer) {
+            <mat-option [value]="item">{{ item.nickname }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field><br/>
+      <div><button matButton="elevated">Actualizar</button></div>
+    </form>
+  </div>
+</div>

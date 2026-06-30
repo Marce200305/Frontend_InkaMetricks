@@ -1,0 +1,45 @@
+<div class="container">
+  <div style="text-align: center; margin: 2%"><h2>Actualizar Streamer</h2></div>
+  <div style="text-align: center; margin: 3%">
+    <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+      <mat-form-field>
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="codigo" readonly />
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>Nickname</mat-label>
+        <input matInput formControlName="nickname" />
+        <mat-error>@if (form.get('nickname')?.hasError('required')) { Ingrese el nickname }</mat-error>
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>Género</mat-label>
+        <mat-select formControlName="genero">
+          <mat-option value="M">Masculino</mat-option>
+          <mat-option value="F">Femenino</mat-option>
+          <mat-option value="O">Otro</mat-option>
+        </mat-select>
+        <mat-error>@if (form.get('genero')?.hasError('required')) { Seleccione el género }</mat-error>
+      </mat-form-field><br/>
+      <div>
+        <mat-form-field>
+          <mat-label>Fecha de Registro</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="fechaRegistroApp" />
+          <mat-hint>DD/MM/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error>@if (form.get('fechaRegistroApp')?.hasError('required')) { Ingrese la fecha de registro }</mat-error>
+        </mat-form-field>
+      </div><br/>
+      <mat-form-field>
+        <mat-label>Región</mat-label>
+        <mat-select formControlName="region" [compareWith]="compareById">
+          @for (item of listaRegiones; track item.idRegion) {
+            <mat-option [value]="item">{{ item.nombre }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>@if (form.get('region')?.hasError('required')) { Seleccione una región }</mat-error>
+      </mat-form-field><br/>
+      <div><button matButton="elevated">Actualizar</button></div>
+    </form>
+  </div>
+</div>

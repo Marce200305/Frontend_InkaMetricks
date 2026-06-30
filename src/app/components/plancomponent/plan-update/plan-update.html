@@ -1,0 +1,27 @@
+<div class="container">
+  <div style="text-align: center; margin: 2%"><h2>Actualizar Plan</h2></div>
+  <div style="text-align: center; margin: 3%">
+    <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+      <mat-form-field>
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="codigo" readonly />
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre" />
+        <mat-error>@if (form.get('nombre')?.hasError('required')) { Ingrese el nombre }</mat-error>
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>Precio Mensual</mat-label>
+        <input matInput type="number" formControlName="precioMensual" />
+        <mat-error>@if (form.get('precioMensual')?.hasError('required')) { Ingrese el precio mensual }</mat-error>
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>Límite API</mat-label>
+        <input matInput type="number" formControlName="limiteApi" />
+        <mat-error>@if (form.get('limiteApi')?.hasError('required')) { Ingrese el límite de API }</mat-error>
+      </mat-form-field><br/>
+      <div><button matButton="elevated">Actualizar</button></div>
+    </form>
+  </div>
+</div>
