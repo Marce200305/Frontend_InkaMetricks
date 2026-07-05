@@ -1,20 +1,20 @@
 .chart-container {
-  width: 95%;
+  width: 100%;
   max-width: 1200px;
-  margin: 2rem auto;
-  padding: 2rem;
+  margin: 0 auto;
+  padding: 1.25rem;
   background: #fff;
-  border-radius: 20px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(15,23,42,.06);
   box-sizing: border-box;
 }
 
 .chart-title {
   text-align: center;
-  font-size: 2rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  color: #2c3e50;
-  margin-bottom: 2rem;
+  color: #0F172A;
+  margin-bottom: 1.25rem;
 }
 
 .chart-wrapper {
@@ -25,10 +25,14 @@
   overflow-x: auto;
 }
 
+.chart-line {
+  width: 100%;
+  height: 380px;
+}
+
 .chart-line canvas {
   width: 100% !important;
-  max-width: 1000px !important;
-  height: 450px !important;
+  height: 100% !important;
 }
 
 .no-data {
@@ -42,6 +46,22 @@
   border: 2px dashed #d32f2f;
   border-radius: 12px;
   background: #fff5f5;
+}
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem auto;
+  padding: 3rem 2rem;
+}
+
+.loading-message {
+  margin-top: 1.25rem;
+  font-size: 1rem;
+  color: #64748B;
+  text-align: center;
 }
 
 .no-data-icon {
@@ -64,9 +84,9 @@
     padding: 1rem;
   }
   .chart-title {
-    font-size: 1.4rem;
+    font-size: 1.1rem;
   }
-  .chart-line canvas {
-    height: 350px !important;
+  .chart-line {
+    height: 300px;
   }
 }

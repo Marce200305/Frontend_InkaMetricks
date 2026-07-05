@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChartDataset, ChartOptions, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ReportService } from '../../services/report-service';
 import { MetricsByRegionDTO } from '../../models/MetricsByRegionDTO';
 
@@ -18,17 +19,32 @@ const PALETTE = [
 
 @Component({
   selector: 'app-metrics-by-region',
-  imports: [BaseChartDirective, MatIconModule],
+  imports: [BaseChartDirective, MatIconModule, MatProgressSpinnerModule],
   templateUrl: './metrics-by-region-component.html',
   styleUrl: './metrics-by-region-component.css',
 })
 export class MetricsByRegion implements OnInit {
   hasData = false;
+  loading = true;
 
   chartOptions: ChartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
+    layout: {
+      padding: { top: 8 },
+    },
     plugins: {
-      legend: { position: 'top', labels: { padding: 20, font: { size: 13 }, usePointStyle: true } },
+      legend: {
+        position: 'top',
+        align: 'center',
+        labels: {
+          padding: 14,
+          boxWidth: 10,
+          boxHeight: 10,
+          font: { size: 12 },
+          usePointStyle: true,
+        },
+      },
       tooltip: {
         callbacks: {
           label: (ctx) => ` ${ctx.dataset.label}: ${Number(ctx.parsed.y).toLocaleString()}`,
@@ -81,9 +97,11 @@ export class MetricsByRegion implements OnInit {
         } else {
           this.hasData = false;
         }
+        this.loading = false;
       },
       error: () => {
         this.hasData = false;
+        this.loading = false;
       },
     });
   }

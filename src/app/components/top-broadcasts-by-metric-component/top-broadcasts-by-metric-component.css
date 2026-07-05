@@ -80,6 +80,22 @@
   background: #fff5f5;
 }
 
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem auto;
+  padding: 3rem 2rem;
+}
+
+.loading-message {
+  margin-top: 1.25rem;
+  font-size: 1rem;
+  color: #64748B;
+  text-align: center;
+}
+
 .no-data-icon {
   font-size: 48px;
   width: 48px;

@@ -3,17 +3,19 @@ import { FormsModule } from '@angular/forms';
 import { ChartDataset, ChartOptions, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ReportService } from '../../services/report-service';
 import { MetricsByBroadcastDTO } from '../../models/MetricsByBroadcastDTO';
 
 @Component({
   selector: 'app-top-broadcasts-by-metric',
-  imports: [BaseChartDirective, MatIconModule, FormsModule],
+  imports: [BaseChartDirective, MatIconModule, MatProgressSpinnerModule, FormsModule],
   templateUrl: './top-broadcasts-by-metric-component.html',
   styleUrl: './top-broadcasts-by-metric-component.css',
 })
 export class TopBroadcastsByMetric implements OnInit {
   hasData = false;
+  loading = true;
   metricName = '';
   availableNames: string[] = [];
 
@@ -47,12 +49,16 @@ export class TopBroadcastsByMetric implements OnInit {
         if (names.length > 0) {
           this.metricName = names[0];
           this.loadData();
+        } else {
+          this.loading = false;
         }
       },
+      error: () => { this.loading = false; },
     });
   }
 
   loadData(): void {
+    this.loading = true;
     this.rS.getTopBroadcastsByMetric(this.metricName).subscribe({
       next: (data) => {
         if (data && data.length > 0) {
@@ -69,8 +75,9 @@ export class TopBroadcastsByMetric implements OnInit {
         } else {
           this.hasData = false;
         }
+        this.loading = false;
       },
-      error: () => { this.hasData = false; },
+      error: () => { this.hasData = false; this.loading = false; },
     });
   }
 }

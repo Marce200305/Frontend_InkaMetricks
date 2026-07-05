@@ -72,6 +72,7 @@ import { DashboardComponent } from './components/dashboard/dashboard';
 import { Authenticate } from './components/authenticate/authenticate';
 import { Register } from './components/register/register';
 import { seguridadGuard } from './guard/seguridad-guard';
+import { adminGuard } from './guard/admin-guard';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -171,7 +172,7 @@ export const routes: Routes = [
         ]
     },
     {
-        path: 'roles', component: RoleComponent, canActivate: [seguridadGuard],
+        path: 'roles', component: RoleComponent, canActivate: [adminGuard],
         children: [
             { path: 'create', component: RoleInsertar },
             { path: 'list', component: RoleListar },
@@ -179,7 +180,7 @@ export const routes: Routes = [
         ]
     },
     {
-        path: 'users', component: UserComponent, canActivate: [seguridadGuard],
+        path: 'users', component: UserComponent, canActivate: [adminGuard],
         children: [
             { path: 'create', component: UserCreate },
             { path: 'list', component: UserList },

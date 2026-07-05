@@ -16,8 +16,10 @@
       <button mat-menu-item [matMenuTriggerFor]="menuMarcaM"><mat-icon>label</mat-icon> Marca</button>
       <button mat-menu-item [matMenuTriggerFor]="menuEmpresaM"><mat-icon>business</mat-icon> Empresa</button>
       <button mat-menu-item [matMenuTriggerFor]="menuStreamerM"><mat-icon>videocam</mat-icon> Streamer</button>
-      <button mat-menu-item [matMenuTriggerFor]="menuUsuariosM"><mat-icon>person</mat-icon> Usuario</button>
-      <button mat-menu-item [matMenuTriggerFor]="menuRoleM"><mat-icon>admin_panel_settings</mat-icon> Rol</button>
+      @if (esAdmin) {
+        <button mat-menu-item [matMenuTriggerFor]="menuUsuariosM"><mat-icon>person</mat-icon> Usuario</button>
+        <button mat-menu-item [matMenuTriggerFor]="menuRoleM"><mat-icon>admin_panel_settings</mat-icon> Rol</button>
+      }
       <button mat-menu-item [matMenuTriggerFor]="menuCanalM"><mat-icon>wifi</mat-icon> Canal</button>
       <button mat-menu-item [matMenuTriggerFor]="menuCanalMonitoreradoM"><mat-icon>monitor</mat-icon> Canal Monitoreado</button>
       <button mat-menu-item [matMenuTriggerFor]="menuTransmisionM"><mat-icon>live_tv</mat-icon> Transmisión</button>
@@ -138,22 +140,24 @@
       </mat-menu>
 
       <!-- Nivel 3 -->
-      <button matButton class="btn-menu" [matMenuTriggerFor]="menuUsuarios">
-        <mat-icon>person</mat-icon> Usuario
-      </button>
-      <mat-menu #menuUsuarios="matMenu">
-        <button mat-menu-item routerLink="/users/create"><mat-icon>add</mat-icon>Registrar</button>
-        <button mat-menu-item routerLink="/users/list"><mat-icon>list</mat-icon>Lista</button>
-      </mat-menu>
+      @if (esAdmin) {
+        <button matButton class="btn-menu" [matMenuTriggerFor]="menuUsuarios">
+          <mat-icon>person</mat-icon> Usuario
+        </button>
+        <mat-menu #menuUsuarios="matMenu">
+          <button mat-menu-item routerLink="/users/create"><mat-icon>add</mat-icon>Registrar</button>
+          <button mat-menu-item routerLink="/users/list"><mat-icon>list</mat-icon>Lista</button>
+        </mat-menu>
 
-      <!-- Nivel 4 -->
-      <button matButton class="btn-menu" [matMenuTriggerFor]="menuRole">
-        <mat-icon>admin_panel_settings</mat-icon> Rol
-      </button>
-      <mat-menu #menuRole="matMenu">
-        <button mat-menu-item routerLink="/roles/create"><mat-icon>add</mat-icon>Registrar</button>
-        <button mat-menu-item routerLink="/roles/list"><mat-icon>list</mat-icon>Lista</button>
-      </mat-menu>
+        <!-- Nivel 4 -->
+        <button matButton class="btn-menu" [matMenuTriggerFor]="menuRole">
+          <mat-icon>admin_panel_settings</mat-icon> Rol
+        </button>
+        <mat-menu #menuRole="matMenu">
+          <button mat-menu-item routerLink="/roles/create"><mat-icon>add</mat-icon>Registrar</button>
+          <button mat-menu-item routerLink="/roles/list"><mat-icon>list</mat-icon>Lista</button>
+        </mat-menu>
+      }
 
       <button matButton class="btn-menu" [matMenuTriggerFor]="menuCanal">
         <mat-icon>live_tv</mat-icon> Canal

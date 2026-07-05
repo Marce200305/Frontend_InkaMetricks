@@ -11,7 +11,12 @@
   </div>
 
   <div class="chart-wrapper">
-    @if (hasData) {
+    @if (loading) {
+      <div class="loading-state">
+        <mat-spinner diameter="48"></mat-spinner>
+        <p class="loading-message">Cargando reporte...</p>
+      </div>
+    } @else if (hasData) {
       <div class="chart-wrapper chart-pie">
         <canvas baseChart
           [datasets]="chartData"
@@ -21,8 +26,7 @@
           [type]="chartType">
         </canvas>
       </div>
-    }
-    @if (!hasData) {
+    } @else {
       <div class="no-data">
         <mat-icon class="no-data-icon">info_outline</mat-icon>
         <p class="no-data-message">No hay datos disponibles para mostrar.</p>
