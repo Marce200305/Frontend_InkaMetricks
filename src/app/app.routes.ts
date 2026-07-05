@@ -70,11 +70,13 @@ import { TopBroadcastsByMetric } from './components/top-broadcasts-by-metric-com
 import { MetricsByRegion } from './components/metrics-by-region-component/metrics-by-region-component';
 import { DashboardComponent } from './components/dashboard/dashboard';
 import { Authenticate } from './components/authenticate/authenticate';
+import { Register } from './components/register/register';
 import { seguridadGuard } from './guard/seguridad-guard';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'login', component: Authenticate },
+    { path: 'register', component: Register },
     { path: 'homes', component: HomeComponent, canActivate: [seguridadGuard] },
     { path: 'dashboard', component: DashboardComponent, canActivate: [seguridadGuard] },
     { path: 'top-broadcasts-by-metric', component: TopBroadcastsByMetric, canActivate: [seguridadGuard] },

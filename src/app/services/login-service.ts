@@ -21,6 +21,10 @@ export class LoginService {
         return this.http.post('http://localhost:8080/InkaMetrics/tf/login', request);
     }
 
+    register(data: { username: string; password: string; companyId: number | null }) {
+        return this.http.post('http://localhost:8080/InkaMetrics/tf/register', data, { responseType: 'text' });
+    }
+
     verificar(): boolean {
         if (!this.isBrowser()) {
             return false;
