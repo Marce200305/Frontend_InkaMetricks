@@ -24,6 +24,7 @@
       <button mat-menu-item [matMenuTriggerFor]="menuMetricaM"><mat-icon>bar_chart</mat-icon> Métrica</button>
       <button mat-menu-item [matMenuTriggerFor]="menuDeteccionM"><mat-icon>campaign</mat-icon> Detección Pub.</button>
       <button mat-menu-item routerLink="/dashboard"><mat-icon>dashboard</mat-icon> Dashboard</button>
+      <button mat-menu-item (click)="cerrar()"><mat-icon>logout</mat-icon> Cerrar sesión</button>
     </mat-menu>
 
     <!-- Submenús móvil -->
@@ -198,6 +199,10 @@
 
       <button matButton class="btn-menu" routerLink="/dashboard">
         <mat-icon>dashboard</mat-icon> Dashboard
+      </button>
+
+      <button matButton class="btn-menu" (click)="cerrar()">
+        <mat-icon>logout</mat-icon> Cerrar sesión
       </button>
     </div>
 

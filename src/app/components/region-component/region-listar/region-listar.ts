@@ -1,23 +1,25 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { Region } from '../../../models/Region';
 import { RegionService } from '../../../services/region-service';
 
 @Component({
   selector: 'app-region-listar',
-  imports: [MatTableModule, CommonModule, MatIconModule, RouterLink, MatButtonModule],
+  imports: [MatTableModule, CommonModule, MatIconModule, RouterLink, MatButtonModule, MatPaginatorModule],
   templateUrl: './region-listar.html',
   styleUrl: './region-listar.css',
 })
-export class RegionListar implements OnInit, OnDestroy {
+export class RegionListar implements OnInit, OnDestroy, AfterViewInit {
   dataSource: MatTableDataSource<Region> = new MatTableDataSource();
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4'];
   private routerSub?: Subscription;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private cS: RegionService, private router: Router) {}
 
@@ -28,6 +30,8 @@ export class RegionListar implements OnInit, OnDestroy {
     });
   }
 
+  ngAfterViewInit(): void { this.dataSource.paginator = this.paginator; }
+
   ngOnDestroy(): void { this.routerSub?.unsubscribe(); }
 
   cargar() {
@@ -35,7 +39,7 @@ export class RegionListar implements OnInit, OnDestroy {
   }
 
   eliminar(id: number) {
-    if (confirm('⚠️ Al eliminar esta Región se eliminarán también:\n→ Streamers de esa región\n→ Canales de esos streamers\n→ Transmisiones, Métricas y Detecciones asociadas\n\n¿Deseas continuar?')) {
+    if (confirm('¿Estás seguro de que deseas eliminar este registro?')) {
       this.cS.delete(id).subscribe(() => { this.cargar(); });
     }
   }

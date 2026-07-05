@@ -1,3 +1,5 @@
+seguridad:
+npm install @auth0/angular-jwt
 
 Solo para Entidad Curso
 ->en app:

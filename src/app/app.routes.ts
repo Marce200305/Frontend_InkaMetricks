@@ -69,16 +69,19 @@ import { HomeComponent } from './components/home-component/home-component';
 import { TopBroadcastsByMetric } from './components/top-broadcasts-by-metric-component/top-broadcasts-by-metric-component';
 import { MetricsByRegion } from './components/metrics-by-region-component/metrics-by-region-component';
 import { DashboardComponent } from './components/dashboard/dashboard';
+import { Authenticate } from './components/authenticate/authenticate';
+import { seguridadGuard } from './guard/seguridad-guard';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'homes', pathMatch: 'full' },
-    { path: 'homes', component: HomeComponent },
-    { path: 'dashboard', component: DashboardComponent },
-    { path: 'top-broadcasts-by-metric', component: TopBroadcastsByMetric },
-    { path: 'metrics-by-region', component: MetricsByRegion },
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    { path: 'login', component: Authenticate },
+    { path: 'homes', component: HomeComponent, canActivate: [seguridadGuard] },
+    { path: 'dashboard', component: DashboardComponent, canActivate: [seguridadGuard] },
+    { path: 'top-broadcasts-by-metric', component: TopBroadcastsByMetric, canActivate: [seguridadGuard] },
+    { path: 'metrics-by-region', component: MetricsByRegion, canActivate: [seguridadGuard] },
 
     {
-        path: 'brands', component: BrandComponent,
+        path: 'brands', component: BrandComponent, canActivate: [seguridadGuard],
         children: [
             { path: 'create', component: BrandCreate },
             { path: 'list', component: BrandList },
@@ -86,7 +89,7 @@ export const routes: Routes = [
         ]
     },
     {
-        path: 'platforms', component: PlatformComponent,
+        path: 'platforms', component: PlatformComponent, canActivate: [seguridadGuard],
         children: [
             { path: 'create', component: PlatformCreate },
             { path: 'list', component: PlatformList },
@@ -94,7 +97,7 @@ export const routes: Routes = [
         ]
     },
     {
-        path: 'companies', component: CompanyComponent,
+        path: 'companies', component: CompanyComponent, canActivate: [seguridadGuard],
         children: [
             { path: 'create', component: CompanyCreate },
             { path: 'list', component: CompanyList },
@@ -102,7 +105,7 @@ export const routes: Routes = [
         ]
     },
     {
-        path: 'channels', component: ChannelComponent,
+        path: 'channels', component: ChannelComponent, canActivate: [seguridadGuard],
         children: [
             { path: 'create', component: ChannelCreate },
             { path: 'list', component: ChannelList },
@@ -110,7 +113,7 @@ export const routes: Routes = [
         ]
     },
     {
-        path: 'broadcasts', component: BroadcastComponent,
+        path: 'broadcasts', component: BroadcastComponent, canActivate: [seguridadGuard],
         children: [
             { path: 'create', component: BroadcastCreate },
             { path: 'list', component: BroadcastList },
@@ -118,7 +121,7 @@ export const routes: Routes = [
         ]
     },
     {
-        path: 'monitored-channels', component: MonitoredChannelComponent,
+        path: 'monitored-channels', component: MonitoredChannelComponent, canActivate: [seguridadGuard],
         children: [
             { path: 'create', component: MonitoredChannelCreate },
             { path: 'list', component: MonitoredChannelList },
@@ -126,7 +129,7 @@ export const routes: Routes = [
         ]
     },
     {
-        path: 'metrics', component: MetricSnapshotComponent,
+        path: 'metrics', component: MetricSnapshotComponent, canActivate: [seguridadGuard],
         children: [
             { path: 'create', component: MetricSnapshotCreate },
             { path: 'list', component: MetricSnapshotList },
@@ -134,7 +137,7 @@ export const routes: Routes = [
         ]
     },
     {
-        path: 'ad-detections', component: AdDetectionComponent,
+        path: 'ad-detections', component: AdDetectionComponent, canActivate: [seguridadGuard],
         children: [
             { path: 'create', component: AdDetectionCreate },
             { path: 'list', component: AdDetectionList },
@@ -142,7 +145,7 @@ export const routes: Routes = [
         ]
     },
     {
-        path: 'plans', component: PlanComponent,
+        path: 'plans', component: PlanComponent, canActivate: [seguridadGuard],
         children: [
             { path: 'create', component: PlanInsertar },
             { path: 'list', component: PlanListar },
@@ -150,7 +153,7 @@ export const routes: Routes = [
         ]
     },
     {
-        path: 'regions', component: RegionComponent,
+        path: 'regions', component: RegionComponent, canActivate: [seguridadGuard],
         children: [
             { path: 'create', component: RegionInsertar },
             { path: 'list', component: RegionListar },
@@ -158,7 +161,7 @@ export const routes: Routes = [
         ]
     },
     {
-        path: 'streamers', component: StreamerComponent,
+        path: 'streamers', component: StreamerComponent, canActivate: [seguridadGuard],
         children: [
             { path: 'create', component: StreamerInsertar },
             { path: 'list', component: StreamerListar },
@@ -166,7 +169,7 @@ export const routes: Routes = [
         ]
     },
     {
-        path: 'roles', component: RoleComponent,
+        path: 'roles', component: RoleComponent, canActivate: [seguridadGuard],
         children: [
             { path: 'create', component: RoleInsertar },
             { path: 'list', component: RoleListar },
@@ -174,7 +177,7 @@ export const routes: Routes = [
         ]
     },
     {
-        path: 'users', component: UserComponent,
+        path: 'users', component: UserComponent, canActivate: [seguridadGuard],
         children: [
             { path: 'create', component: UserCreate },
             { path: 'list', component: UserList },

@@ -1,32 +1,42 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { Role } from '../../../models/Role';
 import { RoleService } from '../../../services/role-service';
+import { LoginService } from '../../../services/login-service';
 
 @Component({
   selector: 'app-role-listar',
-  imports: [MatTableModule, CommonModule, MatIconModule, RouterLink, MatButtonModule],
+  imports: [MatTableModule, CommonModule, MatIconModule, RouterLink, MatButtonModule, MatPaginatorModule],
   templateUrl: './role-listar.html',
   styleUrl: './role-listar.css',
 })
-export class RoleListar implements OnInit, OnDestroy {
+export class RoleListar implements OnInit, OnDestroy, AfterViewInit {
   dataSource: MatTableDataSource<Role> = new MatTableDataSource();
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5'];
   private routerSub?: Subscription;
+  esCliente: boolean = false;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private cS: RoleService, private router: Router) {}
+  constructor(private cS: RoleService, private router: Router, private loginService: LoginService) {}
 
   ngOnInit(): void {
-    this.cargar();
-    this.routerSub = this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) { this.cargar(); }
-    });
+    const rol = this.loginService.showRole();
+    this.esCliente = JSON.stringify(rol).includes('CLIENTE');
+    if (!this.esCliente) {
+      this.cargar();
+      this.routerSub = this.router.events.subscribe(event => {
+        if (event instanceof NavigationEnd) { this.cargar(); }
+      });
+    }
   }
+
+  ngAfterViewInit(): void { this.dataSource.paginator = this.paginator; }
 
   ngOnDestroy(): void { this.routerSub?.unsubscribe(); }
 

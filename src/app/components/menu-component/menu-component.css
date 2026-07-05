@@ -1,117 +1,107 @@
+/* Anula el padding del contenedor global para que la barra llegue a los bordes */
+:host { display: block; width: 100%; }
+:host .container { padding: 0 !important; max-width: 100% !important; }
+
+/* ── Navbar ── */
 .custom-toolbar {
-  background-color: #1E293B !important;
-  border-bottom: 1px solid #334155;
+  background: #0F172A !important;
+  border-bottom: none;
+  box-shadow: 0 2px 16px rgba(15,23,42,.25);
   display: flex;
   align-items: center;
-  padding: 0 12px;
+  padding: 0 4px;
+  height: 54px;
   flex-wrap: nowrap;
   overflow-x: auto;
-  height: 60px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
 }
 
 .desktop-menu {
   display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 0;
   flex-wrap: nowrap;
-  gap: 2px;
+  width: 100%;
 }
 
-/* Reset completo de Material en estos botones */
+/* ── Botón base ── */
 .btn-menu {
-  background-color: transparent !important;
+  background: transparent !important;
   border: none !important;
   outline: none !important;
   font-family: 'Inter', sans-serif !important;
-  font-size: 0.82rem !important;
+  font-size: 0.8rem !important;
   font-weight: 500 !important;
-  color: #CBD5E1 !important;
+  color: #FFFFFF !important;
   border-radius: 6px !important;
-  margin: 2px !important;
-  padding: 6px 10px !important;
-  display: flex !important;
+  padding: 5px 9px !important;
+  margin: 0 !important;
+  display: inline-flex !important;
   align-items: center !important;
-  gap: 5px !important;
+  gap: 4px !important;
   cursor: pointer !important;
-  transition: background-color 0.15s ease, color 0.15s ease !important;
+  transition: background 0.13s, color 0.13s !important;
   white-space: nowrap !important;
   text-transform: none !important;
-  letter-spacing: normal !important;
+  letter-spacing: 0 !important;
   min-width: unset !important;
+  height: 34px !important;
 }
 
 .btn-menu:hover {
-  background-color: #2563EB !important;
+  background: rgba(13,148,136,.22) !important;
   color: #FFFFFF !important;
 }
 
 .btn-menu mat-icon {
-  font-size: 1rem !important;
-  width: 1rem !important;
-  height: 1rem !important;
-  line-height: 1rem !important;
-  vertical-align: middle !important;
+  font-size: 15px !important;
+  width: 15px !important;
+  height: 15px !important;
+  line-height: 15px !important;
   color: inherit !important;
 }
 
-/* Entidades independientes: badge verde sutil, sin borde lateral */
+/* ── Entidades independientes ── */
 .btn-menu.independiente {
-  color: #4ADE80 !important;
-  background-color: rgba(34, 197, 94, 0.08) !important;
-}
-
-.btn-menu.independiente::after {
-  content: '●';
-  font-size: 0.4rem;
-  color: #22C55E;
-  margin-left: 3px;
-  vertical-align: middle;
+  color: #FFFFFF !important;
 }
 
 .btn-menu.independiente:hover {
-  background-color: #166534 !important;
+  background: rgba(13,148,136,.22) !important;
   color: #FFFFFF !important;
 }
 
-.btn-menu.independiente:hover::after {
-  color: #FFFFFF;
-}
+/* ── Ripple ── */
+.btn-menu .mat-mdc-button-ripple,
+.btn-menu .mat-ripple { opacity: 0.06; }
 
-/* Botón hamburguesa */
+/* ── Botón hamburguesa (móvil) ── */
 .btn-hamburger {
   display: none !important;
-  background-color: transparent !important;
-  border: 1px solid #475569 !important;
+  background: transparent !important;
+  border: 1px solid rgba(255,255,255,.2) !important;
   border-radius: 6px !important;
-  padding: 6px 10px !important;
+  padding: 5px 9px !important;
   cursor: pointer !important;
-  color: #CBD5E1 !important;
-  transition: background-color 0.15s ease !important;
+  color: #FFFFFF !important;
+  transition: all 0.13s !important;
+  height: 34px !important;
+  align-items: center !important;
 }
 
 .btn-hamburger:hover {
-  background-color: #2563EB !important;
-  border-color: #2563EB !important;
+  background: rgba(13,148,136,.22) !important;
   color: #FFFFFF !important;
 }
 
-.btn-hamburger mat-icon {
-  color: inherit !important;
-}
+.btn-hamburger mat-icon { color: inherit !important; }
 
-/* Ripple de Material — hacerlo sutil */
-.btn-menu .mat-mdc-button-ripple,
-.btn-menu .mat-ripple {
-  opacity: 0.08;
-}
-
-/* Responsive */
+/* ── Responsive ── */
 @media (max-width: 768px) {
-  .btn-hamburger {
-    display: flex !important;
-    align-items: center !important;
-  }
-
-  .desktop-menu {
-    display: none !important;
-  }
+  .btn-hamburger { display: inline-flex !important; }
+  .desktop-menu  { display: none !important; }
 }

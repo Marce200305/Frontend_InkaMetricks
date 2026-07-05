@@ -1,6 +1,13 @@
 <div class="container">
   <div style="text-align: center; margin: 5%"><h2>Users</h2></div>
-  <div>
+
+  <div *ngIf="esCliente" style="text-align: center; margin: 5%">
+    <mat-icon style="font-size: 48px; color: #f44336;">lock</mat-icon>
+    <p style="font-size: 1.2rem; color: #f44336; margin-top: 10px;">No tienes permiso para ver esta sección.</p>
+    <p style="color: #aaa;">Solo los administradores pueden acceder a la lista de usuarios.</p>
+  </div>
+
+  <div *ngIf="!esCliente">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <ng-container matColumnDef="c1">
         <th mat-header-cell *matHeaderCellDef>ID</th>
@@ -33,5 +40,6 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
   </div>
 </div>

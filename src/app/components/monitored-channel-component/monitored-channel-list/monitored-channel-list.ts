@@ -1,23 +1,25 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MonitoredChannel } from '../../../models/MonitoredChannel';
 import { MonitoredChannelService } from '../../../services/monitored-channel-service';
 
 @Component({
   selector: 'app-monitored-channel-list',
-  imports: [MatTableModule, CommonModule, MatIconModule, RouterLink, MatButtonModule],
+  imports: [MatTableModule, CommonModule, MatIconModule, RouterLink, MatButtonModule, MatPaginatorModule],
   templateUrl: './monitored-channel-list.html',
   styleUrl: './monitored-channel-list.css',
 })
-export class MonitoredChannelList implements OnInit, OnDestroy {
+export class MonitoredChannelList implements OnInit, OnDestroy, AfterViewInit {
   dataSource: MatTableDataSource<MonitoredChannel> = new MatTableDataSource();
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5'];
   private routerSub?: Subscription;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private cS: MonitoredChannelService, private router: Router) {}
 
@@ -27,6 +29,8 @@ export class MonitoredChannelList implements OnInit, OnDestroy {
       if (event instanceof NavigationEnd) { this.load(); }
     });
   }
+
+  ngAfterViewInit(): void { this.dataSource.paginator = this.paginator; }
 
   ngOnDestroy(): void { this.routerSub?.unsubscribe(); }
 

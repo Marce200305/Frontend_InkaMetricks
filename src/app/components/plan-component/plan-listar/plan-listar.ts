@@ -1,23 +1,25 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { Plan } from '../../../models/Plan';
 import { PlanService } from '../../../services/plan-service';
 
 @Component({
   selector: 'app-plan-listar',
-  imports: [MatTableModule, CommonModule, MatIconModule, RouterLink, MatButtonModule],
+  imports: [MatTableModule, CommonModule, MatIconModule, RouterLink, MatButtonModule, MatPaginatorModule],
   templateUrl: './plan-listar.html',
   styleUrl: './plan-listar.css',
 })
-export class PlanListar implements OnInit, OnDestroy {
+export class PlanListar implements OnInit, OnDestroy, AfterViewInit {
   dataSource: MatTableDataSource<Plan> = new MatTableDataSource();
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'];
   private routerSub?: Subscription;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private cS: PlanService, private router: Router) {}
 
@@ -28,6 +30,8 @@ export class PlanListar implements OnInit, OnDestroy {
     });
   }
 
+  ngAfterViewInit(): void { this.dataSource.paginator = this.paginator; }
+
   ngOnDestroy(): void { this.routerSub?.unsubscribe(); }
 
   cargar() {
@@ -35,7 +39,7 @@ export class PlanListar implements OnInit, OnDestroy {
   }
 
   eliminar(id: number) {
-    if (confirm('⚠️ Al eliminar este Plan se eliminarán también:\n→ Empresas con ese plan\n→ Usuarios de esas empresas y sus Roles\n→ Canales Monitoreados asociados\n\n¿Deseas continuar?')) {
+    if (confirm('¿Estás seguro de que deseas eliminar este registro?')) {
       this.cS.delete(id).subscribe(() => { this.cargar(); });
     }
   }

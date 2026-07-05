@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, OnDestroy, AfterViewInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { Streamer } from '../../../models/Streamer';
 import { StreamerService } from '../../../services/streamer-service';
 import { Region } from '../../../models/Region';
@@ -18,25 +19,29 @@ import { RegionService } from '../../../services/region-service';
     MatIconModule,
     RouterLink,
     MatButtonModule,
+    MatPaginatorModule,
   ],
   templateUrl: './streamer-listar.html',
   styleUrl: './streamer-listar.css',
 })
-export class StreamerListar implements OnInit, OnDestroy {
+export class StreamerListar implements OnInit, OnDestroy, AfterViewInit {
   dataSource: MatTableDataSource<Streamer> = new MatTableDataSource();
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'];
   listaRegiones: Region[] = [];
   private routerSub?: Subscription;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private cS: StreamerService, private regionS: RegionService, private router: Router) {}
+  constructor(private cS: StreamerService, private regionS: RegionService, private router: Router, private cdRef: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.regionS.list().subscribe(data => { this.listaRegiones = data; });
+    this.regionS.list().subscribe(data => { this.listaRegiones = data; this.cdRef.detectChanges(); });
     this.cargar();
     this.routerSub = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) { this.cargar(); }
     });
   }
+
+  ngAfterViewInit(): void { this.dataSource.paginator = this.paginator; }
 
   ngOnDestroy(): void { this.routerSub?.unsubscribe(); }
 
@@ -51,7 +56,7 @@ export class StreamerListar implements OnInit, OnDestroy {
   }
 
   eliminar(id: number) {
-    if (confirm('⚠️ Al eliminar este Streamer se eliminarán también:\n→ Canales asociados\n→ Transmisiones de esos canales\n→ Métricas y Detecciones de esas transmisiones\n\n¿Deseas continuar?')) {
+    if (confirm('¿Estás seguro de que deseas eliminar este registro?')) {
       this.cS.delete(id).subscribe(() => { this.cargar(); });
     }
   }
