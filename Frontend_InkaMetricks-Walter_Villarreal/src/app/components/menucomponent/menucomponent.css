@@ -1,0 +1,171 @@
+/* --- Variables de Identidad Compartida --- */
+:root {
+  --bg-dark-nav: #0a0f1d;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --accent-cyan: #00f2fe;
+  --accent-blue: #4facfe;
+  --accent-green: #00f5a0; /* Verde tecnológico para los "independientes" */
+  --glass-bg-nav: rgba(10, 15, 29, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+/* --- Contenedor e Interfaz de la Barra --- */
+.container {
+  width: 100%;
+  background-color: #05070f; /* Un fondo base un poco más oscuro */
+}
+
+.custom-toolbar {
+  /* CAMBIO: Fondo oscuro más sólido y denso para evitar que el fondo claro del hero transparente las letras */
+  background: #090d16 !important; 
+  /* CAMBIO: Borde inferior con un toque cian brillante para separar la barra */
+  border-bottom: 1px solid rgba(0, 242, 254, 0.2); 
+  color: #ffffff !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* CAMBIO: Un poco más de altura (70px) para que respiren mejor todos los ítems */
+  height: 70px !important; 
+  padding: 0 1.5rem !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 10; /* Asegura que la barra siempre quede por encima del contenido inferior */
+}
+
+/* --- Menú de Escritorio (Desktop) --- */
+.desktop-menu {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* CAMBIO: Más espacio entre los botones */
+  width: 100%;
+  overflow-x: auto; /* Permite scroll horizontal si los ítems desbordan */
+  white-space: nowrap;
+  padding: 0.5rem 0;
+}
+
+/* Ocultar barra de scroll para mantenerlo estético */
+.desktop-menu::-webkit-scrollbar {
+  display: none;
+}
+
+/* Estilo Base de Botones en Navbar */
+.btn-menu {
+  /* CAMBIO: Texto a gris claro/blanco y más grueso para lectura perfecta */
+  color: #e5e7eb !important; 
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.85rem !important; /* Ligeramente más compacto para albergar todos los enlaces */
+  font-weight: 600 !important; 
+  border-radius: 6px !important;
+  padding: 0.4rem 0.8rem !important;
+  transition: all 0.25s ease !important;
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.btn-menu mat-icon {
+  font-size: 18px !important;
+  width: 18px !important;
+  height: 18px !important;
+  /* CAMBIO: Los iconos ahora brillan en cian directamente para captar la atención */
+  color: #00f2fe !important; 
+  transition: color 0.3s ease;
+  margin-right: 4px;
+}
+
+/* Hover General */
+.btn-menu:hover {
+  /* CAMBIO: Efecto hover con fondo cian sutil y resplandor tecnológico */
+  background: rgba(0, 242, 254, 0.1) !important; 
+  border-color: rgba(0, 242, 254, 0.4) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 12px rgba(0, 242, 254, 0.2);
+}
+
+.btn-menu:hover mat-icon {
+  color: #ffffff !important; /* El icono se vuelve blanco al pasar el mouse */
+}
+
+/* Diferenciación Nivel 1: Independientes (Verde) */
+.btn-menu.independiente {
+  border: 1px solid rgba(0, 245, 160, 0.25) !important;
+  color: #f3f4f6 !important;
+}
+
+.btn-menu.independiente mat-icon {
+  color: #00f5a0 !important; /* Icono verde tecnológico */
+}
+
+.btn-menu.independiente:hover {
+  background: rgba(0, 245, 160, 0.12) !important;
+  border-color: #00f5a0 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 12px rgba(0, 245, 160, 0.3);
+}
+
+.btn-menu.independiente:hover mat-icon {
+  color: #ffffff !important;
+}
+
+/* --- Menú Hamburguesa (Móvil) --- */
+.btn-hamburger {
+  color: var(--text-main) !important;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: none; 
+}
+
+/* --- Sobrescribir Menús Desplegables de Angular Material (.mat-mdc-menu-panel) --- */
+::ng-deep .mat-mdc-menu-panel {
+  /* Fondo oscuro tecnológico semitransparente con desenfoque */
+  background: rgba(13, 20, 38, 0.95) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(0, 242, 254, 0.25) !important; /* Borde cian sutil */
+  border-radius: 10px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6) !important;
+  padding: 0.25rem 0 !important;
+}
+
+/* Ítems dentro del Menú Desplegable */
+::ng-deep .mat-mdc-menu-item {
+  color: #e5e7eb !important;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.9rem !important;
+  font-weight: 500 !important;
+  transition: all 0.2s ease !important;
+}
+
+::ng-deep .mat-mdc-menu-item mat-icon {
+  color: #00f2fe !important; 
+  font-size: 18px !important;
+  margin-right: 10px !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hover en los ítems desplegables */
+::ng-deep .mat-mdc-menu-item:hover {
+  background: rgba(0, 242, 254, 0.12) !important; 
+  color: #ffffff !important; /* Texto blanco puro en hover */
+}
+
+::ng-deep .mat-mdc-menu-item:hover mat-icon {
+  color: #ffffff !important;
+}
+
+/* --- Adaptación Responsiva (Media Queries) --- */
+@media (max-width: 1024px) {
+  .desktop-menu {
+    display: none; 
+  }
+  
+  .btn-hamburger {
+    display: block; 
+  }
+}

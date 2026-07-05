@@ -1,0 +1,26 @@
+<div class="container">
+  <div style="text-align: center; margin: 2%"><h2>Actualizar Rol</h2></div>
+  <div style="text-align: center; margin: 3%">
+    <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+      <mat-form-field>
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="codigo" readonly />
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>Rol</mat-label>
+        <input matInput formControlName="rol" />
+        <mat-error>@if (form.get('rol')?.hasError('required')) { Ingrese el rol }</mat-error>
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="user" [compareWith]="compareById">
+          @for (item of listaUsuarios; track item.id) {
+            <mat-option [value]="item">{{ item.username }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>@if (form.get('user')?.hasError('required')) { Seleccione un usuario }</mat-error>
+      </mat-form-field><br/>
+      <div><button matButton="elevated">Actualizar</button></div>
+    </form>
+  </div>
+</div>
