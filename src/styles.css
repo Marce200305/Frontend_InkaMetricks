@@ -64,14 +64,26 @@ body {
 h1,h2,h3,h4 { font-family: var(--font-title); font-weight: 700; color: var(--text); line-height: 1.2; }
 a { color: var(--primary); text-decoration: none; }
 
-/* ── Contenedor de página ── */
-.container { width: 100%; padding: 20px 28px 28px; }
-.page-wrap  { max-width: 1200px; margin: 0 auto; padding: 20px 28px; }
+/* ── Contenedor de página — card global ── */
+.container {
+  max-width: 1100px;
+  margin: 28px auto;
+  background: #FFFFFF;
+  border-radius: 14px;
+  box-shadow: var(--shadow-md);
+  padding: 28px 32px 32px;
+  border: 1px solid var(--border);
+}
+.page-wrap { max-width: 1200px; margin: 0 auto; padding: 20px 28px; }
 
-/* Anula el margin: 5% que tienen los títulos de las listas */
+/* Anula los márgenes internos inline de títulos y secciones */
 .container > div[style*="margin: 5%"],
-.container > div[style*="margin:5%"] {
-  margin: 0 0 16px !important;
+.container > div[style*="margin:5%"],
+.container > div[style*="margin: 2%"],
+.container > div[style*="margin:2%"],
+.container > div[style*="margin: 3%"],
+.container > div[style*="margin:3%"] {
+  margin: 0 0 20px !important;
   padding: 0 !important;
 }
 

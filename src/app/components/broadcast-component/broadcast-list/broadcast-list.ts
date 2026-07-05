@@ -6,6 +6,7 @@ import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Broadcast } from '../../../models/Broadcast';
 import { BroadcastService } from '../../../services/broadcast-service';
 import { Channel } from '../../../models/Channel';
@@ -24,7 +25,7 @@ export class BroadcastList implements OnInit, OnDestroy, AfterViewInit {
   private routerSub?: Subscription;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private cS: BroadcastService, private channelS: ChannelService, private router: Router, private cdRef: ChangeDetectorRef) {}
+  constructor(private cS: BroadcastService, private channelS: ChannelService, private router: Router, private cdRef: ChangeDetectorRef, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.channelS.list().subscribe(data => { this.listaChannels = data; this.cdRef.detectChanges(); });
@@ -48,7 +49,13 @@ export class BroadcastList implements OnInit, OnDestroy, AfterViewInit {
 
   delete(id: number) {
     if (confirm('¿Estás seguro de que deseas eliminar este registro?')) {
-      this.cS.delete(id).subscribe(() => { this.load(); });
+      this.cS.delete(id).subscribe({
+        next: () => { this.load(); },
+        error: (err) => {
+          const msg = err?.error || 'No se puede eliminar este registro.';
+          this.snackBar.open(msg, 'Cerrar', { duration: 5000, horizontalPosition: 'center', verticalPosition: 'top' });
+        }
+      });
     }
   }
 }

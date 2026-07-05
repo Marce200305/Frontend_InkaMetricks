@@ -1,6 +1,14 @@
 /* Anula el padding del contenedor global para que la barra llegue a los bordes */
 :host { display: block; width: 100%; }
-:host .container { padding: 0 !important; max-width: 100% !important; }
+:host .container {
+  padding: 0 !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border: none !important;
+}
 
 /* ── Navbar ── */
 .custom-toolbar {

@@ -6,6 +6,7 @@ import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Role } from '../../../models/Role';
 import { RoleService } from '../../../services/role-service';
 import { LoginService } from '../../../services/login-service';
@@ -23,7 +24,7 @@ export class RoleListar implements OnInit, OnDestroy, AfterViewInit {
   esCliente: boolean = false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private cS: RoleService, private router: Router, private loginService: LoginService) {}
+  constructor(private cS: RoleService, private router: Router, private loginService: LoginService, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     const rol = this.loginService.showRole();
@@ -46,7 +47,13 @@ export class RoleListar implements OnInit, OnDestroy, AfterViewInit {
 
   eliminar(id: number) {
     if (confirm('¿Estás seguro de que deseas eliminar este registro?')) {
-      this.cS.delete(id).subscribe(() => { this.cargar(); });
+      this.cS.delete(id).subscribe({
+        next: () => { this.cargar(); },
+        error: (err) => {
+          const msg = err?.error || 'No se puede eliminar este registro.';
+          this.snackBar.open(msg, 'Cerrar', { duration: 5000, horizontalPosition: 'center', verticalPosition: 'top' });
+        }
+      });
     }
   }
 }

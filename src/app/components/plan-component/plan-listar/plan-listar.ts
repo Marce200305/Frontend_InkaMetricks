@@ -6,6 +6,7 @@ import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Plan } from '../../../models/Plan';
 import { PlanService } from '../../../services/plan-service';
 
@@ -21,7 +22,7 @@ export class PlanListar implements OnInit, OnDestroy, AfterViewInit {
   private routerSub?: Subscription;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private cS: PlanService, private router: Router) {}
+  constructor(private cS: PlanService, private router: Router, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.cargar();
@@ -40,7 +41,13 @@ export class PlanListar implements OnInit, OnDestroy, AfterViewInit {
 
   eliminar(id: number) {
     if (confirm('¿Estás seguro de que deseas eliminar este registro?')) {
-      this.cS.delete(id).subscribe(() => { this.cargar(); });
+      this.cS.delete(id).subscribe({
+        next: () => { this.cargar(); },
+        error: (err) => {
+          const msg = err?.error || 'No se puede eliminar este registro.';
+          this.snackBar.open(msg, 'Cerrar', { duration: 5000, horizontalPosition: 'center', verticalPosition: 'top' });
+        }
+      });
     }
   }
 }

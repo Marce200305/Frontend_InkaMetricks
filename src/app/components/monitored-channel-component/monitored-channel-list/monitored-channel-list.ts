@@ -6,6 +6,7 @@ import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MonitoredChannel } from '../../../models/MonitoredChannel';
 import { MonitoredChannelService } from '../../../services/monitored-channel-service';
 
@@ -21,7 +22,7 @@ export class MonitoredChannelList implements OnInit, OnDestroy, AfterViewInit {
   private routerSub?: Subscription;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private cS: MonitoredChannelService, private router: Router) {}
+  constructor(private cS: MonitoredChannelService, private router: Router, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.load();
@@ -39,8 +40,14 @@ export class MonitoredChannelList implements OnInit, OnDestroy, AfterViewInit {
   }
 
   delete(id: number) {
-    if (confirm('Delete this monitored channel?')) {
-      this.cS.delete(id).subscribe(() => { this.load(); });
+    if (confirm('¿Estás seguro de que deseas eliminar este registro?')) {
+      this.cS.delete(id).subscribe({
+        next: () => { this.load(); },
+        error: (err) => {
+          const msg = err?.error || 'No se puede eliminar este registro.';
+          this.snackBar.open(msg, 'Cerrar', { duration: 5000, horizontalPosition: 'center', verticalPosition: 'top' });
+        }
+      });
     }
   }
 }

@@ -6,6 +6,7 @@ import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Channel } from '../../../models/Channel';
 import { ChannelService } from '../../../services/channel-service';
 import { StreamingPlatformData } from '../../../models/StreamingPlatformData';
@@ -30,7 +31,7 @@ export class ChannelList implements OnInit, OnDestroy, AfterViewInit {
   listaPlatforms: Platform[] = [];
   listaStreamers: Streamer[] = [];
 
-  constructor(private cS: ChannelService, private platformS: PlatformService, private streamerS: StreamerService, private router: Router, private cdRef: ChangeDetectorRef) {}
+  constructor(private cS: ChannelService, private platformS: PlatformService, private streamerS: StreamerService, private router: Router, private cdRef: ChangeDetectorRef, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.platformS.list().subscribe(data => { this.listaPlatforms = data; this.cdRef.detectChanges(); });
@@ -61,7 +62,13 @@ export class ChannelList implements OnInit, OnDestroy, AfterViewInit {
 
   delete(id: number) {
     if (confirm('¿Estás seguro de que deseas eliminar este registro?')) {
-      this.cS.delete(id).subscribe(() => { this.load(); });
+      this.cS.delete(id).subscribe({
+        next: () => { this.load(); },
+        error: (err) => {
+          const msg = err?.error || 'No se puede eliminar este registro.';
+          this.snackBar.open(msg, 'Cerrar', { duration: 5000, horizontalPosition: 'center', verticalPosition: 'top' });
+        }
+      });
     }
   }
 }
