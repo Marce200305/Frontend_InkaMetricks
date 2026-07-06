@@ -1,0 +1,190 @@
+<!-- ===================== NAV SUPERIOR ===================== -->
+<header class="lp-nav">
+  <div class="lp-nav-inner">
+    <a href="#inicio" class="lp-brand">
+      <span class="lp-brand-dot"></span> InkaMetrics
+    </a>
+
+    <nav class="lp-links">
+      <a href="#inicio">Inicio</a>
+      <a href="#nosotros">Quiénes somos</a>
+      <a href="#contacto">Contáctanos</a>
+    </nav>
+
+    <div class="lp-nav-actions">
+      <button matButton class="lp-btn-ghost" routerLink="/login">Iniciar sesión</button>
+      <button matButton="filled" class="lp-btn-solid" routerLink="/register">Registrarse</button>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== HERO / INICIO ===================== -->
+<section id="inicio" class="lp-hero">
+  <div class="lp-hero-content">
+    <div class="lp-badge">
+      <span class="lp-badge-dot"></span> Plataforma de análisis de streaming
+    </div>
+    <h1 class="lp-title">La moneda de audiencia<br />del streaming peruano</h1>
+    <p class="lp-subtitle">
+      Monitorea canales, métricas y transmisiones en tiempo real en Twitch,
+      YouTube Live y Kick. Datos claros, comparables y verificables para
+      creadores, agencias y marcas.
+    </p>
+    <div class="lp-hero-actions">
+      <button matButton="filled" class="lp-btn-solid lp-btn-lg" routerLink="/register">
+        <mat-icon>rocket_launch</mat-icon> Crear cuenta
+      </button>
+      <button matButton class="lp-btn-outline lp-btn-lg" routerLink="/login">
+        <mat-icon>login</mat-icon> Iniciar sesión
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== STATS ===================== -->
+<section class="lp-stats">
+  @for (s of stats; track s.etiqueta) {
+    <div class="lp-stat">
+      <mat-icon>{{ s.icon }}</mat-icon>
+      <div class="lp-stat-value">{{ s.valor }}</div>
+      <div class="lp-stat-label">{{ s.etiqueta }}</div>
+    </div>
+  }
+</section>
+
+<!-- ===================== FEATURES ===================== -->
+<section class="lp-section">
+  <div class="lp-head">
+    <h2>Todo lo que tu equipo necesita</h2>
+    <p>Una sola herramienta para medir, comparar y decidir con datos reales.</p>
+  </div>
+  <div class="lp-grid-4">
+    @for (f of features; track f.title) {
+      <mat-card class="lp-card" appearance="outlined">
+        <div class="lp-card-icon"><mat-icon>{{ f.icon }}</mat-icon></div>
+        <h3>{{ f.title }}</h3>
+        <p>{{ f.text }}</p>
+      </mat-card>
+    }
+  </div>
+</section>
+
+<!-- ===================== QUIÉNES SOMOS ===================== -->
+<section id="nosotros" class="lp-section lp-section-alt">
+  <div class="lp-head">
+    <h2>Quiénes somos</h2>
+    <p>
+      InkaMetrics nació para profesionalizar el ecosistema de creadores de
+      contenido en vivo del Perú, dándoles a ellos y a las marcas una lectura
+      transparente de lo que ocurre en las principales plataformas de streaming.
+    </p>
+  </div>
+
+  <div class="lp-about">
+    <mat-card class="lp-about-card" appearance="outlined">
+      <div class="lp-about-icon"><mat-icon>flag</mat-icon></div>
+      <h3>Misión</h3>
+      <p>
+        Poner el poder de los datos de live-streaming al alcance de cada creador,
+        agencia y anunciante peruano, con métricas claras que impulsen decisiones
+        justas y rentables.
+      </p>
+    </mat-card>
+    <mat-card class="lp-about-card" appearance="outlined">
+      <div class="lp-about-icon"><mat-icon>rocket_launch</mat-icon></div>
+      <h3>Visión</h3>
+      <p>
+        Ser la plataforma de referencia para la medición del streaming en
+        Hispanoamérica, fomentando un ecosistema digital profesional y sostenible.
+      </p>
+    </mat-card>
+  </div>
+
+  <div class="lp-values">
+    @for (v of valores; track v.title) {
+      <div class="lp-value">
+        <mat-icon>{{ v.icon }}</mat-icon>
+        <div>
+          <strong>{{ v.title }}</strong>
+          <span>{{ v.text }}</span>
+        </div>
+      </div>
+    }
+  </div>
+</section>
+
+<!-- ===================== CONTÁCTANOS ===================== -->
+<section id="contacto" class="lp-section">
+  <div class="lp-head">
+    <h2>Contáctanos</h2>
+    <p>¿Tienes dudas o quieres una demo? Escríbenos y te respondemos.</p>
+  </div>
+
+  <div class="lp-contact">
+    <!-- Datos de contacto -->
+    <div class="lp-contact-info">
+      <div class="lp-contact-item">
+        <mat-icon>mail</mat-icon>
+        <div><strong>Correo</strong><span>contacto&#64;inkametrics.pe</span></div>
+      </div>
+      <div class="lp-contact-item">
+        <mat-icon>call</mat-icon>
+        <div><strong>Teléfono</strong><span>+51 999 999 999</span></div>
+      </div>
+      <div class="lp-contact-item">
+        <mat-icon>location_on</mat-icon>
+        <div><strong>Ubicación</strong><span>Lima, Perú</span></div>
+      </div>
+    </div>
+
+    <!-- Formulario -->
+    <mat-card class="lp-form-card" appearance="outlined">
+      @if (enviado()) {
+        <div class="lp-sent">
+          <mat-icon>check_circle</mat-icon>
+          <p>¡Gracias! Tu mensaje fue enviado. Te contactaremos pronto.</p>
+        </div>
+      } @else {
+        <form [formGroup]="formContacto" (ngSubmit)="enviar()">
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="nombre" maxlength="60" />
+            <mat-error>
+              @if (formContacto.get('nombre')?.hasError('required')) { Ingresa tu nombre }
+              @if (formContacto.get('nombre')?.hasError('maxlength')) { Máximo 60 caracteres }
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Correo</mat-label>
+            <input matInput formControlName="email" maxlength="80" />
+            <mat-error>
+              @if (formContacto.get('email')?.hasError('required')) { Ingresa tu correo }
+              @if (formContacto.get('email')?.hasError('email')) { Correo no válido }
+              @if (formContacto.get('email')?.hasError('maxlength')) { Máximo 80 caracteres }
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Mensaje</mat-label>
+            <textarea matInput rows="4" formControlName="mensaje" maxlength="300"></textarea>
+            <mat-error>
+              @if (formContacto.get('mensaje')?.hasError('required')) { Escribe tu mensaje }
+              @if (formContacto.get('mensaje')?.hasError('maxlength')) { Máximo 300 caracteres }
+            </mat-error>
+          </mat-form-field>
+
+          <button matButton="filled" class="lp-btn-solid" type="submit">
+            <mat-icon>send</mat-icon> Enviar mensaje
+          </button>
+        </form>
+      }
+    </mat-card>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="lp-footer">
+  <span class="lp-brand"><span class="lp-brand-dot"></span> InkaMetrics</span>
+  <span>© 2026 InkaMetrics SAC · Lima, Perú</span>
+</footer>

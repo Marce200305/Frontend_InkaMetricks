@@ -1,0 +1,35 @@
+<div class="container">
+  <div style="text-align: center; margin: 2%"><h2>Actualizar Métrica</h2></div>
+  <div style="text-align: center; margin: 3%">
+    <form [formGroup]="form" (submit)="submit()" class="example-form">
+      <mat-form-field>
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="codigo" readonly />
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>Nombre de Métrica</mat-label>
+        <mat-select formControlName="name">
+          @for (item of metricNames; track item) {
+            <mat-option [value]="item">{{ item }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>@if (form.get('name')?.hasError('required')) { Seleccione una métrica }</mat-error>
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>Cantidad</mat-label>
+        <input matInput type="number" formControlName="amount" />
+        <mat-error>@if (form.get('amount')?.hasError('required')) { Ingrese la cantidad }</mat-error>
+      </mat-form-field><br/>
+      <mat-form-field>
+        <mat-label>Transmisión</mat-label>
+        <mat-select formControlName="broadcast">
+          @for (item of listaBroadcasts; track item.id) {
+            <mat-option [value]="item.id">{{ item.streamTitle }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>@if (form.get('broadcast')?.hasError('required')) { Seleccione una transmisión }</mat-error>
+      </mat-form-field><br/>
+      <div><button matButton="elevated">Actualizar</button></div>
+    </form>
+  </div>
+</div>

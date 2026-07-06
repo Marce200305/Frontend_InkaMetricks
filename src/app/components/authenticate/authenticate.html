@@ -1,0 +1,29 @@
+<div class="login-page">
+  <div class="login-card">
+
+    <div class="login-brand">
+      <div class="login-logo">
+        <mat-icon>bar_chart</mat-icon>
+      </div>
+      <h1 class="login-title">InkaMetrics</h1>
+      <p class="login-subtitle">Ingresa tus credenciales para continuar</p>
+    </div>
+
+    <mat-form-field appearance="outline" class="login-field">
+      <mat-label>Usuario</mat-label>
+      <mat-icon matPrefix>person_outline</mat-icon>
+      <input matInput [(ngModel)]="username" placeholder="Ingresa tu usuario" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="login-field">
+      <mat-label>Contraseña</mat-label>
+      <mat-icon matPrefix>lock_outline</mat-icon>
+      <input matInput type="password" [(ngModel)]="password" placeholder="Ingresa tu contraseña" />
+    </mat-form-field>
+
+    <button class="login-btn" (click)="login()">Iniciar sesión</button>
+
+    <p class="login-link">¿No tienes cuenta? <a routerLink="/register">Regístrate</a></p>
+
+  </div>
+</div>

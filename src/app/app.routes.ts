@@ -1,0 +1,191 @@
+import { Routes } from '@angular/router';
+
+import { BrandComponent } from './components/brand-component/brand-component';
+import { BrandCreate } from './components/brand-component/brand-create/brand-create';
+import { BrandList } from './components/brand-component/brand-list/brand-list';
+import { BrandEdit } from './components/brand-component/brand-edit/brand-edit';
+
+import { PlatformComponent } from './components/platform-component/platform-component';
+import { PlatformCreate } from './components/platform-component/platform-create/platform-create';
+import { PlatformList } from './components/platform-component/platform-list/platform-list';
+import { PlatformEdit } from './components/platform-component/platform-edit/platform-edit';
+
+import { CompanyComponent } from './components/company-component/company-component';
+import { CompanyCreate } from './components/company-component/company-create/company-create';
+import { CompanyList } from './components/company-component/company-list/company-list';
+import { CompanyEdit } from './components/company-component/company-edit/company-edit';
+
+import { ChannelComponent } from './components/channel-component/channel-component';
+import { ChannelCreate } from './components/channel-component/channel-create/channel-create';
+import { ChannelList } from './components/channel-component/channel-list/channel-list';
+import { ChannelEdit } from './components/channel-component/channel-edit/channel-edit';
+
+import { BroadcastComponent } from './components/broadcast-component/broadcast-component';
+import { BroadcastCreate } from './components/broadcast-component/broadcast-create/broadcast-create';
+import { BroadcastList } from './components/broadcast-component/broadcast-list/broadcast-list';
+import { BroadcastEdit } from './components/broadcast-component/broadcast-edit/broadcast-edit';
+
+import { MonitoredChannelComponent } from './components/monitored-channel-component/monitored-channel-component';
+import { MonitoredChannelCreate } from './components/monitored-channel-component/monitored-channel-create/monitored-channel-create';
+import { MonitoredChannelList } from './components/monitored-channel-component/monitored-channel-list/monitored-channel-list';
+import { MonitoredChannelEdit } from './components/monitored-channel-component/monitored-channel-edit/monitored-channel-edit';
+
+import { MetricSnapshotComponent } from './components/metric-snapshot-component/metric-snapshot-component';
+import { MetricSnapshotCreate } from './components/metric-snapshot-component/metric-snapshot-create/metric-snapshot-create';
+import { MetricSnapshotList } from './components/metric-snapshot-component/metric-snapshot-list/metric-snapshot-list';
+import { MetricSnapshotEdit } from './components/metric-snapshot-component/metric-snapshot-edit/metric-snapshot-edit';
+
+import { AdDetectionComponent } from './components/ad-detection-component/ad-detection-component';
+import { AdDetectionCreate } from './components/ad-detection-component/ad-detection-create/ad-detection-create';
+import { AdDetectionList } from './components/ad-detection-component/ad-detection-list/ad-detection-list';
+import { AdDetectionEdit } from './components/ad-detection-component/ad-detection-edit/ad-detection-edit';
+
+import { PlanComponent } from './components/plan-component/plan-component';
+import { PlanInsertar } from './components/plan-component/plan-insertar/plan-insertar';
+import { PlanListar } from './components/plan-component/plan-listar/plan-listar';
+import { PlanActualizar } from './components/plan-component/plan-actualizar/plan-actualizar';
+
+import { RegionComponent } from './components/region-component/region-component';
+import { RegionInsertar } from './components/region-component/region-insertar/region-insertar';
+import { RegionListar } from './components/region-component/region-listar/region-listar';
+import { RegionActualizar } from './components/region-component/region-actualizar/region-actualizar';
+
+import { StreamerComponent } from './components/streamer-component/streamer-component';
+import { StreamerInsertar } from './components/streamer-component/streamer-insertar/streamer-insertar';
+import { StreamerListar } from './components/streamer-component/streamer-listar/streamer-listar';
+import { StreamerActualizar } from './components/streamer-component/streamer-actualizar/streamer-actualizar';
+
+import { RoleComponent } from './components/role-component/role-component';
+import { RoleInsertar } from './components/role-component/role-insertar/role-insertar';
+import { RoleListar } from './components/role-component/role-listar/role-listar';
+import { RoleActualizar } from './components/role-component/role-actualizar/role-actualizar';
+
+import { UserComponent } from './components/user-component/user-component';
+import { UserCreate } from './components/user-component/user-create/user-create';
+import { UserList } from './components/user-component/user-list/user-list';
+import { UserEdit } from './components/user-component/user-edit/user-edit';
+
+import { HomeComponent } from './components/home-component/home-component';
+import { TopBroadcastsByMetric } from './components/top-broadcasts-by-metric-component/top-broadcasts-by-metric-component';
+import { MetricsByRegion } from './components/metrics-by-region-component/metrics-by-region-component';
+import { DashboardComponent } from './components/dashboard/dashboard';
+import { Authenticate } from './components/authenticate/authenticate';
+import { Register } from './components/register/register';
+import { Landing } from './components/landing/landing';
+import { seguridadGuard } from './guard/seguridad-guard';
+import { adminGuard } from './guard/admin-guard';
+
+export const routes: Routes = [
+    { path: '', component: Landing },
+    { path: 'login', component: Authenticate },
+    { path: 'register', component: Register },
+    { path: 'homes', component: HomeComponent, canActivate: [seguridadGuard] },
+    { path: 'dashboard', component: DashboardComponent, canActivate: [seguridadGuard] },
+    { path: 'top-broadcasts-by-metric', component: TopBroadcastsByMetric, canActivate: [seguridadGuard] },
+    { path: 'metrics-by-region', component: MetricsByRegion, canActivate: [seguridadGuard] },
+
+    {
+        path: 'brands', component: BrandComponent, canActivate: [seguridadGuard],
+        children: [
+            { path: 'create', component: BrandCreate, canActivate: [adminGuard] },
+            { path: 'list', component: BrandList },
+            { path: 'edit/:id', component: BrandEdit, canActivate: [adminGuard] },
+        ]
+    },
+    {
+        path: 'platforms', component: PlatformComponent, canActivate: [seguridadGuard],
+        children: [
+            { path: 'create', component: PlatformCreate, canActivate: [adminGuard] },
+            { path: 'list', component: PlatformList },
+            { path: 'edit/:id', component: PlatformEdit, canActivate: [adminGuard] },
+        ]
+    },
+    {
+        path: 'companies', component: CompanyComponent, canActivate: [seguridadGuard],
+        children: [
+            { path: 'create', component: CompanyCreate, canActivate: [adminGuard] },
+            { path: 'list', component: CompanyList },
+            { path: 'edit/:id', component: CompanyEdit, canActivate: [adminGuard] },
+        ]
+    },
+    {
+        path: 'channels', component: ChannelComponent, canActivate: [seguridadGuard],
+        children: [
+            { path: 'create', component: ChannelCreate, canActivate: [adminGuard] },
+            { path: 'list', component: ChannelList },
+            { path: 'edit/:id', component: ChannelEdit, canActivate: [adminGuard] },
+        ]
+    },
+    {
+        path: 'broadcasts', component: BroadcastComponent, canActivate: [seguridadGuard],
+        children: [
+            { path: 'create', component: BroadcastCreate, canActivate: [adminGuard] },
+            { path: 'list', component: BroadcastList },
+            { path: 'edit/:id', component: BroadcastEdit, canActivate: [adminGuard] },
+        ]
+    },
+    {
+        path: 'monitored-channels', component: MonitoredChannelComponent, canActivate: [seguridadGuard],
+        children: [
+            { path: 'create', component: MonitoredChannelCreate, canActivate: [adminGuard] },
+            { path: 'list', component: MonitoredChannelList },
+            { path: 'edit/:id', component: MonitoredChannelEdit, canActivate: [adminGuard] },
+        ]
+    },
+    {
+        path: 'metrics', component: MetricSnapshotComponent, canActivate: [seguridadGuard],
+        children: [
+            { path: 'create', component: MetricSnapshotCreate, canActivate: [adminGuard] },
+            { path: 'list', component: MetricSnapshotList },
+            { path: 'edit/:id', component: MetricSnapshotEdit, canActivate: [adminGuard] },
+        ]
+    },
+    {
+        path: 'ad-detections', component: AdDetectionComponent, canActivate: [seguridadGuard],
+        children: [
+            { path: 'create', component: AdDetectionCreate, canActivate: [adminGuard] },
+            { path: 'list', component: AdDetectionList },
+            { path: 'edit/:id', component: AdDetectionEdit, canActivate: [adminGuard] },
+        ]
+    },
+    {
+        path: 'plans', component: PlanComponent, canActivate: [seguridadGuard],
+        children: [
+            { path: 'create', component: PlanInsertar, canActivate: [adminGuard] },
+            { path: 'list', component: PlanListar },
+            { path: 'edit/:id', component: PlanActualizar, canActivate: [adminGuard] },
+        ]
+    },
+    {
+        path: 'regions', component: RegionComponent, canActivate: [seguridadGuard],
+        children: [
+            { path: 'create', component: RegionInsertar, canActivate: [adminGuard] },
+            { path: 'list', component: RegionListar },
+            { path: 'edit/:id', component: RegionActualizar, canActivate: [adminGuard] },
+        ]
+    },
+    {
+        path: 'streamers', component: StreamerComponent, canActivate: [seguridadGuard],
+        children: [
+            { path: 'create', component: StreamerInsertar, canActivate: [adminGuard] },
+            { path: 'list', component: StreamerListar },
+            { path: 'edit/:id', component: StreamerActualizar, canActivate: [adminGuard] },
+        ]
+    },
+    {
+        path: 'roles', component: RoleComponent, canActivate: [adminGuard],
+        children: [
+            { path: 'create', component: RoleInsertar, canActivate: [adminGuard] },
+            { path: 'list', component: RoleListar },
+            { path: 'edit/:id', component: RoleActualizar, canActivate: [adminGuard] },
+        ]
+    },
+    {
+        path: 'users', component: UserComponent, canActivate: [adminGuard],
+        children: [
+            { path: 'create', component: UserCreate, canActivate: [adminGuard] },
+            { path: 'list', component: UserList },
+            { path: 'edit/:id', component: UserEdit, canActivate: [adminGuard] },
+        ]
+    },
+];

@@ -1,0 +1,163 @@
+/* ── Hero ── */
+.hero {
+  width: 100%;
+  min-height: calc(100vh - 54px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decoración: dos manchas teal y slate muy suaves */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero-bg::before {
+  content: '';
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(13,148,136,.10) 0%, transparent 70%);
+  top: -160px;
+  right: -100px;
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(99,102,241,.07) 0%, transparent 70%);
+  bottom: -80px;
+  left: -60px;
+}
+
+/* ── Contenido ── */
+.hero-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 72px 24px;
+  max-width: 660px;
+}
+
+/* ── Badge ── */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #F0FDFA;
+  border: 1px solid #99F6E4;
+  color: #0F766E;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.73rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 999px;
+  margin-bottom: 36px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 0 3px rgba(16,185,129,.2);
+  animation: blink 2.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 3px rgba(16,185,129,.2); }
+  50%       { opacity: .5; box-shadow: 0 0 0 5px rgba(16,185,129,.08); }
+}
+
+/* ── Título ── */
+.hero-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(2.8rem, 8vw, 5rem);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -2px;
+  margin-bottom: 20px;
+  color: #0F172A;
+}
+
+.hero-title span {
+  color: #0F172A;
+  background: none;
+  -webkit-text-fill-color: #0F172A;
+}
+
+/* ── Subtítulo ── */
+.hero-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: #64748B;
+  line-height: 1.75;
+  max-width: 480px;
+  margin-bottom: 52px;
+}
+
+/* ── Stats ── */
+.hero-stats {
+  display: flex;
+  align-items: stretch;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  box-shadow: 0 4px 24px rgba(13,148,136,.10);
+  overflow: hidden;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 22px 32px;
+  flex: 1;
+}
+
+.stat:not(:last-child) {
+  border-right: 1px solid #E2E8F0;
+}
+
+.stat-num {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #0D9488;
+  line-height: 1;
+}
+
+.stat-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  color: #94A3B8;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  white-space: nowrap;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .hero-content { padding: 44px 16px; }
+  .stat { padding: 18px 18px; }
+  .stat-num { font-size: 1.4rem; }
+  .hero-subtitle { font-size: 0.93rem; }
+  .hero-title { letter-spacing: -1px; }
+}

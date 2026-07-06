@@ -1,0 +1,115 @@
+/* Anula el padding del contenedor global para que la barra llegue a los bordes */
+:host { display: block; width: 100%; }
+:host .container {
+  padding: 0 !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* ── Navbar ── */
+.custom-toolbar {
+  background: #0F172A !important;
+  border-bottom: none;
+  box-shadow: 0 2px 16px rgba(15,23,42,.25);
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+  height: 54px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+}
+
+.desktop-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+/* ── Botón base ── */
+.btn-menu {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.8rem !important;
+  font-weight: 500 !important;
+  color: #FFFFFF !important;
+  border-radius: 6px !important;
+  padding: 5px 9px !important;
+  margin: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  cursor: pointer !important;
+  transition: background 0.13s, color 0.13s !important;
+  white-space: nowrap !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  min-width: unset !important;
+  height: 34px !important;
+}
+
+.btn-menu:hover {
+  background: rgba(13,148,136,.22) !important;
+  color: #FFFFFF !important;
+}
+
+.btn-menu mat-icon {
+  font-size: 15px !important;
+  width: 15px !important;
+  height: 15px !important;
+  line-height: 15px !important;
+  color: inherit !important;
+}
+
+/* ── Entidades independientes ── */
+.btn-menu.independiente {
+  color: #FFFFFF !important;
+}
+
+.btn-menu.independiente:hover {
+  background: rgba(13,148,136,.22) !important;
+  color: #FFFFFF !important;
+}
+
+/* ── Ripple ── */
+.btn-menu .mat-mdc-button-ripple,
+.btn-menu .mat-ripple { opacity: 0.06; }
+
+/* ── Botón hamburguesa (móvil) ── */
+.btn-hamburger {
+  display: none !important;
+  background: transparent !important;
+  border: 1px solid rgba(255,255,255,.2) !important;
+  border-radius: 6px !important;
+  padding: 5px 9px !important;
+  cursor: pointer !important;
+  color: #FFFFFF !important;
+  transition: all 0.13s !important;
+  height: 34px !important;
+  align-items: center !important;
+}
+
+.btn-hamburger:hover {
+  background: rgba(13,148,136,.22) !important;
+  color: #FFFFFF !important;
+}
+
+.btn-hamburger mat-icon { color: inherit !important; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .btn-hamburger { display: inline-flex !important; }
+  .desktop-menu  { display: none !important; }
+}
