@@ -1,0 +1,215 @@
+<div class="container">
+
+  <mat-toolbar class="custom-toolbar">
+
+    <!-- Botón hamburguesa: solo visible en móvil -->
+    <button matButton class="btn-hamburger" [matMenuTriggerFor]="menuPrincipal" aria-label="Menú">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <!-- Menú principal colapsado (móvil) -->
+    <mat-menu #menuPrincipal="matMenu">
+      <button mat-menu-item routerLink="/homes"><mat-icon>home</mat-icon> Inicio</button>
+      <button mat-menu-item [matMenuTriggerFor]="menuRegionM"><mat-icon>public</mat-icon> Región</button>
+      <button mat-menu-item [matMenuTriggerFor]="menuPlataformaM"><mat-icon>devices</mat-icon> Plataforma</button>
+      <button mat-menu-item [matMenuTriggerFor]="menuPlanM"><mat-icon>card_membership</mat-icon> Plan</button>
+      <button mat-menu-item [matMenuTriggerFor]="menuMarcaM"><mat-icon>label</mat-icon> Marca</button>
+      <button mat-menu-item [matMenuTriggerFor]="menuEmpresaM"><mat-icon>business</mat-icon> Empresa</button>
+      <button mat-menu-item [matMenuTriggerFor]="menuStreamerM"><mat-icon>videocam</mat-icon> Streamer</button>
+      @if (esAdmin) {
+        <button mat-menu-item [matMenuTriggerFor]="menuUsuariosM"><mat-icon>person</mat-icon> Usuario</button>
+        <button mat-menu-item [matMenuTriggerFor]="menuRoleM"><mat-icon>admin_panel_settings</mat-icon> Rol</button>
+      }
+      <button mat-menu-item [matMenuTriggerFor]="menuCanalM"><mat-icon>wifi</mat-icon> Canal</button>
+      <button mat-menu-item [matMenuTriggerFor]="menuCanalMonitoreradoM"><mat-icon>monitor</mat-icon> Canal Monitoreado</button>
+      <button mat-menu-item [matMenuTriggerFor]="menuTransmisionM"><mat-icon>live_tv</mat-icon> Transmisión</button>
+      <button mat-menu-item [matMenuTriggerFor]="menuMetricaM"><mat-icon>bar_chart</mat-icon> Métrica</button>
+      <button mat-menu-item [matMenuTriggerFor]="menuDeteccionM"><mat-icon>campaign</mat-icon> Detección Pub.</button>
+      <button mat-menu-item routerLink="/dashboard"><mat-icon>dashboard</mat-icon> Dashboard</button>
+      <button mat-menu-item (click)="cerrar()"><mat-icon>logout</mat-icon> Cerrar sesión</button>
+    </mat-menu>
+
+    <!-- Submenús móvil -->
+    <mat-menu #menuRegionM="matMenu">
+      @if (esAdmin) { <button mat-menu-item routerLink="/regions/create"><mat-icon>add</mat-icon>Registrar</button> }
+      <button mat-menu-item routerLink="/regions/list"><mat-icon>list</mat-icon>Lista</button>
+    </mat-menu>
+    <mat-menu #menuPlataformaM="matMenu">
+      @if (esAdmin) { <button mat-menu-item routerLink="/platforms/create"><mat-icon>add</mat-icon>Registrar</button> }
+      <button mat-menu-item routerLink="/platforms/list"><mat-icon>list</mat-icon>Lista</button>
+    </mat-menu>
+    <mat-menu #menuPlanM="matMenu">
+      @if (esAdmin) { <button mat-menu-item routerLink="/plans/create"><mat-icon>add</mat-icon>Registrar</button> }
+      <button mat-menu-item routerLink="/plans/list"><mat-icon>list</mat-icon>Lista</button>
+    </mat-menu>
+    <mat-menu #menuMarcaM="matMenu">
+      @if (esAdmin) { <button mat-menu-item routerLink="/brands/create"><mat-icon>add</mat-icon>Registrar</button> }
+      <button mat-menu-item routerLink="/brands/list"><mat-icon>list</mat-icon>Lista</button>
+    </mat-menu>
+    <mat-menu #menuEmpresaM="matMenu">
+      @if (esAdmin) { <button mat-menu-item routerLink="/companies/create"><mat-icon>add</mat-icon>Registrar</button> }
+      <button mat-menu-item routerLink="/companies/list"><mat-icon>list</mat-icon>Lista</button>
+    </mat-menu>
+    <mat-menu #menuStreamerM="matMenu">
+      @if (esAdmin) { <button mat-menu-item routerLink="/streamers/create"><mat-icon>add</mat-icon>Registrar</button> }
+      <button mat-menu-item routerLink="/streamers/list"><mat-icon>list</mat-icon>Lista</button>
+    </mat-menu>
+    <mat-menu #menuUsuariosM="matMenu">
+      @if (esAdmin) { <button mat-menu-item routerLink="/users/create"><mat-icon>add</mat-icon>Registrar</button> }
+      <button mat-menu-item routerLink="/users/list"><mat-icon>list</mat-icon>Lista</button>
+    </mat-menu>
+    <mat-menu #menuRoleM="matMenu">
+      @if (esAdmin) { <button mat-menu-item routerLink="/roles/create"><mat-icon>add</mat-icon>Registrar</button> }
+      <button mat-menu-item routerLink="/roles/list"><mat-icon>list</mat-icon>Lista</button>
+    </mat-menu>
+    <mat-menu #menuCanalM="matMenu">
+      @if (esAdmin) { <button mat-menu-item routerLink="/channels/create"><mat-icon>add</mat-icon>Registrar</button> }
+      <button mat-menu-item routerLink="/channels/list"><mat-icon>list</mat-icon>Lista</button>
+    </mat-menu>
+    <mat-menu #menuCanalMonitoreradoM="matMenu">
+      @if (esAdmin) { <button mat-menu-item routerLink="/monitored-channels/create"><mat-icon>add</mat-icon>Registrar</button> }
+      <button mat-menu-item routerLink="/monitored-channels/list"><mat-icon>list</mat-icon>Lista</button>
+    </mat-menu>
+    <mat-menu #menuTransmisionM="matMenu">
+      @if (esAdmin) { <button mat-menu-item routerLink="/broadcasts/create"><mat-icon>add</mat-icon>Registrar</button> }
+      <button mat-menu-item routerLink="/broadcasts/list"><mat-icon>list</mat-icon>Lista</button>
+    </mat-menu>
+    <mat-menu #menuMetricaM="matMenu">
+      @if (esAdmin) { <button mat-menu-item routerLink="/metrics/create"><mat-icon>add</mat-icon>Registrar</button> }
+      <button mat-menu-item routerLink="/metrics/list"><mat-icon>list</mat-icon>Lista</button>
+    </mat-menu>
+    <mat-menu #menuDeteccionM="matMenu">
+      @if (esAdmin) { <button mat-menu-item routerLink="/ad-detections/create"><mat-icon>add</mat-icon>Registrar</button> }
+      <button mat-menu-item routerLink="/ad-detections/list"><mat-icon>list</mat-icon>Lista</button>
+    </mat-menu>
+
+    <!-- Botones desktop -->
+    <div class="desktop-menu">
+      <button matButton class="btn-menu" routerLink="/homes">
+        <mat-icon>home</mat-icon> Inicio
+      </button>
+
+      <!-- Nivel 1: independientes (verde) -->
+      <button matButton class="btn-menu independiente" [matMenuTriggerFor]="menuRegion">
+        <mat-icon>public</mat-icon> Región
+      </button>
+      <mat-menu #menuRegion="matMenu">
+        @if (esAdmin) { <button mat-menu-item routerLink="/regions/create"><mat-icon>add</mat-icon>Registrar</button> }
+        <button mat-menu-item routerLink="/regions/list"><mat-icon>list</mat-icon>Lista</button>
+      </mat-menu>
+
+      <button matButton class="btn-menu independiente" [matMenuTriggerFor]="menuPlataforma">
+        <mat-icon>devices</mat-icon> Plataforma
+      </button>
+      <mat-menu #menuPlataforma="matMenu">
+        @if (esAdmin) { <button mat-menu-item routerLink="/platforms/create"><mat-icon>add</mat-icon>Registrar</button> }
+        <button mat-menu-item routerLink="/platforms/list"><mat-icon>list</mat-icon>Lista</button>
+      </mat-menu>
+
+      <button matButton class="btn-menu independiente" [matMenuTriggerFor]="menuPlan">
+        <mat-icon>card_membership</mat-icon> Plan
+      </button>
+      <mat-menu #menuPlan="matMenu">
+        @if (esAdmin) { <button mat-menu-item routerLink="/plans/create"><mat-icon>add</mat-icon>Registrar</button> }
+        <button mat-menu-item routerLink="/plans/list"><mat-icon>list</mat-icon>Lista</button>
+      </mat-menu>
+
+      <button matButton class="btn-menu independiente" [matMenuTriggerFor]="menuMarca">
+        <mat-icon>label</mat-icon> Marca
+      </button>
+      <mat-menu #menuMarca="matMenu">
+        @if (esAdmin) { <button mat-menu-item routerLink="/brands/create"><mat-icon>add</mat-icon>Registrar</button> }
+        <button mat-menu-item routerLink="/brands/list"><mat-icon>list</mat-icon>Lista</button>
+      </mat-menu>
+
+      <!-- Nivel 2 -->
+      <button matButton class="btn-menu" [matMenuTriggerFor]="menuEmpresa">
+        <mat-icon>business</mat-icon> Empresa
+      </button>
+      <mat-menu #menuEmpresa="matMenu">
+        @if (esAdmin) { <button mat-menu-item routerLink="/companies/create"><mat-icon>add</mat-icon>Registrar</button> }
+        <button mat-menu-item routerLink="/companies/list"><mat-icon>list</mat-icon>Lista</button>
+      </mat-menu>
+
+      <button matButton class="btn-menu" [matMenuTriggerFor]="menuStreamer">
+        <mat-icon>videocam</mat-icon> Streamer
+      </button>
+      <mat-menu #menuStreamer="matMenu">
+        @if (esAdmin) { <button mat-menu-item routerLink="/streamers/create"><mat-icon>add</mat-icon>Registrar</button> }
+        <button mat-menu-item routerLink="/streamers/list"><mat-icon>list</mat-icon>Lista</button>
+      </mat-menu>
+
+      <!-- Nivel 3 -->
+      @if (esAdmin) {
+        <button matButton class="btn-menu" [matMenuTriggerFor]="menuUsuarios">
+          <mat-icon>person</mat-icon> Usuario
+        </button>
+        <mat-menu #menuUsuarios="matMenu">
+          @if (esAdmin) { <button mat-menu-item routerLink="/users/create"><mat-icon>add</mat-icon>Registrar</button> }
+          <button mat-menu-item routerLink="/users/list"><mat-icon>list</mat-icon>Lista</button>
+        </mat-menu>
+
+        <!-- Nivel 4 -->
+        <button matButton class="btn-menu" [matMenuTriggerFor]="menuRole">
+          <mat-icon>admin_panel_settings</mat-icon> Rol
+        </button>
+        <mat-menu #menuRole="matMenu">
+          @if (esAdmin) { <button mat-menu-item routerLink="/roles/create"><mat-icon>add</mat-icon>Registrar</button> }
+          <button mat-menu-item routerLink="/roles/list"><mat-icon>list</mat-icon>Lista</button>
+        </mat-menu>
+      }
+
+      <button matButton class="btn-menu" [matMenuTriggerFor]="menuCanal">
+        <mat-icon>live_tv</mat-icon> Canal
+      </button>
+      <mat-menu #menuCanal="matMenu">
+        @if (esAdmin) { <button mat-menu-item routerLink="/channels/create"><mat-icon>add</mat-icon>Registrar</button> }
+        <button mat-menu-item routerLink="/channels/list"><mat-icon>list</mat-icon>Lista</button>
+      </mat-menu>
+
+      <!-- Nivel 5 -->
+      <button matButton class="btn-menu" [matMenuTriggerFor]="menuCanalMonitoreado">
+        <mat-icon>monitor</mat-icon> Canal Monitoreado
+      </button>
+      <mat-menu #menuCanalMonitoreado="matMenu">
+        @if (esAdmin) { <button mat-menu-item routerLink="/monitored-channels/create"><mat-icon>add</mat-icon>Registrar</button> }
+        <button mat-menu-item routerLink="/monitored-channels/list"><mat-icon>list</mat-icon>Lista</button>
+      </mat-menu>
+
+      <button matButton class="btn-menu" [matMenuTriggerFor]="menuTransmision">
+        <mat-icon>live_tv</mat-icon> Transmisión
+      </button>
+      <mat-menu #menuTransmision="matMenu">
+        @if (esAdmin) { <button mat-menu-item routerLink="/broadcasts/create"><mat-icon>add</mat-icon>Registrar</button> }
+        <button mat-menu-item routerLink="/broadcasts/list"><mat-icon>list</mat-icon>Lista</button>
+      </mat-menu>
+
+      <!-- Nivel 6 -->
+      <button matButton class="btn-menu" [matMenuTriggerFor]="menuMetrica">
+        <mat-icon>bar_chart</mat-icon> Métrica
+      </button>
+      <mat-menu #menuMetrica="matMenu">
+        @if (esAdmin) { <button mat-menu-item routerLink="/metrics/create"><mat-icon>add</mat-icon>Registrar</button> }
+        <button mat-menu-item routerLink="/metrics/list"><mat-icon>list</mat-icon>Lista</button>
+      </mat-menu>
+
+      <button matButton class="btn-menu" [matMenuTriggerFor]="menuDeteccion">
+        <mat-icon>campaign</mat-icon> Detección Pub.
+      </button>
+      <mat-menu #menuDeteccion="matMenu">
+        @if (esAdmin) { <button mat-menu-item routerLink="/ad-detections/create"><mat-icon>add</mat-icon>Registrar</button> }
+        <button mat-menu-item routerLink="/ad-detections/list"><mat-icon>list</mat-icon>Lista</button>
+      </mat-menu>
+
+      <button matButton class="btn-menu" routerLink="/dashboard">
+        <mat-icon>dashboard</mat-icon> Dashboard
+      </button>
+
+      <button matButton class="btn-menu" (click)="cerrar()">
+        <mat-icon>logout</mat-icon> Cerrar sesión
+      </button>
+    </div>
+
+  </mat-toolbar>
+
+</div>

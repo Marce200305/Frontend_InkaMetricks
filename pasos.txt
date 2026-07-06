@@ -1,0 +1,72 @@
+seguridad:
+npm install @auth0/angular-jwt
+
+Solo para Entidad Curso
+->en app:
+    ->components
+        ->coursecomponent
+            ->coursecomponent.css - html - ts
+            ->course-insert
+                ->course-insert.css - html - ts
+            ->course-list
+                ->course-list.css - html - ts
+        ->homecomponent
+            homecomponent.css - html - ts
+        ->menucomponent
+            menucomponent.css - html - ts
+    ->models
+        ->Course.ts        
+    ->services
+        ->courseservice.ts
+->environments/environment.development.ts
+---
+-> Menu y Home
+ng g c components/homecomponent --skip-tests
+ng g c components/menucomponent --skip-tests
+
+---
+
+1. metricas
+ng g c components/metricascomponent --skip-tests
+
+ng g c components/metricascomponent/metricas-insert --skip-tests
+ng g c components/metricascomponent/metricas-list --skip-tests
+ng g c components/metricascomponent/metricas-actualizar --skip-tests
+
+ng g s services/metricasservices --skip-tests
+
+src/app/models/ThesisDefense.ts (manual) - (nombres exactos de la Entidad ThesisDefense del Backend)
+
+---
+
+(comando por comando)
+1.MetricaSnapshot - metricasnapshot
+ng g c components/metricasnapshot-component --skip-tests
+
+ng g c components/metricasnapshot-component/metricasnapshot-insertar --skip-tests
+ng g c components/metricasnapshot-component/metricasnapshot-listar --skip-tests
+ng g c components/metricasnapshot-component/metricasnapshot-actualizar --skip-tests
+
+ng g s services/metricasnapshot-service --skip-tests
+
+src/app/models/MetricaSnapshot.ts (manual) - (nombres exactos de la Entidad MetricaSnapshot del Backend)
+
+environments (manual)
+
+---
+
+(entidad por entidad)
+set NOMBRE=canal
+
+ng g c components/%NOMBRE%-component --skip-tests && ^
+ng g c components/%NOMBRE%-component/%NOMBRE%-insertar --skip-tests && ^
+ng g c components/%NOMBRE%-component/%NOMBRE%-listar --skip-tests && ^
+ng g c components/%NOMBRE%-component/%NOMBRE%-actualizar --skip-tests && ^
+ng g s services/%NOMBRE%-service --skip-tests
+
+environments (manual)
+
+---
+
+13 entidades
+for %n in (canal canalmonitoreado deteccionpublicitaria empresa marca metricasnapshot plan plataforma region role streamer transmision users) do (ng g c components/%n-component --skip-tests && ng g c components/%n-component/%n-insertar --skip-tests && ng g c components/%n-component/%n-listar --skip-tests && ng g c components/%n-component/%n-actualizar --skip-tests && ng g s services/%n-service --skip-tests)
