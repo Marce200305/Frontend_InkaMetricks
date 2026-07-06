@@ -1,0 +1,42 @@
+<div class="login-page">
+  <div class="login-card">
+
+    <div class="login-brand">
+      <div class="login-logo">
+        <mat-icon>person_add</mat-icon>
+      </div>
+      <h1 class="login-title">Crear cuenta</h1>
+      <p class="login-subtitle">Ingresa tus datos para registrarte</p>
+    </div>
+
+    <mat-form-field appearance="outline" class="login-field">
+      <mat-label>Usuario</mat-label>
+      <mat-icon matPrefix>person_outline</mat-icon>
+      <input matInput [(ngModel)]="username" placeholder="Ingresa tu usuario" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="login-field">
+      <mat-label>Contraseña</mat-label>
+      <mat-icon matPrefix>lock_outline</mat-icon>
+      <input matInput type="password" [(ngModel)]="password" placeholder="Ingresa tu contraseña" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="login-field">
+      <mat-label>Confirmar contraseña</mat-label>
+      <mat-icon matPrefix>lock_outline</mat-icon>
+      <input matInput type="password" [(ngModel)]="confirmPassword" placeholder="Repite tu contraseña" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="login-field">
+      <mat-label>ID de Empresa (opcional)</mat-label>
+      <mat-icon matPrefix>business</mat-icon>
+      <input matInput type="number" [(ngModel)]="companyId" placeholder="Ej: 1" />
+      <mat-hint>Si no perteneces a una empresa, déjalo vacío</mat-hint>
+    </mat-form-field>
+
+    <button class="login-btn" (click)="register()">Registrarse</button>
+
+    <p class="login-link">¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión</a></p>
+
+  </div>
+</div>

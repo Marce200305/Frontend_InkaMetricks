@@ -1,0 +1,28 @@
+<div class="chart-container">
+  <h2 class="chart-title">Eficiencia de streamers</h2>
+
+  <div class="chart-wrapper">
+    @if (loading) {
+      <div class="loading-state">
+        <mat-spinner diameter="48"></mat-spinner>
+        <p class="loading-message">Cargando reporte...</p>
+      </div>
+    } @else if (hasData) {
+      <div class="chart-wrapper chart-line">
+        <canvas
+          baseChart
+          [datasets]="chartData"
+          [labels]="chartLabels"
+          [options]="chartOptions"
+          [legend]="chartLegend"
+          [type]="chartType"
+        ></canvas>
+      </div>
+    } @else {
+      <div class="no-data">
+        <mat-icon class="no-data-icon">info_outline</mat-icon>
+        <p class="no-data-message">No hay datos disponibles para mostrar.</p>
+      </div>
+    }
+  </div>
+</div>

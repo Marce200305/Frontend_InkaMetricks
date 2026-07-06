@@ -1,0 +1,288 @@
+/* ============================================================
+   INKAMETRICS — Design System v3
+   Paleta: Blanco · Teal · Slate oscuro
+   ============================================================ */
+
+:root {
+  /* Superficies */
+  --bg:         #FFFFFF;
+  --bg-page:    #F7F8FA;
+  --surface:    #FFFFFF;
+  --surface-2:  #F3F4F6;
+
+  /* Marca — Slate oscuro (igual al navbar) */
+  --primary:       #0F172A;
+  --primary-light: #F1F5F9;
+  --primary-mid:   #E2E8F0;
+  --primary-hov:   #1E293B;
+  --primary-text:  #0F172A;
+
+  /* Acento complementario */
+  --accent:        #334155;
+  --accent-light:  #F8FAFC;
+
+  /* Texto */
+  --text:          #0F172A;
+  --text-muted:    #64748B;
+  --text-light:    #94A3B8;
+
+  /* Bordes */
+  --border:        #E2E8F0;
+  --border-focus:  #0D9488;
+
+  /* Estado */
+  --success:   #10B981;
+  --error:     #EF4444;
+  --warning:   #F59E0B;
+
+  /* Sombras */
+  --shadow-xs: 0 1px 2px rgba(15,23,42,.05);
+  --shadow-sm: 0 2px 8px rgba(15,23,42,.07);
+  --shadow-md: 0 6px 20px rgba(15,23,42,.09);
+
+  /* Tipografía */
+  --font:       'Inter', system-ui, sans-serif;
+  --font-title: 'Poppins', system-ui, sans-serif;
+
+  /* Forma */
+  --r-sm: 6px;
+  --r:    10px;
+  --r-lg: 16px;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font);
+  font-size: 14.5px;
+  line-height: 1.6;
+  background: var(--bg-page);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+h1,h2,h3,h4 { font-family: var(--font-title); font-weight: 700; color: var(--text); line-height: 1.2; }
+a { color: var(--primary); text-decoration: none; }
+
+/* ── Contenedor de página — card global ── */
+.container {
+  max-width: 1100px;
+  margin: 28px auto;
+  background: #FFFFFF;
+  border-radius: 14px;
+  box-shadow: var(--shadow-md);
+  padding: 28px 32px 32px;
+  border: 1px solid var(--border);
+}
+.page-wrap { max-width: 1200px; margin: 0 auto; padding: 20px 28px; }
+
+/* Anula los márgenes internos inline de títulos y secciones */
+.container > div[style*="margin: 5%"],
+.container > div[style*="margin:5%"],
+.container > div[style*="margin: 2%"],
+.container > div[style*="margin:2%"],
+.container > div[style*="margin: 3%"],
+.container > div[style*="margin:3%"] {
+  margin: 0 0 20px !important;
+  padding: 0 !important;
+}
+
+/* ═══════════════════════════════════════
+   TABLA
+═══════════════════════════════════════ */
+.mat-mdc-table {
+  background: var(--surface) !important;
+  border-radius: var(--r) !important;
+  overflow: hidden !important;
+  width: 100% !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.mat-mdc-header-row {
+  background: var(--primary) !important;
+}
+
+.mat-mdc-header-cell {
+  color: #FFFFFF !important;
+  font-family: var(--font) !important;
+  font-size: 0.74rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.7px !important;
+  text-transform: uppercase !important;
+  border-bottom: none !important;
+  padding: 10px 18px !important;
+}
+
+.mat-mdc-row {
+  background: var(--surface) !important;
+  transition: background 0.1s !important;
+}
+
+.mat-mdc-row:not(:last-child) {
+  border-bottom: 1px solid var(--border) !important;
+}
+
+.mat-mdc-row:hover {
+  background: var(--primary-light) !important;
+}
+
+.mat-mdc-cell {
+  color: var(--text) !important;
+  font-family: var(--font) !important;
+  font-size: 0.875rem !important;
+  border-bottom: none !important;
+  padding: 7px 18px !important;
+}
+
+/* ═══════════════════════════════════════
+   PAGINADOR
+═══════════════════════════════════════ */
+.mat-mdc-paginator {
+  background: var(--surface-2) !important;
+  border-top: 1px solid var(--border) !important;
+  border-radius: 0 0 var(--r) var(--r) !important;
+  font-family: var(--font) !important;
+  font-size: 0.83rem !important;
+  color: var(--text-muted) !important;
+}
+.mat-mdc-paginator-range-label,
+.mat-mdc-paginator-page-size-label { color: var(--text-muted) !important; }
+.mat-mdc-icon-button { color: var(--primary) !important; }
+
+/* ═══════════════════════════════════════
+   BOTONES
+═══════════════════════════════════════ */
+button[matButton], button[mat-button] {
+  font-family: var(--font) !important;
+  border-radius: var(--r-sm) !important;
+  letter-spacing: 0 !important;
+  transition: background 0.15s, color 0.15s !important;
+}
+
+/* Botones de formulario — relleno teal */
+form button[matButton],
+form .mat-mdc-button,
+form .mat-mdc-raised-button,
+form .mat-mdc-unelevated-button {
+  background: var(--primary) !important;
+  color: #fff !important;
+  height: 40px !important;
+  padding: 0 28px !important;
+  font-size: 0.88rem !important;
+  font-weight: 500 !important;
+  box-shadow: none !important;
+}
+form button[matButton]:hover { background: var(--primary-hov) !important; }
+
+/* Botones de acción en tabla */
+.mat-mdc-table button {
+  color: var(--text-light) !important;
+  background: transparent !important;
+  transition: color 0.15s, background 0.15s !important;
+}
+
+/* Editar — teal */
+.mat-mdc-table td button:first-child mat-icon {
+  color: var(--primary) !important;
+}
+.mat-mdc-table td button:first-child:hover {
+  background: var(--primary-light) !important;
+}
+
+/* Eliminar — gris en reposo, rojo al hover */
+.mat-mdc-table td button:last-child mat-icon {
+  color: var(--text-light) !important;
+}
+.mat-mdc-table td button:last-child:hover mat-icon {
+  color: var(--error) !important;
+}
+.mat-mdc-table td button:last-child:hover {
+  background: #FEF2F2 !important;
+}
+
+/* ═══════════════════════════════════════
+   FORM FIELDS
+═══════════════════════════════════════ */
+.mat-mdc-form-field { width: 100%; max-width: 440px; }
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background: var(--surface) !important;
+}
+.mat-mdc-text-field-wrapper { background: var(--surface) !important; }
+.mat-mdc-form-field-focus-overlay { background: transparent !important; }
+
+.mat-mdc-input-element,
+.mat-mdc-select-value-text {
+  color: var(--text) !important;
+  font-family: var(--font) !important;
+  font-size: 0.9rem !important;
+}
+.mdc-floating-label { color: var(--text-muted) !important; font-family: var(--font) !important; }
+.mdc-line-ripple::before { border-bottom-color: var(--border) !important; }
+.mdc-line-ripple::after  { border-bottom-color: var(--primary) !important; }
+.mat-mdc-form-field-error { color: var(--error) !important; }
+
+/* ═══════════════════════════════════════
+   SELECT / DROPDOWNS / MENÚ
+═══════════════════════════════════════ */
+.mat-mdc-select-panel,
+.mat-mdc-autocomplete-panel {
+  background: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--r) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+.mat-mdc-option {
+  color: var(--text) !important;
+  font-family: var(--font) !important;
+  font-size: 0.875rem !important;
+}
+.mat-mdc-option:hover,
+.mat-mdc-option.mat-mdc-option-active {
+  background: var(--primary-light) !important;
+  color: var(--primary-text) !important;
+}
+
+.mat-mdc-menu-panel {
+  background: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--r) !important;
+  box-shadow: var(--shadow-md) !important;
+  min-width: 160px !important;
+}
+.mat-mdc-menu-item {
+  color: var(--text) !important;
+  font-family: var(--font) !important;
+  font-size: 0.875rem !important;
+  min-height: 40px !important;
+}
+.mat-mdc-menu-item:hover {
+  background: var(--primary-light) !important;
+  color: var(--primary-text) !important;
+}
+.mat-mdc-menu-item .mat-icon { color: var(--text-muted) !important; font-size: 18px !important; }
+.mat-mdc-menu-item:hover .mat-icon { color: var(--primary) !important; }
+
+/* ═══════════════════════════════════════
+   SNACKBAR / ELEVATION
+═══════════════════════════════════════ */
+.mat-mdc-snack-bar-container { background: var(--text) !important; color: #fff !important; border-radius: var(--r) !important; }
+.mat-elevation-z8, .mat-mdc-elevation-z8 { box-shadow: var(--shadow-sm) !important; }
+
+/* ═══════════════════════════════════════
+   SCROLLBAR
+═══════════════════════════════════════ */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-light); }
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media (max-width: 768px) {
+  .mat-mdc-table { display: block; overflow-x: auto; }
+  .mat-mdc-form-field { max-width: 100% !important; }
+  .page-wrap { padding: 20px 16px; }
+}

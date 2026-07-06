@@ -1,0 +1,83 @@
+<div class="container">
+  <div style="text-align: center; margin: 2%"><h2>Registrar Streamer</h2></div>
+  <div style="text-align: center; margin: 3%">
+    <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+
+      <mat-form-field>
+        <mat-label>Plataforma (para buscar perfil)</mat-label>
+        <mat-select [value]="plataformaSeleccionada" (selectionChange)="plataformaSeleccionada = $event.value">
+          <mat-option value="">— Sin verificar —</mat-option>
+          <mat-option value="twitch">Twitch</mat-option>
+          <mat-option value="youtube">YouTube</mat-option>
+          <mat-option value="kick">Kick</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <br/>
+
+      <mat-form-field>
+        <mat-label>Nickname</mat-label>
+        <input matInput formControlName="nickname" (blur)="buscarPerfil()" />
+        <mat-error>
+          @if (form.get('nickname')?.hasError('required')) { Ingrese el nickname }
+          @else if (form.get('nickname')?.hasError('minlength')) { Mínimo 3 caracteres }
+          @else if (form.get('nickname')?.hasError('maxlength')) { Máximo 50 caracteres }
+          @else if (form.get('nickname')?.hasError('pattern')) { Solo letras, números, puntos, guiones y guiones bajos }
+        </mat-error>
+      </mat-form-field>
+
+      @if (buscando) {
+        <div style="margin: 4px 0 8px"><mat-spinner diameter="20" style="display:inline-block"></mat-spinner></div>
+      }
+      @if (perfilEncontrado) {
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px; justify-content:center">
+          <img [src]="perfilEncontrado.profilePic" alt="foto" width="36" height="36"
+               style="border-radius:50%; object-fit:cover" />
+          <div style="text-align:left">
+            <div style="font-weight:600; font-size:14px">{{ perfilEncontrado.displayName }}</div>
+            <div style="font-size:12px; color:#888">{{ perfilEncontrado.followers | number }} seguidores
+              @if (perfilEncontrado.isLive) { <span style="color:#f44336">● En vivo</span> }
+            </div>
+          </div>
+        </div>
+      }
+      @if (errorBusqueda) {
+        <p style="color:#f44336; font-size:13px; margin-bottom:8px">{{ errorBusqueda }}</p>
+      }
+
+      <br/>
+
+      <mat-form-field>
+        <mat-label>Género</mat-label>
+        <mat-select formControlName="gender">
+          <mat-option value="M">Masculino</mat-option>
+          <mat-option value="F">Femenino</mat-option>
+          <mat-option value="O">Otro</mat-option>
+        </mat-select>
+        <mat-error>@if (form.get('gender')?.hasError('required')) { Seleccione un género }</mat-error>
+      </mat-form-field><br/>
+
+      <div>
+        <mat-form-field>
+          <mat-label>Fecha de Registro</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="registrationDate" />
+          <mat-hint>DD/MM/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div><br/>
+
+      <mat-form-field>
+        <mat-label>Región</mat-label>
+        <mat-select formControlName="region">
+          @for (item of listaRegiones; track item.id) {
+            <mat-option [value]="item.id">{{ item.name }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>@if (form.get('region')?.hasError('required')) { Seleccione una región }</mat-error>
+      </mat-form-field><br/>
+
+      <div><button matButton="elevated">Registrar</button></div>
+    </form>
+  </div>
+</div>
