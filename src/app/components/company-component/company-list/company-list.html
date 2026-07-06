@@ -1,5 +1,15 @@
 <div class="container">
   <div style="text-align: center; margin: 5%"><h2>Lista de Empresas</h2></div>
+
+  <div style="text-align: center; margin-bottom: 20px;">
+    <mat-form-field appearance="outline" style="margin-right: 10px;">
+      <mat-label>Filtrar por ID de Plan</mat-label>
+      <input matInput type="number" [(ngModel)]="idPlanBuscar" placeholder="Ej: 1">
+    </mat-form-field>
+    <button mat-raised-button color="primary" style="margin-right: 10px;" (click)="buscarPorPlan()">Buscar</button>
+    <button mat-raised-button color="accent" (click)="idPlanBuscar = 0; load()">Limpiar</button>
+  </div>
+
   <div>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <ng-container matColumnDef="c1">

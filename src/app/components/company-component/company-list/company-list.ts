@@ -7,6 +7,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { Company } from '../../../models/Company';
 import { CompanyService } from '../../../services/company-service';
 import { Plan } from '../../../models/Plan';
@@ -14,7 +17,7 @@ import { PlanService } from '../../../services/plan-service';
 
 @Component({
   selector: 'app-company-list',
-  imports: [MatTableModule, CommonModule, MatIconModule, RouterLink, MatButtonModule, MatPaginatorModule],
+  imports: [MatTableModule, CommonModule, MatIconModule, RouterLink, MatButtonModule, FormsModule, MatInputModule, MatFormFieldModule, MatPaginatorModule],
   templateUrl: './company-list.html',
   styleUrl: './company-list.css',
 })
@@ -24,6 +27,8 @@ export class CompanyList implements OnInit, OnDestroy, AfterViewInit {
   listaPlanes: Plan[] = [];
   private routerSub?: Subscription;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  idPlanBuscar: number = 0;
 
   constructor(private cS: CompanyService, private planS: PlanService, private router: Router, private cdRef: ChangeDetectorRef, private snackBar: MatSnackBar) {}
 
@@ -45,6 +50,20 @@ export class CompanyList implements OnInit, OnDestroy, AfterViewInit {
 
   getPlan(id: number): string {
     return this.listaPlanes.find(p => p.id === id)?.name || '—';
+  }
+
+  buscarPorPlan() {
+    if (this.idPlanBuscar > 0) {
+      this.cS.buscarPorPlan(this.idPlanBuscar).subscribe({
+        next: (data) => { this.dataSource.data = data; },
+        error: () => {
+          this.dataSource.data = [];
+          this.snackBar.open('No se encontraron empresas para ese plan.', 'Cerrar', { duration: 4000, horizontalPosition: 'center', verticalPosition: 'top' });
+        }
+      });
+    } else {
+      this.load();
+    }
   }
 
   delete(id: number) {

@@ -27,4 +27,8 @@ export class CompanyService {
   listId(id: number) {
     return this.http.get<Company>(`${this.url}/${id}`);
   }
+
+  buscarPorPlan(idPlan: number) {
+    return this.http.get<Company[]>(`${this.url}/find-by-plan?planId=${idPlan}`);
+  }
 }

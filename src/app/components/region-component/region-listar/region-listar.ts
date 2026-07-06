@@ -7,12 +7,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { Region } from '../../../models/Region';
 import { RegionService } from '../../../services/region-service';
 
 @Component({
   selector: 'app-region-listar',
-  imports: [MatTableModule, CommonModule, MatIconModule, RouterLink, MatButtonModule, MatPaginatorModule],
+  imports: [MatTableModule, CommonModule, MatIconModule, RouterLink, MatButtonModule, FormsModule, MatInputModule, MatFormFieldModule, MatPaginatorModule],
   templateUrl: './region-listar.html',
   styleUrl: './region-listar.css',
 })
@@ -21,6 +24,8 @@ export class RegionListar implements OnInit, OnDestroy, AfterViewInit {
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4'];
   private routerSub?: Subscription;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  nombreBuscar: string = '';
 
   constructor(private cS: RegionService, private router: Router, private snackBar: MatSnackBar) {}
 
@@ -37,6 +42,20 @@ export class RegionListar implements OnInit, OnDestroy, AfterViewInit {
 
   cargar() {
     this.cS.list().subscribe({ next: (data) => { this.dataSource.data = data; } });
+  }
+
+  buscarPorNombre() {
+    if (this.nombreBuscar.trim() !== '') {
+      this.cS.buscarPorNombre(this.nombreBuscar).subscribe({
+        next: (data) => { this.dataSource.data = data; },
+        error: () => {
+          this.dataSource.data = [];
+          this.snackBar.open('No se encontraron regiones con ese nombre.', 'Cerrar', { duration: 4000, horizontalPosition: 'center', verticalPosition: 'top' });
+        }
+      });
+    } else {
+      this.cargar();
+    }
   }
 
   eliminar(id: number) {

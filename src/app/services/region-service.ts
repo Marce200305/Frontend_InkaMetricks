@@ -27,4 +27,8 @@ export class RegionService {
   listId(id: number) {
     return this.http.get<Region>(`${this.url}/${id}`);
   }
+
+  buscarPorNombre(nombre: string) {
+    return this.http.get<Region[]>(`${this.url}/find-by-name?name=${nombre}`);
+  }
 }
