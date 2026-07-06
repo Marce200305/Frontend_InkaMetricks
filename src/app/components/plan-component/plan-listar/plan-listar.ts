@@ -38,7 +38,15 @@ export class PlanListar implements OnInit, OnDestroy, AfterViewInit {
   cargar() {
     this.cS.list().subscribe({ next: (data) => { this.dataSource.data = data; } });
   }
-
+  // Nuevo metodo para cargar solo los de mayor precio
+cargarMayorPrecio() {
+    this.cS.listHigherPrice().subscribe({
+      next: (data) => { this.dataSource.data = data; },
+      error: (err) => {
+        this.snackBar.open('Error al cargar planes de mayor precio', 'Cerrar', { duration: 3000 });
+      }
+    });
+  }
   eliminar(id: number) {
     if (confirm('¿Estás seguro de que deseas eliminar este registro?')) {
       this.cS.delete(id).subscribe({
@@ -50,4 +58,5 @@ export class PlanListar implements OnInit, OnDestroy, AfterViewInit {
       });
     }
   }
+  
 }

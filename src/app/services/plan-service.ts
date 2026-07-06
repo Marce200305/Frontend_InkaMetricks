@@ -25,4 +25,8 @@ export class PlanService {
   listId(id: number) {
     return this.http.get<Plan>(`${this.url}/${id}`);
   }
+  // metodo agregado
+  listHigherPrice() {
+    return this.http.get<Plan[]>(`${this.url}/higher-price`);
+  }
 }
