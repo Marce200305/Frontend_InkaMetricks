@@ -22,7 +22,7 @@ import { CompanyService } from '../../../services/company-service';
 export class CompanyList implements OnInit, OnDestroy {
   dataSource: MatTableDataSource<Company> = new MatTableDataSource();
   
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6']; 
   private routerSub?: Subscription;
 
   idPlanBuscar: number = 0;
