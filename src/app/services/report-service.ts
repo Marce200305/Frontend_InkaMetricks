@@ -6,6 +6,8 @@ import { MetricsByBroadcastDTO } from '../models/MetricsByBroadcastDTO';
 import { MetricsByRegionDTO } from '../models/MetricsByRegionDTO';
 import { AdDurationByTypeDTO } from '../models/AdDurationByTypeDTO';
 import { StreamerEfficiencyDTO } from '../models/StreamerEfficiencyDTO';
+import { ChannelsByPlatformDTO } from '../models/ChannelsByPlatformDTO';
+import { AverageFollowersDTO } from '../models/AverageFollowersDTO';
 
 const base_url = environment.base;
 
@@ -15,12 +17,15 @@ const base_url = environment.base;
 export class ReportService {
   private url = `${base_url}/metrics`;
   private adUrl = `${base_url}/ad-detections`;
+  private channelUrl = `${base_url}/channels`;
 
   private metricNames$: Observable<string[]> | null = null;
   private metricsByRegion$: Observable<MetricsByRegionDTO[]> | null = null;
   private topBroadcasts$: Map<string, Observable<MetricsByBroadcastDTO[]>> = new Map();
   private adDurationByType$: Observable<AdDurationByTypeDTO[]> | null = null;
   private streamerEfficiency$: Observable<StreamerEfficiencyDTO[]> | null = null;
+  private channelsByPlatform$: Observable<ChannelsByPlatformDTO[]> | null = null;
+  private averageFollowers$: Observable<AverageFollowersDTO[]> | null = null;
 
   constructor(private http: HttpClient) {}
 
@@ -70,5 +75,23 @@ export class ReportService {
         .pipe(shareReplay(1));
     }
     return this.streamerEfficiency$;
+  }
+
+  getChannelsByPlatform(): Observable<ChannelsByPlatformDTO[]> {
+    if (!this.channelsByPlatform$) {
+      this.channelsByPlatform$ = this.http
+        .get<ChannelsByPlatformDTO[]>(`${this.channelUrl}/channels-by-platform`)
+        .pipe(shareReplay(1));
+    }
+    return this.channelsByPlatform$;
+  }
+
+  getAverageFollowersByPlatform(): Observable<AverageFollowersDTO[]> {
+    if (!this.averageFollowers$) {
+      this.averageFollowers$ = this.http
+        .get<AverageFollowersDTO[]>(`${this.channelUrl}/average-followers`)
+        .pipe(shareReplay(1));
+    }
+    return this.averageFollowers$;
   }
 }
